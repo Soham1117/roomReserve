@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "sed -i.bak \"s|__API_KEY_PLACEHOLDER__|${NG_APP_API_KEY}|g\" src/environments/environment.production.ts && rm src/environments/environment.production.ts.bak && ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
