@@ -1,0 +1,19 @@
+<!-- App Layout -->
+<div class="flex flex-col min-h-screen">
+  <!-- Header -->
+  <app-header>
+    <!-- Navigation is now inside HeaderComponent -->
+  </app-header>
+
+  <!-- Main Content Area - Full width -->
+  <main class="flex-grow">
+    <!-- Routed components will be displayed here -->
+    <router-outlet />
+  </main>
+
+  <!-- Footer Removed -->
+  <!-- <app-footer></app-footer> -->
+
+  <!-- Global Notification Display -->
+  <app-notification-display></app-notification-display>
+</div>

@@ -1,0 +1,21 @@
+:host {
+  display: block; /* Ensure component takes up space */
+  width: 100%;
+}
+
+header {
+  /* Initial state for animation */
+  transform: translateY(-100%);
+  opacity: 0;
+  /* Transition properties */
+  transition:
+    transform 0.6s ease-out,
+    opacity 0.6s ease-out;
+  transition-delay: 0.2s; /* Optional delay */
+}
+
+:host(.is-visible) header {
+  /* Final state when visible */
+  transform: translateY(0);
+  opacity: 1;
+}

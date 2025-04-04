@@ -1,0 +1,62 @@
+<!-- Hotel Card Container - Horizontal Layout -->
+<div class="flex gap-6 md:gap-8 items-start py-8 border-b border-gray-700">
+  <!-- Left: Image -->
+  <div class="w-1/3 md:w-1/4 flex-shrink-0">
+    <img
+      [src]="'/image_' + ((hotel.id % 30) + 1) + '.jpg'"
+      alt="Photo of {{ hotel.name }}"
+      class="w-full h-auto object-cover aspect-[4/3]"
+      loading="lazy"
+      (error)="onImageError($event)"
+    />
+  </div>
+
+  <!-- Center: Text Content -->
+  <div class="flex-grow">
+    <!-- Hotel Name (Title) -->
+    <h3 class="font-serif text-2xl md:text-3xl font-bold mb-2">
+      {{ hotel.name || "Hotel Name Placeholder" }}
+    </h3>
+
+    <!-- Location & Details -->
+    <p class="font-sans text-xs uppercase tracking-wider text-gray-400 mb-4">
+      {{
+        (hotel.city
+          ? hotel.city.toUpperCase() +
+            (hotel.country ? ", " + hotel.country.toUpperCase() : "")
+          : "") || "LOCATION PLACEHOLDER"
+      }}
+      <!-- Add Season/Episode if available in hotel model -->
+      <!-- Example: SEASON: 18 EPISODE(S): 14-16 -->
+    </p>
+
+    <!-- Description -->
+    <p class="font-sans text-sm text-gray-300 mb-6">
+      {{
+        hotel.description ||
+          "Description placeholder text. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+      }}
+    </p>
+  </div>
+
+  <!-- Right: Buttons -->
+  <div class="flex flex-col space-y-3 items-end flex-shrink-0 w-32">
+    <!-- Assuming a bookNow() method exists or will be added -->
+    <button
+      (click)="bookNow()"
+      class="w-full py-2 px-4 rounded-sm font-sans text-xs font-semibold uppercase tracking-wider text-black bg-white hover:bg-gray-200 transition-colors duration-200 flex items-center justify-center"
+    >
+      Book Now
+      <span class="ml-2">→</span>
+      <!-- Simple arrow -->
+    </button>
+    <button
+      (click)="viewDetails()"
+      class="w-full py-2 px-4 rounded-sm font-sans text-xs font-semibold uppercase tracking-wider text-black bg-white hover:bg-gray-200 transition-colors duration-200 flex items-center justify-center"
+    >
+      Read More
+      <span class="ml-2">→</span>
+      <!-- Simple arrow -->
+    </button>
+  </div>
+</div>

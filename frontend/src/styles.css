@@ -1,0 +1,83 @@
+@font-face {
+  font-family: 'Tartuffo';
+  src: url('/fonts/Tartuffo_Trial-Bold-BF643371dae156a.otf') format('opentype');
+  font-weight: 700; /* Bold */
+  font-style: normal;
+}
+
+/* Add other Tartuffo weights */
+@font-face {
+  font-family: 'Tartuffo';
+  src: url('/fonts/Tartuffo_Trial-Thin-BF643371db08833.otf') format('opentype');
+  font-weight: 100; /* Thin */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Tartuffo';
+  src: url('/fonts/Tartuffo_Trial-Light-BF643371daf1e86.otf') format('opentype');
+  font-weight: 300; /* Light */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Tartuffo';
+  src: url('/fonts/Tartuffo_Trial-Regular-BF643371db1355b.otf') format('opentype');
+  font-weight: 400; /* Regular */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Tartuffo';
+  src: url('/fonts/Tartuffo_Trial-Medium-BF643371daee2ec.otf') format('opentype');
+  font-weight: 500; /* Medium */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lausanne';
+  src: url('/fonts/Lausanne-300.ttf') format('truetype');
+  font-weight: 300; /* Light */
+  font-style: normal;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* You can add global styles to this file, and also import other style files */
+
+/* Add any necessary base styles or CSS variables for Spartan UI here */
+/* Example: @import '@spartan-ng/ui-core/index.css'; */
+/* Example: :root { --primary: ...; } */
+
+/* Menu Link Styles */
+.menu-link {
+  @apply block py-1 font-serif text-4xl font-medium transition-colors duration-200 hover:text-gray-900 md:text-5xl;
+  /* Add other hover effects if needed, e.g., hover:underline */
+}
+
+/* You can add global styles to this file, and also import other style files */
+
+/* Define the orange filter for SVGs */
+.filter-orange {
+  /* This filter combination aims for a bright orange. Adjust as needed. */
+  /* You might need to experiment to get the exact shade from the reference image. */
+  filter: invert(60%) sepia(98%) saturate(1400%) hue-rotate(359deg) brightness(103%) contrast(101%);
+}
+
+html {
+  overflow-y: hidden; /* Prevent html element from scrolling vertically */
+  overflow-x: hidden; /* Prevent html element from scrolling horizontally */
+}
+
+body {
+  background-color: black; /* Assuming a default black background */
+  color: white; /* Default text color */
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  overflow-y: auto; /* Allow body to handle vertical scroll */
+  height: 100vh; /* Force body to viewport height to manage scroll correctly */
+  font-family: sans-serif; /* Basic font */
+}
+
+/* Removed global PrimeNG Calendar Panel Position Adjustment */

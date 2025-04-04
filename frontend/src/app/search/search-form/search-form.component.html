@@ -1,0 +1,121 @@
+<!-- More prominent search form -->
+<div class="p-8 bg-gray-100 rounded-xl shadow-lg mt-12">
+  <h2 class="text-2xl font-semibold text-gray-800 mb-6 text-center">
+    Find Your Perfect Hotel
+  </h2>
+
+  <form
+    #searchForm="ngForm"
+    (ngSubmit)="onSearch(searchForm)"
+    class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end"
+  >
+    <!-- Destination -->
+    <div class="md:col-span-1">
+      <label for="destination" class="block text-sm font-medium text-gray-700"
+        >Destination</label
+      >
+      <input
+        type="text"
+        id="destination"
+        name="destination"
+        required
+        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        placeholder="e.g. New York"
+        ngModel
+        #destination="ngModel"
+      />
+      <div
+        *ngIf="
+          destination.invalid && (destination.dirty || destination.touched)
+        "
+        class="text-red-600 text-xs mt-1"
+      >
+        Destination is required.
+      </div>
+    </div>
+
+    <!-- Check-in Date -->
+    <div>
+      <label for="checkin" class="block text-sm font-medium text-gray-700"
+        >Check-in</label
+      >
+      <input
+        type="date"
+        id="checkin"
+        name="checkin"
+        required
+        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        ngModel
+        #checkin="ngModel"
+      />
+      <div
+        *ngIf="checkin.invalid && (checkin.dirty || checkin.touched)"
+        class="text-red-600 text-xs mt-1"
+      >
+        Check-in date is required.
+      </div>
+    </div>
+
+    <!-- Check-out Date -->
+    <div>
+      <label for="checkout" class="block text-sm font-medium text-gray-700"
+        >Check-out</label
+      >
+      <input
+        type="date"
+        id="checkout"
+        name="checkout"
+        required
+        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        ngModel
+        #checkout="ngModel"
+      />
+      <!-- Add validation: checkout > checkin -->
+      <div
+        *ngIf="checkout.invalid && (checkout.dirty || checkout.touched)"
+        class="text-red-600 text-xs mt-1"
+      >
+        Check-out date is required.
+      </div>
+    </div>
+
+    <!-- Guests -->
+    <!-- Simple version: number input. Could be enhanced with dropdown/popover later -->
+    <div>
+      <label for="guests" class="block text-sm font-medium text-gray-700"
+        >Guests</label
+      >
+      <input
+        type="number"
+        id="guests"
+        name="guests"
+        required
+        min="1"
+        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        placeholder="1"
+        ngModel
+        #guests="ngModel"
+      />
+      <div
+        *ngIf="guests.invalid && (guests.dirty || guests.touched)"
+        class="text-red-600 text-xs mt-1"
+      >
+        <div *ngIf="guests.errors?.['required']">
+          Number of guests is required.
+        </div>
+        <div *ngIf="guests.errors?.['min']">At least 1 guest required.</div>
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="md:col-span-4 flex justify-end mt-4 md:mt-0">
+      <button
+        type="submit"
+        [disabled]="!searchForm.form.valid"
+        class="inline-flex justify-center py-2 px-6 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition duration-150 ease-in-out"
+      >
+        Search
+      </button>
+    </div>
+  </form>
+</div>

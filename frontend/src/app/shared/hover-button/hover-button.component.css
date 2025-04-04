@@ -1,0 +1,41 @@
+/* --- Explore Map Button Hover Effect --- */
+/* :host ensures styles are scoped and allows targeting the button if needed */
+:host {
+  display: inline-block; /* Or block depending on usage */
+}
+
+.hover-effect-button {
+  /* Ensure positioning context and clipping */
+  /* Tailwind: relative overflow-hidden z-10 */
+  /* Add transition for text color change */
+  transition: color 0.4s ease-out;
+}
+
+.hover-circle {
+  /* Positioned absolutely, starts as a tiny dot */
+  /* Tailwind: absolute -z-10 block transform rounded-full bg-black -translate-x-1/2 -translate-y-1/2 */
+  width: 0;
+  height: 0;
+  /* Transition for size */
+  transition:
+    width 0.4s ease-out,
+    /* Match duration in original CSS */ height 0.4s ease-out;
+}
+
+.hover-effect-button:hover {
+  color: white; /* Text color changes on hover */
+  /* border-color: white; /* Assuming border color changes too */
+  /* Note: Tailwind handles border color change on hover if needed */
+}
+
+/* The circle expansion is handled by JS setting width/height */
+
+/* Style for the icon image within the button */
+.hover-effect-button img {
+  transition: filter 0.3s ease-out; /* Add transition for the filter */
+}
+
+/* Apply white filter on button hover when type is 'img' */
+.hover-effect-button:hover img {
+  filter: brightness(0) invert(1); /* Simple filter to make image white */
+}

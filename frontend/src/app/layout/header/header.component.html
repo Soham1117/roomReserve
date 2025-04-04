@@ -1,0 +1,129 @@
+<!-- Header remains minimal -->
+<header class="fixed top-0 left-0 right-0 z-50 text-white">
+  <!-- Use fixed positioning, ensure high z-index -->
+  <!-- Use padding and flex to position items -->
+  <div
+    class="absolute top-10 right-16 px-4 sm:px-6 lg:px-8 py-4 flex justify-end items-end"
+  >
+    <!-- Left side: Logo Placeholder -->
+
+    <!-- Right side: Menu Toggle Button -->
+    <button (click)="toggleMenu()" class="z-50">
+      <!-- Ensure button is clickable above overlay -->
+      <!-- Conditional Icons -->
+      <svg
+        *ngIf="!isMenuOpen"
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-8 w-8"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="1.5"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M4 6h16M4 12h16M4 18h16"
+        />
+      </svg>
+      <svg
+        *ngIf="isMenuOpen"
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-8 w-8 text-black"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="1.5"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M6 18L18 6M6 6l12 12"
+        />
+      </svg>
+    </button>
+  </div>
+</header>
+
+<!-- Full Screen Overlay Menu -->
+<div
+  *ngIf="isMenuOpen"
+  class="fixed inset-0 bg-gray-100 text-black z-40 p-8 flex flex-col justify-between"
+  @fadeSlideInOut
+>
+  <!-- Ensure tag is correctly closed -->
+  <!-- Top Left Text -->
+  <div class="absolute top-16 left-16 text-xs uppercase tracking-widest">
+    Bethany ordered<br />
+    For the table
+  </div>
+
+  <!-- Main Menu Content -->
+  <div class="flex-grow flex items-center">
+    <nav class="w-full md:w-1/2">
+      <ul class="space-y-2 group">
+        <li class="group-hover:text-gray-400">
+          <a routerLink="/explore-map" (click)="closeMenu()" class="menu-link"
+            >Explore the map</a
+          >
+        </li>
+        <li class="group-hover:text-gray-400">
+          <a routerLink="/search" (click)="closeMenu()" class="menu-link"
+            >Browse by series</a
+          >
+        </li>
+        <li class="group-hover:text-gray-400">
+          <a routerLink="/housewives" (click)="closeMenu()" class="menu-link"
+            >Housewives in the wild</a
+          >
+        </li>
+        <li class="group-hover:text-gray-400">
+          <a routerLink="/about" (click)="closeMenu()" class="menu-link"
+            >About us</a
+          >
+        </li>
+        <li class="group-hover:text-gray-400">
+          <a routerLink="/contact" (click)="closeMenu()" class="menu-link"
+            >Get in touch</a
+          >
+        </li>
+      </ul>
+      <!-- Search Bar -->
+      <div class="mt-12 relative">
+        <input
+          type="text"
+          placeholder="Search by Location, Trip or Wife"
+          class="w-full border-b border-gray-400 bg-transparent py-2 focus:outline-none focus:border-black placeholder-gray-500"
+        />
+        <button class="absolute right-0 top-1/2 -translate-y-1/2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5 text-gray-500"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="1.5"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            />
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Bottom Right Content -->
+  <div class="absolute bottom-8 right-8 text-right">
+    <ul class="text-xs uppercase tracking-widest space-y-1 mb-4">
+      <li><a href="#" target="_blank" class="hover:underline">Facebook</a></li>
+      <li><a href="#" target="_blank" class="hover:underline">Instagram</a></li>
+      <li>
+        <a href="#" target="_blank" class="hover:underline">1AX Consulting</a>
+      </li>
+    </ul>
+    <img src="/image_10.jpg" alt="Menu Image" class="w-32 h-auto ml-auto" />
+  </div>
+</div>

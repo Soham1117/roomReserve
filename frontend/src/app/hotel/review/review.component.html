@@ -1,0 +1,48 @@
+<!-- Single Review Container -->
+<div class="flex space-x-4 py-4">
+  <!-- User Avatar Placeholder -->
+  <div class="flex-shrink-0">
+    <span
+      class="inline-block h-10 w-10 rounded-full overflow-hidden bg-gray-100"
+    >
+      <!-- Placeholder Icon -->
+      <svg
+        class="h-full w-full text-gray-300"
+        fill="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"
+        />
+      </svg>
+    </span>
+  </div>
+  <!-- Review Content -->
+  <div>
+    <h4 class="text-sm font-bold text-gray-900">
+      {{ review.userName || "Reviewer Name" }}
+      <!-- Changed from review?.author -->
+    </h4>
+    <div class="flex items-center mt-1">
+      <!-- Star Rating Placeholder -->
+      <div class="flex items-center">
+        <span
+          *ngFor="let i of [1, 2, 3, 4, 5]"
+          class="h-4 w-4"
+          [class.text-yellow-400]="i <= (review.rating || 0)"
+          [class.text-gray-300]="i > (review.rating || 0)"
+          >★</span
+        >
+      </div>
+      <p class="ml-2 text-sm text-gray-500">
+        {{ review.date || "Month Year" }}
+      </p>
+    </div>
+    <p class="mt-2 text-sm text-gray-700">
+      {{
+        review.comment ||
+          "This is a placeholder review comment. The stay was great!"
+      }}
+    </p>
+  </div>
+</div>

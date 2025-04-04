@@ -1,0 +1,51 @@
+<!-- Search Results Container - Adjusted Padding -->
+<div class="py-10 px-4 sm:px-6 lg:px-8">
+  <!-- Large Location Title -->
+  <div class="mb-12">
+    <!-- TODO: Make this title dynamic based on search/route parameters -->
+    <h1
+      class="font-serif text-8xl md:text-9xl lg:text-[150px] font-bold leading-none text-white"
+    >
+      Location Name
+      <!-- Placeholder -->
+    </h1>
+    <!-- Optional: Add subtitle or breadcrumb if needed -->
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading()" class="text-center py-10">
+    <p class="text-lg text-gray-400">Loading hotels...</p>
+    <!-- Add a spinner here if desired -->
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error() && !isLoading()" class="text-center py-10 px-4 sm:px-0">
+    <p class="text-lg text-red-600">Error loading hotels: {{ error() }}</p>
+    <button
+      (click)="loadHotels()"
+      class="mt-4 px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+    >
+      Retry
+    </button>
+  </div>
+
+  <!-- Results List -->
+  <div *ngIf="!isLoading() && !error() && hotels().length > 0">
+    <!-- Loop through hotels signal and display card -->
+    <app-hotel-card
+      *ngFor="let hotel of hotels()"
+      [hotel]="hotel"
+    ></app-hotel-card>
+  </div>
+
+  <!-- No Results Template -->
+  <div
+    *ngIf="!isLoading() && !error() && hotels().length === 0"
+    class="text-center py-10"
+  >
+    <p class="text-lg text-gray-400">No hotels found matching your criteria.</p>
+    <!-- Optionally add a link back to search form or adjust message -->
+  </div>
+
+  <!-- Add Pagination later if needed -->
+</div>

@@ -1,0 +1,22 @@
+<!-- Container for the map -->
+<div class="map-container w-full h-64 md:h-96">
+  <!-- Google Map Component -->
+  <google-map height="100%" width="100%" [options]="mapOptions">
+    <!-- Loop through markers and display them -->
+    <map-marker
+      *ngFor="let marker of markers"
+      [position]="marker.position ?? { lat: 0, lng: 0 }"
+      [title]="marker.title ?? 'Hotel'"
+      [options]="marker"
+      (mapClick)="onMarkerClick($event)"
+    ></map-marker>
+
+    <!-- Optional: Info Window (requires additional setup in component) -->
+    <!--
+    <map-info-window #infoWindow>
+      <strong>{{ selectedHotel?.name }}</strong><br>
+      {{ selectedHotel?.address }}
+    </map-info-window>
+    -->
+  </google-map>
+</div>

@@ -1,0 +1,39 @@
+<!-- Using a button element, can be adapted for routerLink if needed via Input -->
+<button
+  class="hover-effect-button relative z-10 inline-block overflow-hidden rounded-full border border-white bg-white px-8 py-3 text-sm font-semibold uppercase tracking-wider text-black transition-colors duration-300 ease-in-out"
+  (mousemove)="onButtonMouseMove($event)"
+  (mouseleave)="onButtonMouseLeave($event)"
+  (click)="onClick.emit($event)"
+>
+  <!-- Keep relative z-10 on inner span -->
+  <span class="relative z-10 flex items-center justify-center gap-2">
+    <!-- Optional Icon -->
+    <svg
+      *ngIf="type === 'svg' && iconSvgPath"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      class=""
+      [style.height]="h || '1rem'"
+      [style.width]="w || '1rem'"
+    >
+      <path stroke-linecap="round" stroke-linejoin="round" [attr.d]="iconSvgPath" />
+    </svg>
+    <img
+      *ngIf="type === 'img' && iconSvgPath"
+      [src]="iconSvgPath"
+      alt="Icon"
+      class=""
+      [style.height]="h || '1rem'"
+      [style.width]="w || '1rem'"
+    />
+    <!-- Button Text -->
+    {{ buttonText }}
+  </span>
+  <!-- Add absolute bg-black rounded-full transform -translate-x-1/2 -translate-y-1/2 -z-10 to hover-circle -->
+  <span
+    class="hover-circle absolute -z-10 block -translate-x-1/2 -translate-y-1/2 transform rounded-full bg-black"
+  ></span>
+</button>

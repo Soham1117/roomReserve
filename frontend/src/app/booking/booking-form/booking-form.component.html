@@ -1,0 +1,194 @@
+<!-- Booking Form Container -->
+<div class="max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+  <h1 class="text-3xl font-bold text-gray-900 mb-6">Complete your booking</h1>
+
+  <!-- Error Message Display -->
+  <div
+    *ngIf="errorMessage"
+    class="mb-4 p-4 bg-red-100 text-red-700 border border-red-300 rounded-md"
+    role="alert"
+  >
+    {{ errorMessage }}
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <!-- Left Column: Guest Details Form -->
+    <div class="lg:col-span-2">
+      <form
+        #bookingForm="ngForm"
+        (ngSubmit)="onSubmit(bookingForm)"
+        class="space-y-6 bg-white p-6 rounded-lg shadow"
+      >
+        <h2 class="text-xl font-semibold text-gray-800 border-b pb-3 mb-4">
+          Guest Information
+        </h2>
+
+        <!-- First Name -->
+        <div>
+          <label
+            for="first_name"
+            class="block text-sm font-medium text-gray-700"
+            >First Name</label
+          >
+          <input
+            type="text"
+            id="first_name"
+            name="first_name"
+            required
+            autocomplete="given-name"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            [(ngModel)]="guestDetails.first_name"
+            #first_name="ngModel"
+          />
+          <div
+            *ngIf="
+              first_name.invalid && (first_name.dirty || first_name.touched)
+            "
+            class="text-red-600 text-xs mt-1"
+          >
+            First name is required.
+          </div>
+        </div>
+
+        <!-- Last Name -->
+        <div>
+          <label for="last_name" class="block text-sm font-medium text-gray-700"
+            >Last Name</label
+          >
+          <input
+            type="text"
+            id="last_name"
+            name="last_name"
+            required
+            autocomplete="family-name"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            [(ngModel)]="guestDetails.last_name"
+            #last_name="ngModel"
+          />
+          <div
+            *ngIf="last_name.invalid && (last_name.dirty || last_name.touched)"
+            class="text-red-600 text-xs mt-1"
+          >
+            Last name is required.
+          </div>
+        </div>
+
+        <!-- Email Address -->
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700"
+            >Email Address</label
+          >
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            email
+            autocomplete="email"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            [(ngModel)]="guestDetails.email"
+            #email="ngModel"
+          />
+          <!-- Correctly closed tag -->
+          <div
+            *ngIf="email.invalid && (email.dirty || email.touched)"
+            class="text-red-600 text-xs mt-1"
+          >
+            <!-- Corrected: Use #email template reference variable -->
+            <div *ngIf="email.errors?.['required']">Email is required.</div>
+            <div *ngIf="email.errors?.['email']">
+              Please enter a valid email address.
+            </div>
+          </div>
+        </div>
+
+        <!-- Phone Number -->
+        <div>
+          <label for="phone" class="block text-sm font-medium text-gray-700"
+            >Phone Number</label
+          >
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            required
+            autocomplete="tel"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            [(ngModel)]="guestDetails.phone"
+            #phone="ngModel"
+          />
+          <div
+            *ngIf="phone.invalid && (phone.dirty || phone.touched)"
+            class="text-red-600 text-xs mt-1"
+          >
+            Phone number is required.
+          </div>
+        </div>
+
+        <!-- Special Requests (Optional) -->
+        <div>
+          <label for="requests" class="block text-sm font-medium text-gray-700"
+            >Special Requests (Optional)</label
+          >
+          <textarea
+            id="requests"
+            name="requests"
+            rows="3"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            ngModel
+          ></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="pt-4">
+          <button
+            type="submit"
+            [disabled]="!bookingForm.form.valid || isLoading"
+            class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition duration-150 ease-in-out"
+          >
+            <span *ngIf="!isLoading">Confirm Booking</span>
+            <span *ngIf="isLoading">Processing...</span>
+            <!-- Add spinner later -->
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Right Column: Booking Summary -->
+    <div class="lg:col-span-1">
+      <div class="sticky top-8 bg-white p-6 rounded-lg shadow">
+        <h2 class="text-xl font-semibold text-gray-800 border-b pb-3 mb-4">
+          Your Booking
+        </h2>
+        <!-- Use bookingDetails property -->
+        <div *ngIf="bookingDetails" class="space-y-3 text-sm text-gray-700">
+          <p>
+            <strong>Hotel:</strong>
+            {{ bookingDetails.hotelName || "Hotel Name" }}
+            <!-- Use placeholder if not fetched -->
+          </p>
+          <p>
+            <strong>Room:</strong>
+            {{ bookingDetails.roomTypeName || "Room Type" }}
+            <!-- Use placeholder if not fetched -->
+          </p>
+          <p>
+            <strong>Dates:</strong>
+            {{ bookingDetails.checkIn | date : "mediumDate" }} -
+            <!-- Use date pipe -->
+            {{ bookingDetails.checkOut | date : "mediumDate" }}
+            <!-- Use date pipe -->
+          </p>
+          <p><strong>Guests:</strong> {{ bookingDetails.guests }}</p>
+          <hr class="my-3 border-gray-200" />
+          <p class="text-lg font-semibold text-gray-900">
+            Total: ${{ bookingDetails.totalPrice?.toFixed(2) || "0.00" }}
+          </p>
+        </div>
+        <div *ngIf="!bookingDetails" class="text-sm text-gray-500">
+          Loading booking details...
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

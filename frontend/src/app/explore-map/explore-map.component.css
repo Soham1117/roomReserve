@@ -1,0 +1,25 @@
+/* Target the scrollable container within the component */
+
+.hotel-list-scroll {
+  scroll-behavior: smooth; /* Add smooth scrolling */
+  will-change: scroll-position;
+  /* Hide scrollbar for Webkit browsers */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge */
+  -ms-overflow-style: none;
+  /* Hide scrollbar for Firefox */
+  scrollbar-width: none;
+}
+
+/* Style for individual hotel items in the sidebar list */
+.hotel-list-item {
+  @apply p-1 border border-transparent rounded-md transition-all duration-300 ease-in-out;
+  /* Start with transparent border and minimal padding */
+}
+
+.hotel-list-item:hover {
+  @apply border-white p-2 bg-white bg-opacity-10;
+  /* On hover: show white border, add padding, slight background */
+}

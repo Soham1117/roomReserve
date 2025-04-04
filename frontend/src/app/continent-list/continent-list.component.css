@@ -1,0 +1,142 @@
+:host {
+  display: block;
+}
+
+.continent-list-container {
+  @apply relative flex items-center bg-black py-20 text-white;
+}
+
+.background-images {
+  @apply absolute inset-0 z-0 overflow-hidden opacity-0 transition-opacity duration-700 ease-in-out;
+  pointer-events: none;
+}
+
+/* State when component is visible (applied via JS) */
+.background-images.background-fixed {
+  @apply fixed opacity-100;
+  pointer-events: auto; /* Allow interaction if needed */
+}
+
+.image-layer {
+  @apply absolute inset-0; /* Layers cover the background area */
+}
+.previous-layer {
+  z-index: 1;
+} /* Previous images behind */
+.current-layer {
+  z-index: 2;
+} /* Current images on top */
+
+.image-slot {
+  @apply absolute overflow-hidden;
+  /* Remove transition-all, animation will handle changes */
+  /* height: auto; Let content or specific rules define height */
+  clip-path: inset(0 100% 0 0); /* Start hidden (clipped from right) */
+}
+
+/* Define fixed positions and sizes for each slot */
+.image-slot:nth-child(1) {
+  left: 5%;
+  top: 25%;
+  width: 192px; /* Example width */
+  z-index: 10;
+  aspect-ratio: 3/4;
+}
+
+.image-slot:nth-child(2) {
+  left: 80%;
+  top: 70%;
+  width: 170px; /* Example width */
+  z-index: 9;
+  aspect-ratio: 3/4;
+}
+
+.image-slot:nth-child(3) {
+  left: 85%;
+  top: 20%;
+  width: 140px; /* Example width */
+  z-index: 8;
+  aspect-ratio: 16 / 9; /* Maintain aspect ratio */
+}
+
+.continent-image {
+  @apply h-full w-full object-cover; /* Ensure image covers the slot */
+  /* transition: opacity 1s ease-in-out; /* Remove opacity transition, handled by clip-path */
+}
+
+/* Remove Shutter effect styles */
+
+/* --- New Wipe Animations --- */
+
+@keyframes wipe-ltr-enter {
+  from {
+    clip-path: inset(0 100% 0 0);
+  } /* Hidden on right */
+  to {
+    clip-path: inset(0 0 0 0);
+  } /* Fully visible */
+}
+
+@keyframes wipe-ltr-exit {
+  from {
+    clip-path: inset(0 0 0 0);
+  } /* Fully visible */
+  to {
+    clip-path: inset(0 0 0 100%);
+  } /* Hidden on left */
+}
+
+.image-slot.entering {
+  /* Apply enter animation */
+  animation: wipe-ltr-enter 0.8s ease-out forwards;
+}
+
+.image-slot.exiting {
+  /* Apply exit animation */
+  animation: wipe-ltr-exit 0.8s ease-out forwards;
+}
+
+/* List content styling */
+.list-content {
+  @apply relative z-10 mx-auto w-full max-w-6xl px-4;
+  /* Remove entrance animation styles from the container */
+}
+
+/* Remove .list-content.is-visible rule */
+
+/* Styling for individual character spans */
+.char-span {
+  display: inline-block; /* Needed for transform */
+  opacity: 0;
+  transform: translateY(90px); /* Start slightly lower */
+  transition:
+    opacity 0.5s ease-out,
+    transform 0.5s ease-out;
+  /* transition-delay is set inline in the HTML */
+}
+
+/* Visible state for character spans (triggered by adding .is-visible to the parent .continent-item li) */
+.continent-item.is-visible .char-span {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.continent-header {
+  @apply mb-48 text-center text-base uppercase tracking-widest text-gray-200;
+}
+
+.continent-item {
+  @apply cursor-pointer py-2 text-center transition-colors duration-300;
+}
+
+.continent-name {
+  @apply relative font-serif text-6xl transition-colors duration-500 md:text-[10rem]; /* Slower color transition */
+}
+
+.continent-name.active {
+  @apply text-white;
+}
+
+.continent-name.inactive {
+  @apply text-[#222];
+}

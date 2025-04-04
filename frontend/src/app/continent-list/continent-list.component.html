@@ -1,0 +1,71 @@
+<div #continentListHost class="continent-list-container">
+  <div #backgroundImages class="background-images">
+    <div class="image-layer previous-layer">
+      <div
+        *ngFor="let slot of previousImageSlots; let i = index"
+        class="image-slot previous-slot"
+        [class.exiting]="previousSlotState[i] === 'exiting'"
+      >
+        <img
+          *ngIf="slot"
+          [src]="slot"
+          [alt]="'Previous Hotel Image ' + (i + 1)"
+          class="continent-image"
+        />
+      </div>
+    </div>
+
+    <div class="image-layer current-layer">
+      <div
+        *ngFor="let slot of currentImageSlots; let i = index"
+        class="image-slot current-slot"
+        [class.entering]="currentSlotState[i] === 'entering'"
+      >
+        <img
+          *ngIf="slot"
+          [src]="slot"
+          [alt]="'Current Hotel Image ' + (i + 1)"
+          class="continent-image"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div #listContent class="list-content" (mouseleave)="onMouseLeaveList()">
+    <h2 class="continent-header my-48">Browse Hotels by Continents</h2>
+    <ul class="flex flex-col items-center gap-8">
+      <!-- Add #continentItem template ref variable -->
+      <li
+        #continentItem
+        *ngFor="let continent of continents"
+        class="continent-item"
+        (mouseenter)="onContinentHover(continent)"
+      >
+        <span
+          class="continent-name group"
+          [class.active]="hoveredContinent === continent"
+          [class.inactive]="hoveredContinent !== continent && hoveredContinent !== null"
+        >
+          <!-- Loop over characters for reveal animation -->
+          <span
+            *ngFor="let char of continent.nameChars; let charIndex = index"
+            class="char-span"
+            [style.transition-delay]="charIndex * 0.05 + 's'"
+          >
+            <!-- Stagger delay -->
+            {{ char === ' ' ? '&nbsp;' : char }}
+            <!-- Handle spaces -->
+          </span>
+
+          <img
+            *ngIf="hoveredContinent === continent"
+            [src]="continent.svg"
+            alt=""
+            class="absolute h-20 w-20 transition-transform duration-300 ease-in-out group-hover:scale-105"
+            [ngStyle]="svgPosition"
+          />
+        </span>
+      </li>
+    </ul>
+  </div>
+</div>
