@@ -1,8 +1,5 @@
-<!-- Add w-full to heroSection -->
-<div #heroSection class="relative min-h-screen w-full overflow-hidden p-8">
-  <!-- Add relative w-full mt-6 to scattered-images-container -->
-  <div class="relative mt-6 h-[calc(100vh-200px)] w-full">
-    <!-- Use featuredHotels data for parallax images -->
+<div #heroSection class="relative min-h-screen w-full overflow-hidden p-4 md:p-8">
+  <div class="relative mt-6 h-[calc(100vh-150px)] w-full sm:h-[calc(100vh-200px)]">
     <img
       *ngIf="featuredHotels.length > 0"
       #img1
@@ -11,7 +8,7 @@
         'https://via.placeholder.com/176x117/333333/808080?text=No+Image'
       "
       [alt]="featuredHotels[0].name"
-      class="absolute left-[10%] top-[15%] h-auto w-44 object-cover"
+      class="absolute left-[5%] top-[10%] h-auto w-24 object-cover sm:left-[10%] sm:top-[15%] sm:w-36 md:w-44"
     />
     <img
       *ngIf="featuredHotels.length > 1"
@@ -21,7 +18,7 @@
         'https://via.placeholder.com/144x96/333333/808080?text=No+Image'
       "
       [alt]="featuredHotels[1].name"
-      class="absolute left-[5%] top-[35%] h-auto w-36 object-cover"
+      class="absolute bottom-[10%] left-[10%] h-auto w-28 object-cover sm:left-[5%] sm:top-[35%] sm:w-32 md:w-36"
     />
     <img
       *ngIf="featuredHotels.length > 2"
@@ -31,7 +28,7 @@
         'https://via.placeholder.com/112x75/333333/808080?text=No+Image'
       "
       [alt]="featuredHotels[2].name"
-      class="absolute right-[10%] top-[5%] z-10 h-auto w-28 object-cover"
+      class="absolute right-[5%] top-[8%] z-10 h-auto w-20 object-cover sm:right-[10%] sm:top-[5%] sm:w-24 md:w-28"
     />
     <img
       *ngIf="featuredHotels.length > 3"
@@ -41,7 +38,7 @@
         'https://via.placeholder.com/208x139/333333/808080?text=No+Image'
       "
       [alt]="featuredHotels[3].name"
-      class="absolute right-[5%] top-[40%] h-auto w-52 object-cover"
+      class="absolute bottom-[5%] right-[8%] h-auto w-32 object-cover sm:right-[5%] sm:top-[40%] sm:w-40 md:w-52"
     />
     <img
       *ngIf="featuredHotels.length > 4"
@@ -51,7 +48,7 @@
         'https://via.placeholder.com/144x96/333333/808080?text=No+Image'
       "
       [alt]="featuredHotels[4].name"
-      class="absolute bottom-[20%] right-[25%] h-auto w-36 object-cover"
+      class="absolute bottom-[25%] left-[35%] hidden h-auto w-32 object-cover sm:block md:bottom-[20%] md:left-auto md:right-[25%] md:w-36"
     />
     <img
       *ngIf="featuredHotels.length > 5"
@@ -61,24 +58,23 @@
         'https://via.placeholder.com/192x128/333333/808080?text=No+Image'
       "
       [alt]="featuredHotels[5].name"
-      class="absolute bottom-[0%] left-[30%] h-auto w-48 object-cover"
+      class="absolute bottom-[2%] right-[30%] hidden h-auto w-40 object-cover md:bottom-[0%] md:left-[30%] md:right-auto md:w-48"
     />
 
     <div
-      class="absolute inset-x-0 top-24 flex flex-col items-center justify-center px-10 text-center text-white"
+      class="absolute inset-x-0 top-16 flex flex-col items-center justify-center px-4 text-center text-white sm:top-20 sm:px-6 md:top-24 md:px-10"
     >
-      <!-- Use the shared search bar component -->
       <app-search-bar (onSearch)="handleSearch($event)"></app-search-bar>
 
-      <h2 class="mb-4 mt-24 font-serif text-4xl leading-tight md:text-5xl">
-        Money can't buy you class,<br />
+      <h2
+        class="mb-4 mt-12 font-serif text-3xl leading-tight sm:mt-16 md:mt-24 md:text-4xl lg:text-5xl"
+      >
+        Money can't buy you class,<br class="hidden sm:inline" />
         but it can buy you a vacation.
       </h2>
-      <p class="mb-8 max-w-md font-sans text-sm text-white/60">
-        <!-- Added margin-bottom -->
+      <p class="mb-6 max-w-md font-sans text-sm text-white/60 md:mb-8">
         Check in to the iconic hotels and resorts featured on The Real Housewives.
       </p>
-      <!-- Replace button with the new component, using customClasses -->
       <app-hover-button
         buttonText="Explore The Map"
         [customClasses]="
@@ -94,10 +90,9 @@
     </div>
   </div>
 
-  <!-- Add absolute bottom-0 left-1/2 -translate-x-1/2 to hero-text-bottom container -->
-  <div class="absolute bottom-0 left-1/2 w-full -translate-x-1/2 transform p-8 text-white">
+  <div class="absolute bottom-0 left-1/2 w-full -translate-x-1/2 transform p-4 text-white md:p-8">
     <h1
-      class="width-full text-center font-serif text-8xl font-bold leading-none md:text-9xl lg:text-[15rem]"
+      class="width-full text-center font-serif text-5xl font-bold leading-none sm:text-6xl md:text-8xl lg:text-9xl xl:text-[15rem]"
     >
       The Suite Life
     </h1>

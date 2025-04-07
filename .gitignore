@@ -46,7 +46,9 @@ Thumbs.db
 # Environment configuration files
 # Ignore environment-specific files, but NOT the base file
 /src/environments/environment.development.ts
+/src/environments/environment.ts
 
 
 backend/backup.dump
 frontend/src/environments/environment.ts
+

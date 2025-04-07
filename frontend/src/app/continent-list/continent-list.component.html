@@ -1,5 +1,5 @@
-<div #continentListHost class="continent-list-container">
-  <div #backgroundImages class="background-images">
+<div #continentListHost class="continent-list-container relative overflow-hidden">
+  <div #backgroundImages class="background-images hidden md:block">
     <div class="image-layer previous-layer">
       <div
         *ngFor="let slot of previousImageSlots; let i = index"
@@ -31,10 +31,13 @@
     </div>
   </div>
 
-  <div #listContent class="list-content" (mouseleave)="onMouseLeaveList()">
-    <h2 class="continent-header my-48">Browse Hotels by Continents</h2>
-    <ul class="flex flex-col items-center gap-8">
-      <!-- Add #continentItem template ref variable -->
+  <div #listContent class="list-content relative z-10" (mouseleave)="onMouseLeaveList()">
+    <h2
+      class="continent-header my-24 text-center text-2xl sm:my-32 md:my-48 md:text-3xl lg:text-4xl"
+    >
+      Browse Hotels by Continents
+    </h2>
+    <ul class="flex flex-col items-center gap-4 md:gap-8">
       <li
         #continentItem
         *ngFor="let continent of continents"
@@ -42,26 +45,23 @@
         (mouseenter)="onContinentHover(continent)"
       >
         <span
-          class="continent-name group"
+          class="continent-name group text-4xl sm:text-6xl lg:text-8xl"
           [class.active]="hoveredContinent === continent"
           [class.inactive]="hoveredContinent !== continent && hoveredContinent !== null"
         >
-          <!-- Loop over characters for reveal animation -->
           <span
             *ngFor="let char of continent.nameChars; let charIndex = index"
             class="char-span"
             [style.transition-delay]="charIndex * 0.05 + 's'"
           >
-            <!-- Stagger delay -->
             {{ char === ' ' ? '&nbsp;' : char }}
-            <!-- Handle spaces -->
           </span>
 
           <img
             *ngIf="hoveredContinent === continent"
             [src]="continent.svg"
             alt=""
-            class="absolute h-20 w-20 transition-transform duration-300 ease-in-out group-hover:scale-105"
+            class="absolute h-12 w-12 transition-transform duration-300 ease-in-out group-hover:scale-105 sm:h-16 sm:w-16 md:h-20 md:w-20"
             [ngStyle]="svgPosition"
           />
         </span>

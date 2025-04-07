@@ -2,7 +2,10 @@
 <div class="mt-20 flex min-h-screen items-center justify-center bg-white px-4 py-12">
   <div class="w-full px-12">
     <!-- Title -->
-    <div class="border-b border-gray-300 pb-20 text-center font-serif text-9xl text-black">
+    <div
+      class="border-b border-gray-300 pb-20 text-center font-serif text-5xl text-black sm:text-7xl lg:text-9xl"
+    >
+      <!-- Responsive Title -->
       My Account
     </div>
 
@@ -10,14 +13,20 @@
     <form
       [formGroup]="profileFormGroup"
       (ngSubmit)="updateProfile()"
-      class="mt-10 flex flex-col items-end justify-center gap-6 border-b border-gray-300 pb-10 font-sans"
+      class="mt-10 space-y-8 font-sans"
     >
       <!-- Personal Information Row -->
-      <div class="flex w-full flex-row items-start justify-center gap-20">
-        <h2 class="w-1/4 flex-shrink-0 pt-5 text-2xl font-semibold text-gray-800">
+      <div
+        class="flex w-full flex-col items-start justify-center gap-8 border-b border-gray-300 pb-10 lg:flex-row lg:gap-20"
+      >
+        <!-- Stack columns -->
+        <h2
+          class="w-full flex-shrink-0 pt-5 text-xl font-semibold text-gray-800 lg:w-1/4 lg:text-2xl"
+        >
+          <!-- Responsive Header -->
           Personal Information
         </h2>
-        <div class="flex w-3/4 flex-grow flex-col gap-8">
+        <div class="flex w-full flex-grow flex-col gap-8 lg:w-3/4">
           <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
             <!-- Column 1 -->
             <div class="flex flex-col gap-8">
@@ -30,11 +39,11 @@
                   formControlName="first_name"
                   autocomplete="given-name"
                   required
-                  class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-lg text-black focus:outline-none [&:-webkit-autofill]:[-webkit-text-fill-color:black] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_white_inset]"
+                  class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-base text-black focus:outline-none sm:text-lg [&:-webkit-autofill]:[-webkit-text-fill-color:black] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_white_inset]"
                 />
                 <label
                   for="profileFirstName"
-                  class="absolute bottom-0 left-0 w-full max-w-[84%] truncate text-lg text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)]"
+                  class="absolute bottom-0 left-0 w-full max-w-[84%] truncate text-base text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)] sm:text-lg"
                   >First Name*</label
                 >
                 <div
@@ -59,11 +68,11 @@
                   formControlName="email"
                   autocomplete="email"
                   readonly
-                  class="peer block w-full cursor-not-allowed border-b border-gray-400 bg-gray-100 px-0 pb-1 pt-5 text-lg text-gray-500 focus:outline-none"
+                  class="peer block w-full cursor-not-allowed border-b border-gray-400 bg-gray-100 px-0 pb-1 pt-5 text-base text-gray-500 focus:outline-none sm:text-lg"
                 />
                 <label
                   for="profileEmail"
-                  class="absolute bottom-0 left-0 w-full max-w-[91%] truncate text-lg text-gray-500 transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)]"
+                  class="absolute bottom-0 left-0 w-full max-w-[91%] truncate text-base text-gray-500 transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)] sm:text-lg"
                   >Email*</label
                 >
               </div>
@@ -75,11 +84,11 @@
                   placeholder=" "
                   formControlName="address_line1"
                   autocomplete="address-line1"
-                  class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-lg text-black focus:outline-none [&:-webkit-autofill]:[-webkit-text-fill-color:black] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_white_inset]"
+                  class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-base text-black focus:outline-none sm:text-lg [&:-webkit-autofill]:[-webkit-text-fill-color:black] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_white_inset]"
                 />
                 <label
                   for="profileAddress1"
-                  class="absolute bottom-0 left-0 w-full max-w-[79%] truncate text-lg text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)]"
+                  class="absolute bottom-0 left-0 w-full max-w-[79%] truncate text-base text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)] sm:text-lg"
                   >Address Line 1</label
                 >
               </div>
@@ -91,11 +100,11 @@
                   placeholder=" "
                   formControlName="city"
                   autocomplete="address-level2"
-                  class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-lg text-black focus:outline-none [&:-webkit-autofill]:[-webkit-text-fill-color:black] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_white_inset]"
+                  class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-base text-black focus:outline-none sm:text-lg [&:-webkit-autofill]:[-webkit-text-fill-color:black] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_white_inset]"
                 />
                 <label
                   for="profileCity"
-                  class="absolute bottom-0 left-0 w-full max-w-[94%] truncate text-lg text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)]"
+                  class="absolute bottom-0 left-0 w-full max-w-[94%] truncate text-base text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)] sm:text-lg"
                   >City</label
                 >
               </div>
@@ -107,11 +116,11 @@
                   placeholder=" "
                   formControlName="postal_code"
                   autocomplete="postal-code"
-                  class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-lg text-black focus:outline-none [&:-webkit-autofill]:[-webkit-text-fill-color:black] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_white_inset]"
+                  class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-base text-black focus:outline-none sm:text-lg [&:-webkit-autofill]:[-webkit-text-fill-color:black] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_white_inset]"
                 />
                 <label
                   for="profilepostal_code"
-                  class="absolute bottom-0 left-0 w-full max-w-[83%] truncate text-lg text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)]"
+                  class="absolute bottom-0 left-0 w-full max-w-[83%] truncate text-base text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)] sm:text-lg"
                   >Postal Code</label
                 >
               </div>
@@ -127,11 +136,11 @@
                   formControlName="last_name"
                   autocomplete="family-name"
                   required
-                  class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-lg text-black focus:outline-none [&:-webkit-autofill]:[-webkit-text-fill-color:black] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_white_inset]"
+                  class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-base text-black focus:outline-none sm:text-lg [&:-webkit-autofill]:[-webkit-text-fill-color:black] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_white_inset]"
                 />
                 <label
                   for="profileLastName"
-                  class="absolute bottom-0 left-0 w-full max-w-[84%] truncate text-lg text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)]"
+                  class="absolute bottom-0 left-0 w-full max-w-[84%] truncate text-base text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)] sm:text-lg"
                   >Last Name*</label
                 >
                 <div
@@ -155,11 +164,11 @@
                   placeholder=" "
                   formControlName="phone_number"
                   autocomplete="tel"
-                  class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-lg text-black focus:outline-none [&:-webkit-autofill]:[-webkit-text-fill-color:black] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_white_inset]"
+                  class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-base text-black focus:outline-none sm:text-lg [&:-webkit-autofill]:[-webkit-text-fill-color:black] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_white_inset]"
                 />
                 <label
                   for="profilePhone"
-                  class="absolute bottom-0 left-0 w-full max-w-[79%] truncate text-lg text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)]"
+                  class="absolute bottom-0 left-0 w-full max-w-[79%] truncate text-base text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)] sm:text-lg"
                   >Phone Number</label
                 >
               </div>
@@ -171,11 +180,11 @@
                   placeholder=" "
                   formControlName="address_line2"
                   autocomplete="address-line2"
-                  class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-lg text-black focus:outline-none [&:-webkit-autofill]:[-webkit-text-fill-color:black] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_white_inset]"
+                  class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-base text-black focus:outline-none sm:text-lg [&:-webkit-autofill]:[-webkit-text-fill-color:black] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_white_inset]"
                 />
                 <label
                   for="profileAddress2"
-                  class="absolute bottom-0 left-0 w-full max-w-[79%] truncate text-lg text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)]"
+                  class="absolute bottom-0 left-0 w-full max-w-[79%] truncate text-base text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)] sm:text-lg"
                   >Address Line 2</label
                 >
               </div>
@@ -187,11 +196,11 @@
                   placeholder=" "
                   formControlName="state"
                   autocomplete="address-level1"
-                  class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-lg text-black focus:outline-none [&:-webkit-autofill]:[-webkit-text-fill-color:black] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_white_inset]"
+                  class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-base text-black focus:outline-none sm:text-lg [&:-webkit-autofill]:[-webkit-text-fill-color:black] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_white_inset]"
                 />
                 <label
                   for="profileState"
-                  class="absolute bottom-0 left-0 w-full max-w-[78%] truncate text-lg text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)]"
+                  class="absolute bottom-0 left-0 w-full max-w-[78%] truncate text-base text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)] sm:text-lg"
                   >State / Province</label
                 >
               </div>
@@ -203,11 +212,11 @@
                   placeholder=" "
                   formControlName="country"
                   autocomplete="country-name"
-                  class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-lg text-black focus:outline-none [&:-webkit-autofill]:[-webkit-text-fill-color:black] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_white_inset]"
+                  class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-base text-black focus:outline-none sm:text-lg [&:-webkit-autofill]:[-webkit-text-fill-color:black] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_white_inset]"
                 />
                 <label
                   for="profileCountry"
-                  class="absolute bottom-0 left-0 w-full max-w-[88%] truncate text-lg text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)]"
+                  class="absolute bottom-0 left-0 w-full max-w-[88%] truncate text-base text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)] sm:text-lg"
                   >Country</label
                 >
               </div>
@@ -230,37 +239,63 @@
             {{ profileError() }}
           </div>
           <!-- Update Profile Button -->
-        </div>
-      </div>
-      <div class="pt-4">
-        <button
-          type="submit"
-          [disabled]="profileFormGroup.invalid || !profileFormGroup.dirty || isLoadingProfile()"
-          class="relative w-full rounded-full border border-black text-sm font-semibold tracking-wide text-black"
-          [class.bg-gray-300]="isLoadingProfile()"
-          [class.hover:bg-gray-300]="isLoadingProfile()"
-          [class.text-gray-500]="isLoadingProfile()"
-          [class.border-gray-300]="isLoadingProfile()"
-        >
-          <div class="relativee">
-            <span *ngIf="isLoadingProfile()" class="flex items-center justify-center">
-              Saving...
-            </span>
-            <app-hover-button
-              *ngIf="!isLoadingProfile()"
-              theme="light"
-              buttonText="Save Changes"
-              [customClasses]="'w-full h-full p-2 px-5 hover:text-white'"
-            ></app-hover-button>
+          <div class="pt-4">
+            <button
+              type="submit"
+              [disabled]="profileFormGroup.invalid || !profileFormGroup.dirty || isLoadingProfile()"
+              class="relative w-full rounded-full border border-black text-sm font-semibold tracking-wide text-black transition hover:bg-black hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
+              [class.bg-gray-300]="isLoadingProfile()"
+              [class.hover:bg-gray-300]="isLoadingProfile()"
+              [class.text-gray-500]="isLoadingProfile()"
+              [class.border-gray-300]="isLoadingProfile()"
+            >
+              <div class="relative px-6 py-2">
+                <span *ngIf="isLoadingProfile()" class="flex items-center justify-center">
+                  <svg
+                    class="-ml-1 mr-2 h-5 w-5 animate-spin"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      class="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      stroke-width="4"
+                    ></circle>
+                    <path
+                      class="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
+                  </svg>
+                  Saving...
+                </span>
+                <app-hover-button
+                  *ngIf="!isLoadingProfile()"
+                  theme="light"
+                  buttonText="Save Changes"
+                  [customClasses]="'w-full h-full p-2 hover:text-white'"
+                ></app-hover-button>
+              </div>
+            </button>
           </div>
-        </button>
+        </div>
       </div>
     </form>
 
     <!-- Payment Methods Section -->
-    <div class="mt-10 flex w-full flex-row items-start justify-center gap-20 pb-10 font-sans">
-      <h2 class="w-1/4 flex-shrink-0 pt-5 text-2xl font-semibold text-gray-800">Payment Methods</h2>
-      <div class="flex w-3/4 flex-grow flex-col gap-8">
+    <div
+      class="mt-10 flex w-full flex-col items-start justify-center gap-8 border-b border-gray-300 pb-10 font-sans lg:flex-row lg:gap-20"
+    >
+      <h2
+        class="w-full flex-shrink-0 pt-5 text-xl font-semibold text-gray-800 lg:w-1/4 lg:text-2xl"
+      >
+        Payment Methods
+      </h2>
+      <div class="flex w-full flex-grow flex-col gap-8 lg:w-3/4">
         <!-- Loading/Error State -->
         <div *ngIf="isLoadingPaymentMethods()" class="text-sm text-gray-500">
           Loading payment methods...
@@ -275,14 +310,14 @@
           <ul *ngIf="paymentMethods().length > 0" class="divide-y divide-gray-300">
             <li
               *ngFor="let method of paymentMethods()"
-              class="flex items-center justify-between py-3 text-lg"
+              class="flex flex-col justify-between py-3 text-base sm:flex-row sm:items-center sm:text-lg"
             >
-              <div>
+              <div class="mb-2 sm:mb-0">
                 <span class="font-medium text-black">{{ method.type }}</span>
                 <span class="ml-2 text-gray-600">ending in {{ method.last4 }}</span>
                 <span
                   *ngIf="method.expiryMonth && method.expiryYear"
-                  class="ml-2 text-sm text-gray-500"
+                  class="ml-2 block text-sm text-gray-500 sm:inline"
                 >
                   (Expires {{ method.expiryMonth }}/{{ method.expiryYear }})
                 </span>
@@ -292,7 +327,7 @@
                   >Default</span
                 >
               </div>
-              <div class="space-x-4">
+              <div class="flex space-x-4">
                 <button
                   *ngIf="!method.isDefault"
                   (click)="makeDefaultPaymentMethod(method.id)"
@@ -315,22 +350,23 @@
 
         <!-- Add New Payment Method Form -->
         <div class="mt-6 border-t border-gray-300 pt-6 font-sans">
-          <h3 class="mb-6 text-xl font-semibold text-gray-800">Add New Payment Method</h3>
+          <h3 class="mb-6 text-lg font-semibold text-gray-800 lg:text-xl">
+            Add New Payment Method
+          </h3>
           <form
             [formGroup]="addPaymentMethodForm"
             (ngSubmit)="addNewPaymentMethod()"
             class="space-y-8"
           >
-            <!-- Fields in two columns -->
             <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
               <!-- Column 1 -->
-              <div class="mt-2 flex flex-col gap-8">
+              <div class="flex flex-col gap-8">
                 <!-- Type -->
                 <div class="relative">
                   <select
                     id="pmType"
                     formControlName="type"
-                    class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-lg text-black focus:outline-none"
+                    class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-base text-black focus:outline-none sm:text-lg"
                   >
                     <option value="Credit Card">Credit Card</option>
                     <option value="Debit Card">Debit Card</option>
@@ -338,7 +374,7 @@
                   </select>
                   <label
                     for="pmType"
-                    class="absolute bottom-0 left-0 w-full max-w-[88%] truncate text-lg text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)]"
+                    class="absolute bottom-0 left-0 w-full max-w-[90%] truncate text-base text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)] sm:text-lg"
                     >Type*</label
                   >
                 </div>
@@ -349,11 +385,11 @@
                     type="number"
                     placeholder=" "
                     formControlName="expiryMonth"
-                    class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-lg text-black focus:outline-none"
+                    class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-base text-black focus:outline-none sm:text-lg"
                   />
                   <label
                     for="pmExpiryMonth"
-                    class="absolute bottom-0 left-0 w-full max-w-[71%] truncate text-lg text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)]"
+                    class="absolute bottom-0 left-0 w-full max-w-[80%] truncate text-base text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)] sm:text-lg"
                     >Expiry Month (MM)*</label
                   >
                   <div
@@ -377,11 +413,11 @@
                     type="text"
                     placeholder=" "
                     formControlName="cardNumber"
-                    class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-lg text-black focus:outline-none"
+                    class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-base text-black focus:outline-none sm:text-lg"
                   />
                   <label
                     for="pmCardNumber"
-                    class="absolute bottom-0 left-0 w-full max-w-[81%] truncate text-lg text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)]"
+                    class="absolute bottom-0 left-0 w-full max-w-[80%] truncate text-base text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)] sm:text-lg"
                     >Card Number*</label
                   >
                   <div
@@ -402,11 +438,11 @@
                     type="number"
                     placeholder=" "
                     formControlName="expiryYear"
-                    class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-lg text-black focus:outline-none"
+                    class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-base text-black focus:outline-none sm:text-lg"
                   />
                   <label
                     for="pmExpiryYear"
-                    class="absolute bottom-0 left-0 w-full max-w-[71%] truncate text-lg text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)]"
+                    class="absolute bottom-0 left-0 w-full max-w-[80%] truncate text-base text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)] sm:text-lg"
                     >Expiry Year (YYYY)*</label
                   >
                   <div
@@ -427,23 +463,21 @@
               <button
                 type="submit"
                 [disabled]="addPaymentMethodForm.invalid || isLoadingPaymentMethods()"
-                class="relative w-auto rounded-full border border-black text-sm font-semibold tracking-wide text-black"
+                class="relative w-auto rounded-full border border-black px-6 py-2 text-sm font-semibold tracking-wide text-black transition hover:bg-black hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
                 [class.bg-gray-300]="isLoadingPaymentMethods()"
                 [class.hover:bg-gray-300]="isLoadingPaymentMethods()"
                 [class.text-gray-500]="isLoadingPaymentMethods()"
                 [class.border-gray-300]="isLoadingPaymentMethods()"
               >
                 <div class="relative">
-                  <span
-                    *ngIf="isLoadingPaymentMethods()"
-                    class="flex items-center justify-center p-2"
+                  <span *ngIf="isLoadingPaymentMethods()" class="flex items-center justify-center"
                     >Adding...</span
                   >
                   <app-hover-button
                     *ngIf="!isLoadingPaymentMethods()"
                     theme="light"
                     buttonText="Add Method"
-                    [customClasses]="'w-full h-full p-2 px-5 hover:text-white'"
+                    [customClasses]="'w-full h-full p-0 hover:text-white'"
                   ></app-hover-button>
                 </div>
               </button>

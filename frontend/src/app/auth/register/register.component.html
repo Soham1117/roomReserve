@@ -8,8 +8,12 @@
     </div>
 
     <!-- Register Form -->
-    <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)" class="space-y-8 font-sans">
-      <div class="text-center font-serif text-6xl text-black">Register</div>
+    <form
+      #registerForm="ngForm"
+      (ngSubmit)="onSubmit(registerForm)"
+      class="space-y-6 font-sans sm:space-y-8"
+    >
+      <div class="text-center font-serif text-4xl text-black sm:text-6xl">Register</div>
       <div class="text-center text-sm font-light text-gray-500">
         Already have an account?&nbsp;
         <a routerLink="/login" class="font-semibold text-black hover:text-gray-700">Login</a>
@@ -26,11 +30,11 @@
           required
           ngModel
           #first_name="ngModel"
-          class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-lg text-black focus:outline-none [&:-webkit-autofill]:[-webkit-text-fill-color:black] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_white_inset]"
+          class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-base text-black focus:outline-none sm:text-lg [&:-webkit-autofill]:[-webkit-text-fill-color:black] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_white_inset]"
         />
         <label
           for="first_name"
-          class="absolute bottom-0 left-0 w-full max-w-[80%] truncate text-lg text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)]"
+          class="absolute bottom-0 left-0 w-full max-w-[80%] truncate text-base text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)] sm:text-lg"
         >
           First Name*
         </label>
@@ -53,11 +57,11 @@
           required
           ngModel
           #last_name="ngModel"
-          class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-lg text-black focus:outline-none [&:-webkit-autofill]:[-webkit-text-fill-color:black] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_white_inset]"
+          class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-base text-black focus:outline-none sm:text-lg [&:-webkit-autofill]:[-webkit-text-fill-color:black] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_white_inset]"
         />
         <label
           for="last_name"
-          class="absolute bottom-0 left-0 w-full max-w-[80%] truncate text-lg text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)]"
+          class="absolute bottom-0 left-0 w-full max-w-[80%] truncate text-base text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)] sm:text-lg"
         >
           Last Name*
         </label>
@@ -80,11 +84,11 @@
           required
           ngModel
           #username="ngModel"
-          class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-lg text-black focus:outline-none [&:-webkit-autofill]:[-webkit-text-fill-color:black] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_white_inset]"
+          class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-base text-black focus:outline-none sm:text-lg [&:-webkit-autofill]:[-webkit-text-fill-color:black] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_white_inset]"
         />
         <label
           for="username"
-          class="absolute bottom-0 left-0 w-full max-w-[80%] truncate text-lg text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)]"
+          class="absolute bottom-0 left-0 w-full max-w-[80%] truncate text-base text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)] sm:text-lg"
         >
           Username*
         </label>
@@ -108,11 +112,11 @@
           email
           ngModel
           #email="ngModel"
-          class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-lg text-black focus:outline-none [&:-webkit-autofill]:[-webkit-text-fill-color:black] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_white_inset]"
+          class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-base text-black focus:outline-none sm:text-lg [&:-webkit-autofill]:[-webkit-text-fill-color:black] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_white_inset]"
         />
         <label
           for="email"
-          class="absolute bottom-0 left-0 w-full max-w-[88%] truncate text-lg text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)]"
+          class="absolute bottom-0 left-0 w-full max-w-[80%] truncate text-base text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)] sm:text-lg"
         >
           Email*
         </label>
@@ -126,7 +130,7 @@
       </div>
 
       <!-- Password -->
-      <div class="relative border-b border-black">
+      <div class="relative">
         <input
           id="password"
           name="password"
@@ -137,15 +141,14 @@
           minlength="8"
           ngModel
           #password="ngModel"
-          class="peer block w-full bg-transparent px-0 pb-1 pt-5 text-lg text-black focus:outline-none [&:-webkit-autofill]:bg-transparent [&:-webkit-autofill]:[-webkit-text-fill-color:black] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_white_inset]"
+          class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-base text-black focus:outline-none sm:text-lg [&:-webkit-autofill]:bg-transparent [&:-webkit-autofill]:[-webkit-text-fill-color:black] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_white_inset]"
         />
         <label
           for="password"
-          class="absolute bottom-0 left-0 w-full max-w-[75%] truncate text-lg text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)]"
+          class="absolute bottom-0 left-0 w-full max-w-[75%] truncate text-base text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)] sm:text-lg"
         >
           Password*
         </label>
-        <!-- Eye Icon Placeholder -->
         <div class="absolute bottom-0 right-0 cursor-pointer">
           <img src="eye.png" class="w-5" alt="" />
         </div>
@@ -161,7 +164,7 @@
       </div>
 
       <!-- Confirm Password -->
-      <div class="relative border-b border-black">
+      <div class="relative">
         <input
           id="confirmPassword"
           name="confirmPassword"
@@ -171,15 +174,14 @@
           required
           ngModel
           #confirmPassword="ngModel"
-          class="peer block w-full bg-transparent px-0 pb-1 pt-5 text-lg text-black focus:outline-none [&:-webkit-autofill]:bg-transparent [&:-webkit-autofill]:[-webkit-text-fill-color:black] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_white_inset]"
+          class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-base text-black focus:outline-none sm:text-lg [&:-webkit-autofill]:bg-transparent [&:-webkit-autofill]:[-webkit-text-fill-color:black] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_white_inset]"
         />
         <label
           for="confirmPassword"
-          class="absolute bottom-0 left-0 w-full max-w-[60%] truncate text-lg text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)]"
+          class="absolute bottom-0 left-0 w-full max-w-[75%] truncate text-base text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)] sm:text-lg"
         >
           Confirm Password*
         </label>
-        <!-- Eye Icon Placeholder -->
         <div class="absolute bottom-0 right-0 cursor-pointer">
           <img src="eye.png" class="w-5" alt="" />
         </div>
@@ -219,29 +221,49 @@
       </div>
 
       <!-- Submit -->
-
-      <button
-        type="submit"
-        [disabled]="!registerForm.form.valid || isLoading"
-        class="relative w-full rounded-full border border-black text-sm font-semibold tracking-wide text-black transition hover:bg-black hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
-        [class.bg-gray-300]="isLoading"
-        [class.hover:bg-gray-300]="isLoading"
-        [class.text-gray-500]="isLoading"
-        [class.border-gray-300]="isLoading"
-      >
-        <!-- Container for content to manage padding/height -->
-        <div class="relative">
-          <span *ngIf="isLoading" class="flex items-center justify-center p-2">
-            Creating account...
-          </span>
-          <app-hover-button
-            *ngIf="!isLoading"
-            theme="light"
-            buttonText="Create account"
-            [customClasses]="'w-full h-full p-2 hover:text-white'"
-          ></app-hover-button>
-        </div>
-      </button>
+      <div class="pt-4">
+        <button
+          type="submit"
+          [disabled]="!registerForm.form.valid || isLoading"
+          class="relative w-full rounded-full border border-black text-sm font-semibold tracking-wide text-black transition hover:bg-black hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
+          [class.bg-gray-300]="isLoading"
+          [class.hover:bg-gray-300]="isLoading"
+          [class.text-gray-500]="isLoading"
+          [class.border-gray-300]="isLoading"
+        >
+          <div class="relative px-6 py-2">
+            <span *ngIf="isLoading" class="flex items-center justify-center">
+              <svg
+                class="-ml-1 mr-2 h-5 w-5 animate-spin"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  class="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  stroke-width="4"
+                ></circle>
+                <path
+                  class="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                ></path>
+              </svg>
+              Creating account...
+            </span>
+            <app-hover-button
+              *ngIf="!isLoading"
+              theme="light"
+              buttonText="Create account"
+              [customClasses]="'w-full h-full p-2 hover:text-white'"
+            ></app-hover-button>
+          </div>
+        </button>
+      </div>
     </form>
   </div>
 </div>

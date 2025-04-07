@@ -1,11 +1,15 @@
-<!-- Elegant Search Bar Container -->
-<div class="search-bar-container relative mb-12 w-full max-w-4xl">
-  <!-- Main Search Bar -->
+<div
+  class="search-bar-container relative mb-6 w-full max-w-sm sm:max-w-lg md:mb-12 md:max-w-2xl lg:max-w-4xl"
+>
   <div
-    class="search-bar relative z-20 flex h-24 items-center rounded-full border border-white/30 bg-black/20 py-6 pl-6 pr-4 backdrop-blur-sm transition-all duration-300 ease-in-out focus-within:border-white/80 focus-within:bg-black/40"
+    class="search-bar relative z-20 flex h-16 items-center rounded-full border border-white/30 bg-black/20 py-3 pl-4 pr-2 backdrop-blur-sm transition-all duration-300 ease-in-out focus-within:border-white/80 focus-within:bg-black/40 sm:h-20 sm:py-4 sm:pl-6 sm:pr-4 md:h-24 md:py-6"
     [class.is-focused]="isSearchFocused"
-    [class.max-w-md]="!isSearchFocused"
-    [class.max-w-4xl]="isSearchFocused"
+    [class.max-w-sm]="!isSearchFocused"
+    [class.sm:max-w-lg]="!isSearchFocused"
+    [class.md:max-w-2xl]="!isSearchFocused"
+    [class.lg:max-w-md]="!isSearchFocused"
+    [class.max-w-full]="isSearchFocused"
+    [class.lg:max-w-4xl]="isSearchFocused"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -29,15 +33,12 @@
       (focus)="toggleSearchFocus(true)"
       (blur)="handleBlur($event)"
     />
-    <!-- Hidden Options (Inside the main bar) -->
     <div
       [class.opacity-0]="!isSearchFocused"
       [class.opacity-100]="isSearchFocused"
-      class="hidden-search-options ml-4 flex transform items-center gap-2 border-l border-white/30 pl-4 transition-all duration-300 ease-in-out"
+      class="hidden-search-options ml-4 hidden transform items-center gap-2 border-l border-white/30 pl-4 transition-all duration-300 ease-in-out lg:flex"
     >
-      <!-- Date Section (Using PrimeNG Calendar) -->
       <div class="flex items-center gap-1 text-sm text-white/70">
-        <!-- Keep flex alignment -->
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -59,10 +60,8 @@
           selectionMode="range"
           [readonlyInput]="true"
           (onShow)="onCalendarOpen()"
-        />
-        <!-- Correct self-closing tag -->
+        ></p-calendar>
       </div>
-      <!-- Guest Section -->
       <div class="relative">
         <button
           class="guest-selector-button mr-12 flex items-center gap-1 text-sm text-white/70 hover:text-white"
@@ -84,7 +83,6 @@
           </svg>
           <span>{{ totalGuests }} Guest{{ totalGuests !== 1 ? 's' : '' }}</span>
         </button>
-        <!-- Guest Selector Popup -->
         <div
           *ngIf="showGuestSelector"
           class="guest-selector-popup absolute left-1/2 top-[300%] z-30 mt-2 w-48 -translate-x-1/2 rounded-2xl border border-white/30 bg-black/80 p-4 text-white shadow-lg backdrop-blur-md"
@@ -132,21 +130,18 @@
         </div>
       </div>
     </div>
-    <!-- Search Button -->
-    <div class="ml-auto">
-      <!-- Changed button to app-hover-button -->
+    <div class="ml-auto flex-shrink-0">
       <app-hover-button
         buttonText=""
         [customClasses]="
-          'flex h-16 w-16 items-center justify-center rounded-full bg-white text-sm text-black/70 hover:text-white'
+          'flex h-12 w-12 items-center justify-center rounded-full bg-white text-sm text-black/70 hover:text-white sm:h-14 sm:w-14 md:h-16 md:w-16'
         "
         type="img"
         iconSvgPath="/arrow.png"
-        h="1.5rem"
-        w="2rem"
+        h="'1rem sm:1.25rem md:1.5rem'"
+        w="'1.5rem sm:1.75rem md:2rem'"
         (onClick)="triggerSearch()"
-      >
-      </app-hover-button>
+      ></app-hover-button>
     </div>
   </div>
 </div>

@@ -195,20 +195,20 @@
   - [x] Adjust mobile menu overlay padding (`pt-24 sm:pt-28 md:pt-32`, `p-4 md:p-8`).
   - [x] Adjust mobile menu nav width (`sm:w-3/4 md:w-1/2`).
   - [x] Adjust mobile menu bottom-right section size/text (`w-20 sm:w-24 md:w-32`, `text-[10px] sm:text-xs`).
-- [ ] **Home Page:**
-  - [ ] Hero section text/image layout adjustments.
-  - [ ] Search bar reflow (stacking elements?).
-  - [ ] Continent list adjustments (stacking items?).
-- [ ] **Login/Register/Profile Pages:**
-  - [ ] Verify centered forms look good on mobile.
-  - [ ] Adjust padding/margins if needed.
-- [ ] **Hotel Results Page:**
-  - [ ] Adapt results display (grid to list?).
-  - [ ] Ensure shared search bar is responsive.
-- [ ] **Hotel Detail Page:**
-  - [ ] Hero section adjustments.
-  - [ ] Image grid responsiveness.
-  - [ ] Room type cards stacking/resizing.
-  - [ ] Amenities section layout changes.
-  - [ ] Checkout form adjustments (stacking inputs?).
-  - [ ] Suggested hotels layout changes.
+- [x] **Home Page:**
+  - [x] Hero section text/image layout adjustments.
+  - [x] Search bar reflow (adjusted size, hid options on mobile).
+  - [x] Continent list adjustments (adjusted text/SVG size, hid background images).
+- [x] **Login/Register/Profile Pages:**
+  - [x] Applied responsive text sizes and spacing.
+  - [x] Verified centered forms with `max-w-md` (Login/Register) or adjusted layout (Profile).
+- [x] **Hotel Results Page:**
+  - [x] Adapted results display (stacked list on mobile, row on lg+).
+  - [x] Ensured shared search bar is responsive.
+- [x] **Hotel Detail Page:**
+  - [x] Hero section adjustments (text size, button size, spacing).
+  - [x] Image grid responsiveness (simplified on mobile).
+  - [x] Room type cards stacking/resizing (already responsive grid, adjusted content).
+  - [x] Amenities section layout changes (responsive grid, text size).
+  - [x] Checkout form adjustments (responsive spacing).
+  - [x] Suggested hotels layout changes (matched results page responsiveness).
