@@ -177,11 +177,38 @@
   - [x] **Header Integration:** Update `HeaderComponent` to show Login/Register or Account/Logout links conditionally (Includes conditional styling).
   - [x] **Interceptor:** Update `AuthInterceptor` to handle 401s and token refresh.
   - [x] **Persistent Login:** Modify `AuthService.loadInitialAuthState` to attempt token refresh if access token is expired on load.
-- [ ] **Booking Flow (Initial):**
-  - [ ] **Backend Check:** Verify `Booking` model and `/api/v1/bookings/` endpoint.
-  - [ ] **Frontend Service:** Create/Update `BookingService` with a `createBooking(bookingData)` method.
-  - [ ] **Checkout Form Logic:** On "Reserve" click in `HotelDetailComponent`:
-    - [ ] Validate form inputs.
-    - [ ] Check if user is authenticated (using `AuthService`). Redirect to login if not.
-    - [ ] If authenticated, call `BookingService.createBooking()` with required data (user ID, room type ID, dates, guests, price).
-    - [ ] Handle success (e.g., navigate to confirmation page) or error messages.
+- [x] **Booking Flow (Initial):**
+  - [x] **Backend Check:** Verify `Booking` model and `/api/v1/bookings/` endpoint.
+  - [x] **Frontend Service:** Create/Update `BookingService` with a `createBooking(bookingData)` method.
+  - [x] **Checkout Form Logic:** On "Reserve" click in `HotelDetailComponent`:
+    - [x] Validate form inputs.
+    - [x] Check if user is authenticated (using `AuthService`). Redirect to login if not.
+    - [x] If authenticated, call `BookingService.createBooking()` with required data (user ID, room type ID, dates, guests, price).
+    - [x] Handle success (e.g., navigate to confirmation page) or error messages.
+
+## Phase 12: Responsiveness
+
+- [x] **Header Component:**
+  - [x] Adjust padding (`p-4 md:p-6 lg:p-8`).
+  - [x] Hide left branding text/line on small screens (`hidden sm:block`).
+  - [x] Adjust center logo/title size and position (`text-3xl sm:text-4xl md:text-5xl`, `top-4 md:top-6 lg:top-8`).
+  - [x] Adjust mobile menu overlay padding (`pt-24 sm:pt-28 md:pt-32`, `p-4 md:p-8`).
+  - [x] Adjust mobile menu nav width (`sm:w-3/4 md:w-1/2`).
+  - [x] Adjust mobile menu bottom-right section size/text (`w-20 sm:w-24 md:w-32`, `text-[10px] sm:text-xs`).
+- [ ] **Home Page:**
+  - [ ] Hero section text/image layout adjustments.
+  - [ ] Search bar reflow (stacking elements?).
+  - [ ] Continent list adjustments (stacking items?).
+- [ ] **Login/Register/Profile Pages:**
+  - [ ] Verify centered forms look good on mobile.
+  - [ ] Adjust padding/margins if needed.
+- [ ] **Hotel Results Page:**
+  - [ ] Adapt results display (grid to list?).
+  - [ ] Ensure shared search bar is responsive.
+- [ ] **Hotel Detail Page:**
+  - [ ] Hero section adjustments.
+  - [ ] Image grid responsiveness.
+  - [ ] Room type cards stacking/resizing.
+  - [ ] Amenities section layout changes.
+  - [ ] Checkout form adjustments (stacking inputs?).
+  - [ ] Suggested hotels layout changes.

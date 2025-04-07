@@ -1,5 +1,5 @@
 <header
-  class="fixed left-0 right-0 top-0 z-50 p-8 transition-all duration-300 ease-in-out"
+  class="fixed left-0 right-0 top-0 z-50 p-4 transition-all duration-300 ease-in-out md:p-6 lg:p-8"
   [class.text-white]="!isMenuOpen && !isAuthPage"
   [class.text-black]="isMenuOpen || isAuthPage"
   [class.bg-gray-100]="isMenuOpen"
@@ -9,7 +9,7 @@
   [class.-translate-y-full]="!isHeaderVisible"
 >
   <div class="flex items-center justify-between">
-    <div class="flex flex-row items-center gap-2">
+    <div class="hidden flex-row items-center gap-2 sm:flex">
       <div
         class="h-8 w-[1px]"
         [class.bg-white]="!isMenuOpen && !isAuthPage"
@@ -28,7 +28,7 @@
     <div>
       <a
         routerLink="/"
-        class="fixed left-1/2 top-8 z-30 w-full -translate-x-1/2 text-center font-serif text-5xl font-bold"
+        class="fixed left-1/2 top-4 z-30 w-full -translate-x-1/2 text-center font-serif text-3xl font-bold sm:text-4xl md:top-6 md:text-5xl lg:top-8"
         [class.text-white]="!isMenuOpen && !isAuthPage"
         [class.text-black]="isMenuOpen || isAuthPage"
         >The Suite Life</a
@@ -63,15 +63,14 @@
     </button>
   </div>
 </header>
-<!-- Ensure this closing tag is present -->
 
 <div
   *ngIf="isMenuOpen"
-  class="fixed inset-0 z-40 flex min-h-screen flex-col justify-between overflow-hidden bg-gray-100 p-8 pt-32 text-black"
+  class="fixed inset-0 z-40 flex min-h-screen flex-col justify-between overflow-hidden bg-gray-100 p-4 pt-24 text-black sm:pt-28 md:p-8 md:pt-32"
   [@fadeSlideInOut]
 >
   <div class="flex flex-grow items-center">
-    <nav class="w-full md:w-1/2">
+    <nav class="w-full sm:w-3/4 md:w-1/2">
       <ul class="group space-y-2">
         <li class="group-hover:text-gray-400">
           <a routerLink="/explore-map" (click)="closeMenu()" class="menu-link">Explore the map</a>
@@ -90,7 +89,6 @@
         <li class="group-hover:text-gray-400">
           <a routerLink="/contact" (click)="closeMenu()" class="menu-link">Get in touch</a>
         </li>
-        <!-- Authentication Links -->
         <ng-container *ngIf="!isLoggedIn()">
           <li class="group-hover:text-gray-400">
             <a routerLink="/login" (click)="closeMenu()" class="menu-link">Login</a>
@@ -137,14 +135,14 @@
     </nav>
   </div>
 
-  <div class="absolute bottom-8 right-8 text-right">
-    <ul class="mb-4 space-y-1 text-xs uppercase tracking-widest">
+  <div class="absolute bottom-4 right-4 text-right md:bottom-8 md:right-8">
+    <ul class="mb-4 space-y-1 text-[10px] uppercase tracking-widest sm:text-xs">
       <li><a href="#" target="_blank" class="hover:underline">Facebook</a></li>
       <li><a href="#" target="_blank" class="hover:underline">Instagram</a></li>
       <li>
         <a href="#" target="_blank" class="hover:underline">1AX Consulting</a>
       </li>
     </ul>
-    <img src="/image_10.jpg" alt="Menu Image" class="ml-auto h-auto w-32" />
+    <img src="/image_10.jpg" alt="Menu Image" class="ml-auto h-auto w-20 sm:w-24 md:w-32" />
   </div>
 </div>

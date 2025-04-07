@@ -49,3 +49,4 @@ Thumbs.db
 
 
 backend/backup.dump
+frontend/src/environments/environment.ts
