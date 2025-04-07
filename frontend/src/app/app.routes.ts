@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { SearchFormComponent } from './search/search-form/search-form.component';
-import { SearchResultsComponent } from './search/search-results/search-results.component';
 import { HotelDetailComponent } from './hotel/hotel-detail/hotel-detail.component';
 import { BookingFormComponent } from './booking/booking-form/booking-form.component';
 import { PaymentComponent } from './booking/payment/payment.component';

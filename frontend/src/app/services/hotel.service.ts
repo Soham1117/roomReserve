@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators'; // Import operators
 import { Hotel } from '../models/hotel.model'; // Assuming Hotel model exists
-import { environment } from '../../environments/environment.development'; // Import environment variable
+import { environment } from '../../environments/environment'; // Import environment variable
 @Injectable({
   providedIn: 'root',
 })

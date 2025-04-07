@@ -18,7 +18,7 @@ import {
   BookingResponse,
 } from '../../services/booking.service'; // Import BookingResponse
 import { AuthService } from '../../auth/auth.service';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators'; // Import finalize
 import { FindPrimaryImagePipe } from '../../shared/pipes/find-primary-image.pipe';
 import { HoverButtonComponent } from '../../shared/hover-button/hover-button.component';
@@ -62,7 +62,6 @@ function getContinent(lat: number, lng: number): string {
     CurrencyPipe,
     CalendarModule, // Add CalendarModule
     InputNumberModule, // Add InputNumberModule
-    DatePipe, // Add DatePipe
   ],
   templateUrl: './hotel-detail.component.html',
 })
