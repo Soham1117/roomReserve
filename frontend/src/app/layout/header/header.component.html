@@ -1,30 +1,53 @@
-<!-- Header remains minimal -->
-<header class="fixed top-0 left-0 right-0 z-50 text-white">
-  <!-- Use fixed positioning, ensure high z-index -->
-  <!-- Use padding and flex to position items -->
-  <div
-    class="absolute top-10 right-16 px-4 sm:px-6 lg:px-8 py-4 flex justify-end items-end"
-  >
-    <!-- Left side: Logo Placeholder -->
+<header
+  class="fixed left-0 right-0 top-0 z-50 p-8 transition-all duration-300 ease-in-out"
+  [class.text-white]="!isMenuOpen && !isAuthPage"
+  [class.text-black]="isMenuOpen || isAuthPage"
+  [class.bg-gray-100]="isMenuOpen"
+  [class.bg-white]="isAuthPage && !isMenuOpen"
+  [class.bg-gradient-to-b]="!isMenuOpen && !isAuthPage"
+  [class.from-black]="!isMenuOpen && !isAuthPage"
+  [class.-translate-y-full]="!isHeaderVisible"
+>
+  <div class="flex items-center justify-between">
+    <div class="flex flex-row items-center gap-2">
+      <div
+        class="h-8 w-[1px]"
+        [class.bg-white]="!isMenuOpen && !isAuthPage"
+        [class.bg-black]="isMenuOpen || isAuthPage"
+      ></div>
+      <div
+        class="text-xs uppercase tracking-widest"
+        [class.text-white]="!isMenuOpen && !isAuthPage"
+        [class.text-black]="isMenuOpen || isAuthPage"
+      >
+        Curated hotels from <br />
+        The Real Housewives
+      </div>
+    </div>
 
-    <!-- Right side: Menu Toggle Button -->
-    <button (click)="toggleMenu()" class="z-50">
-      <!-- Ensure button is clickable above overlay -->
-      <!-- Conditional Icons -->
+    <div>
+      <a
+        routerLink="/"
+        class="fixed left-1/2 top-8 z-30 w-full -translate-x-1/2 text-center font-serif text-5xl font-bold"
+        [class.text-white]="!isMenuOpen && !isAuthPage"
+        [class.text-black]="isMenuOpen || isAuthPage"
+        >The Suite Life</a
+      >
+    </div>
+
+    <button (click)="toggleMenu()" class="z-50 p-2">
       <svg
         *ngIf="!isMenuOpen"
         xmlns="http://www.w3.org/2000/svg"
         class="h-8 w-8"
+        [class.text-white]="!isAuthPage"
+        [class.text-black]="isAuthPage"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
         stroke-width="1.5"
       >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M4 6h16M4 12h16M4 18h16"
-        />
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
       </svg>
       <svg
         *ngIf="isMenuOpen"
@@ -35,42 +58,26 @@
         stroke="currentColor"
         stroke-width="1.5"
       >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M6 18L18 6M6 6l12 12"
-        />
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
       </svg>
     </button>
   </div>
 </header>
+<!-- Ensure this closing tag is present -->
 
-<!-- Full Screen Overlay Menu -->
 <div
   *ngIf="isMenuOpen"
-  class="fixed inset-0 bg-gray-100 text-black z-40 p-8 flex flex-col justify-between"
-  @fadeSlideInOut
+  class="fixed inset-0 z-40 flex min-h-screen flex-col justify-between overflow-hidden bg-gray-100 p-8 pt-32 text-black"
+  [@fadeSlideInOut]
 >
-  <!-- Ensure tag is correctly closed -->
-  <!-- Top Left Text -->
-  <div class="absolute top-16 left-16 text-xs uppercase tracking-widest">
-    Bethany ordered<br />
-    For the table
-  </div>
-
-  <!-- Main Menu Content -->
-  <div class="flex-grow flex items-center">
+  <div class="flex flex-grow items-center">
     <nav class="w-full md:w-1/2">
-      <ul class="space-y-2 group">
+      <ul class="group space-y-2">
         <li class="group-hover:text-gray-400">
-          <a routerLink="/explore-map" (click)="closeMenu()" class="menu-link"
-            >Explore the map</a
-          >
+          <a routerLink="/explore-map" (click)="closeMenu()" class="menu-link">Explore the map</a>
         </li>
         <li class="group-hover:text-gray-400">
-          <a routerLink="/search" (click)="closeMenu()" class="menu-link"
-            >Browse by series</a
-          >
+          <a routerLink="/search" (click)="closeMenu()" class="menu-link">Browse by series</a>
         </li>
         <li class="group-hover:text-gray-400">
           <a routerLink="/housewives" (click)="closeMenu()" class="menu-link"
@@ -78,22 +85,37 @@
           >
         </li>
         <li class="group-hover:text-gray-400">
-          <a routerLink="/about" (click)="closeMenu()" class="menu-link"
-            >About us</a
-          >
+          <a routerLink="/about" (click)="closeMenu()" class="menu-link">About us</a>
         </li>
         <li class="group-hover:text-gray-400">
-          <a routerLink="/contact" (click)="closeMenu()" class="menu-link"
-            >Get in touch</a
-          >
+          <a routerLink="/contact" (click)="closeMenu()" class="menu-link">Get in touch</a>
         </li>
+        <!-- Authentication Links -->
+        <ng-container *ngIf="!isLoggedIn()">
+          <li class="group-hover:text-gray-400">
+            <a routerLink="/login" (click)="closeMenu()" class="menu-link">Login</a>
+          </li>
+          <li class="group-hover:text-gray-400">
+            <a routerLink="/register" (click)="closeMenu()" class="menu-link">Register</a>
+          </li>
+        </ng-container>
+        <ng-container *ngIf="isLoggedIn()">
+          <li class="group-hover:text-gray-400">
+            <a routerLink="/account/profile" (click)="closeMenu()" class="menu-link">My Account</a>
+          </li>
+          <li class="group-hover:text-gray-400">
+            <button (click)="logout(); closeMenu()" class="menu-link w-full text-left">
+              Logout
+            </button>
+          </li>
+        </ng-container>
       </ul>
-      <!-- Search Bar -->
-      <div class="mt-12 relative">
+
+      <div class="relative mt-12">
         <input
           type="text"
           placeholder="Search by Location, Trip or Wife"
-          class="w-full border-b border-gray-400 bg-transparent py-2 focus:outline-none focus:border-black placeholder-gray-500"
+          class="w-full border-b border-gray-400 bg-transparent py-2 placeholder-gray-500 focus:border-black focus:outline-none"
         />
         <button class="absolute right-0 top-1/2 -translate-y-1/2">
           <svg
@@ -115,15 +137,14 @@
     </nav>
   </div>
 
-  <!-- Bottom Right Content -->
   <div class="absolute bottom-8 right-8 text-right">
-    <ul class="text-xs uppercase tracking-widest space-y-1 mb-4">
+    <ul class="mb-4 space-y-1 text-xs uppercase tracking-widest">
       <li><a href="#" target="_blank" class="hover:underline">Facebook</a></li>
       <li><a href="#" target="_blank" class="hover:underline">Instagram</a></li>
       <li>
         <a href="#" target="_blank" class="hover:underline">1AX Consulting</a>
       </li>
     </ul>
-    <img src="/image_10.jpg" alt="Menu Image" class="w-32 h-auto ml-auto" />
+    <img src="/image_10.jpg" alt="Menu Image" class="ml-auto h-auto w-32" />
   </div>
 </div>

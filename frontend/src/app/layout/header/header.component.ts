@@ -2,13 +2,18 @@ import {
   Component,
   AfterViewInit, // Add AfterViewInit
   OnDestroy, // Add OnDestroy
-  ElementRef, // Add ElementRef
-  Renderer2, // Add Renderer2
+  ElementRef,
+  Renderer2,
+  HostListener,
+  OnInit,
+  ChangeDetectorRef, // Import ChangeDetectorRef
 } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, NavigationEnd } from '@angular/router'; // Import NavigationEnd
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../auth/auth.service';
-import { trigger, state, style, transition, animate } from '@angular/animations'; // Import animation functions
+import { trigger, state, style, transition, animate } from '@angular/animations';
+import { Subscription } from 'rxjs'; // Import Subscription
+import { filter } from 'rxjs/operators'; // Import filter
 
 @Component({
   selector: 'app-header',
@@ -30,18 +35,40 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
     ]),
   ],
 })
-export class HeaderComponent implements AfterViewInit, OnDestroy {
-  // Implement interfaces
-  isMenuOpen = false; // Property to track menu state
+export class HeaderComponent implements AfterViewInit, OnDestroy, OnInit {
+  isMenuOpen = false;
   private observer: IntersectionObserver | null = null;
+  private lastScrollY = 0;
+  isHeaderVisible = true;
+  isAuthPage = false; // Flag for auth page styling
+  private routerSubscription: Subscription | null = null; // To manage router event subscription
 
-  // Inject AuthService, Router, ElementRef, Renderer2
   constructor(
     public authService: AuthService,
     private router: Router,
     private el: ElementRef,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private cdRef: ChangeDetectorRef // Inject ChangeDetectorRef
   ) {}
+
+  ngOnInit(): void {
+    this.isHeaderVisible = true;
+    // Subscribe to router events to detect navigation to auth pages
+    this.routerSubscription = this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event) => {
+        if (event instanceof NavigationEnd) {
+          this.isAuthPage =
+            event.url === '/login' || event.url === '/register' || event.url === '/account/profile';
+          // Ensure change detection runs if needed, especially with OnPush strategy (though not used here currently)
+          this.cdRef.markForCheck();
+          // Close menu on navigation
+          this.isMenuOpen = false;
+        }
+      });
+    // Initial check in case the component loads directly on an auth page
+    this.isAuthPage = this.router.url === '/login' || this.router.url === '/register';
+  }
 
   ngAfterViewInit(): void {
     this.setupIntersectionObserver();
@@ -50,6 +77,10 @@ export class HeaderComponent implements AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.observer) {
       this.observer.disconnect();
+    }
+    // Unsubscribe from router events to prevent memory leaks
+    if (this.routerSubscription) {
+      this.routerSubscription.unsubscribe();
     }
   }
 
@@ -110,5 +141,30 @@ export class HeaderComponent implements AfterViewInit, OnDestroy {
 
     // Start observing the host element
     this.observer.observe(this.el.nativeElement);
+  }
+
+  // --- Scroll Logic ---
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    const currentScrollY = window.scrollY;
+    const scrollThreshold = 50;
+    const scrollDelta = currentScrollY - this.lastScrollY; // Positive: down, Negative: up
+
+    if (currentScrollY <= scrollThreshold) {
+      // Near top? Always show.
+      this.isHeaderVisible = true;
+    } else {
+      // Past threshold, check direction significantly
+      if (scrollDelta > 5) {
+        // Scrolling down significantly
+        this.isHeaderVisible = false;
+      } else if (scrollDelta < -5) {
+        // Scrolling up significantly
+        this.isHeaderVisible = true;
+      }
+      // If delta is small (-5 to 5), keep current state to avoid flicker
+    }
+
+    this.lastScrollY = currentScrollY <= 0 ? 0 : currentScrollY;
   }
 }

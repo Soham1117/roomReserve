@@ -6,6 +6,7 @@ backend/theSuiteLife.pem
 /tmp
 /out-tsc
 /bazel-out
+/backend
 
 # Node
 /node_modules

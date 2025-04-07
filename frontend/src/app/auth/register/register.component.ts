@@ -1,23 +1,27 @@
 import { Component } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Router, RouterLink } from '@angular/router'; // Import Router
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../auth.service';
-import { HttpErrorResponse } from '@angular/common/http'; // Import HttpErrorResponse
+import { HttpErrorResponse } from '@angular/common/http';
+import { HoverButtonComponent } from '../../shared/hover-button/hover-button.component'; // Import HoverButtonComponent
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink, HoverButtonComponent], // Add HoverButtonComponent
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css'], // Corrected property name
+  styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
   errorMessage: string | null = null; // Add property for error messages
   isLoading = false; // Add loading state
 
   // Inject AuthService and Router
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   onSubmit(form: NgForm) {
     this.errorMessage = null; // Clear previous errors
@@ -64,8 +68,7 @@ export class RegisterComponent {
       },
       error: (error: HttpErrorResponse) => {
         this.isLoading = false;
-        this.errorMessage =
-          error.message || 'Registration failed. Please try again.';
+        this.errorMessage = error.message || 'Registration failed. Please try again.';
         console.error('Registration error:', error);
         // Display error message to user (e.g., bind this.errorMessage in the template)
       },

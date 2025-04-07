@@ -10,9 +10,10 @@ import {
 import { CommonModule } from '@angular/common';
 import Globe from 'globe.gl';
 import { SearchService } from '../search/search.service';
-import { Hotel } from '../models/hotel.model';
+import { Hotel, HotelImage } from '../models/hotel.model'; // Import HotelImage
 import { HttpErrorResponse } from '@angular/common/http';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
+import { FindPrimaryImagePipe } from '../shared/pipes/find-primary-image.pipe'; // Import the pipe
 
 const continentColors: { [key: string]: string } = {
   'North America': '#FF5733',
@@ -51,7 +52,7 @@ function getContinent(lat: number, lng: number): string {
 @Component({
   selector: 'app-explore-map',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, FindPrimaryImagePipe], // Add the pipe
   templateUrl: './explore-map.component.html',
   styleUrls: ['./explore-map.component.css'],
 })
@@ -64,9 +65,7 @@ export class ExploreMapComponent implements OnInit, AfterViewInit, OnDestroy {
   isFilterOpen = false;
   selectedContinents: Set<string> = new Set();
 
-  continents = Object.keys(continentColors).filter(
-    (c) => c !== 'Other' && c !== 'Antarctica'
-  );
+  continents = Object.keys(continentColors).filter((c) => c !== 'Other' && c !== 'Antarctica');
   continentColors = continentColors;
   continentIcons = continentIcons;
 
@@ -92,9 +91,7 @@ export class ExploreMapComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private initializeGlobe(): void {
     if (this.globeContainer && this.globeContainer.nativeElement) {
-      this.globeInstance = new (Globe as any)()(
-        this.globeContainer.nativeElement
-      )
+      this.globeInstance = new (Globe as any)()(this.globeContainer.nativeElement)
         .globeImageUrl('//unpkg.com/three-globe/example/img/earth-dark.jpg')
         .backgroundImageUrl('//unpkg.com/three-globe/example/img/night-sky.png')
         .showAtmosphere(true)
@@ -115,9 +112,7 @@ export class ExploreMapComponent implements OnInit, AfterViewInit, OnDestroy {
     this.errorMessage = null;
     this.searchService.searchHotels({}).subscribe({
       next: (hotels) => {
-        this.hotels = hotels.filter(
-          (h) => h.latitude != null && h.longitude != null
-        );
+        this.hotels = hotels.filter((h) => h.latitude != null && h.longitude != null);
         this.isLoading = false;
         if (this.globeInstance) {
           this.setupGlobePoints();
@@ -140,15 +135,12 @@ export class ExploreMapComponent implements OnInit, AfterViewInit, OnDestroy {
     const filteredHotels = this.hotels.filter(
       (hotel) =>
         this.selectedContinents.size === 0 ||
-        this.selectedContinents.has(
-          getContinent(hotel.latitude!, hotel.longitude!)
-        )
+        this.selectedContinents.has(getContinent(hotel.latitude!, hotel.longitude!))
     );
 
     const pointsData = filteredHotels.map((hotel) => {
       const continent = getContinent(hotel.latitude!, hotel.longitude!);
-      const color =
-        this.continentColors[continent] || this.continentColors['Other'];
+      const color = this.continentColors[continent] || this.continentColors['Other'];
       return {
         lat: hotel.latitude,
         lng: hotel.longitude,
@@ -221,7 +213,11 @@ export class ExploreMapComponent implements OnInit, AfterViewInit, OnDestroy {
       }
 
       const hotel = point.hotel as Hotel;
-      const imageUrl = `/image_${(hotel.id % 30) + 1}.jpg`;
+      // Use the pipe logic to find the primary image (or first as fallback)
+      const primaryImage: HotelImage | null = new FindPrimaryImagePipe().transform(hotel.images);
+      const imageUrl =
+        primaryImage?.image_compressed ||
+        'https://via.placeholder.com/250x120/333333/808080?text=No+Image'; // Use compressed version
 
       tooltip.innerHTML = `
       <div style="position: relative;">
@@ -232,22 +228,17 @@ export class ExploreMapComponent implements OnInit, AfterViewInit, OnDestroy {
         </div>
       </div>
       <div style="padding: 12px;">
-        <div style="font-weight: bold; font-size: 16px; margin-bottom: 4px;">${
-          hotel.name
-        }</div>
+        <div style="font-weight: bold; font-size: 16px; margin-bottom: 4px;">${hotel.name}</div>
         <div style="font-size: 14px; color: #666;">${hotel.city || ''}, ${
-        point.continent || ''
-      }</div>
+          point.continent || ''
+        }</div>
       </div>
     `;
 
       this.positionTooltipAtPoint(tooltip, point);
       tooltip.style.opacity = '1';
 
-      this.globeContainer.nativeElement.addEventListener(
-        'mousemove',
-        this.updateTooltipPosition
-      );
+      this.globeContainer.nativeElement.addEventListener('mousemove', this.updateTooltipPosition);
     } else {
       if (tooltip) {
         tooltip.style.opacity = '0';
@@ -275,18 +266,13 @@ export class ExploreMapComponent implements OnInit, AfterViewInit, OnDestroy {
   private positionTooltipAtPoint(tooltip: HTMLElement, point: any): void {
     try {
       if (this.globeInstance && this.globeInstance.getScreenCoords) {
-        const screenCoords = this.globeInstance.getScreenCoords(
-          point.lat,
-          point.lng
-        );
+        const screenCoords = this.globeInstance.getScreenCoords(point.lat, point.lng);
 
         if (screenCoords) {
-          const containerRect =
-            this.globeContainer.nativeElement.getBoundingClientRect();
+          const containerRect = this.globeContainer.nativeElement.getBoundingClientRect();
 
           const left = screenCoords.x + containerRect.left;
-          const top =
-            screenCoords.y + containerRect.top - tooltip.offsetHeight - 10;
+          const top = screenCoords.y + containerRect.top - tooltip.offsetHeight - 10;
 
           tooltip.style.left = `${left}px`;
           tooltip.style.top = `${top}px`;
@@ -295,8 +281,7 @@ export class ExploreMapComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       }
 
-      const containerRect =
-        this.globeContainer.nativeElement.getBoundingClientRect();
+      const containerRect = this.globeContainer.nativeElement.getBoundingClientRect();
       tooltip.style.left = `${containerRect.left + containerRect.width / 2}px`;
       tooltip.style.top = `${containerRect.top + containerRect.height / 3}px`;
       tooltip.style.transform = 'translateX(-50%)';

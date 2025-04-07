@@ -1,0 +1,43 @@
+/* Target the host element of the hover button component */
+:host ::ng-deep .button-white app-hover-button button {
+  @apply whitespace-nowrap rounded-sm bg-white px-6 py-2.5 text-xs font-bold uppercase tracking-wider text-black transition hover:bg-gray-300;
+  /* Ensure hover effect variables are set if needed by the component's internal CSS */
+  --hover-bg-color: rgba(0, 0, 0, 0.1); /* Example hover effect color */
+}
+
+:host ::ng-deep .button-dark app-hover-button button {
+  @apply whitespace-nowrap rounded-sm border border-gray-700 bg-transparent px-6 py-2.5 text-xs font-semibold uppercase tracking-wider text-gray-400 transition hover:border-white hover:text-white;
+  /* Ensure hover effect variables are set if needed by the component's internal CSS */
+  --hover-bg-color: rgba(255, 255, 255, 0.1); /* Example hover effect color */
+}
+
+/* Optional: Adjustments if the hover effect circle needs different colors */
+:host ::ng-deep .button-white app-hover-button .hover-circle {
+  background-color: var(--hover-bg-color, rgba(0, 0, 0, 0.1));
+}
+
+:host ::ng-deep .button-dark app-hover-button .hover-circle {
+  background-color: var(--hover-bg-color, rgba(255, 255, 255, 0.1));
+}
+
+:host ::ng-deep .p-datepicker-header {
+  background-color: rgb(0 0 0 / 0.95);
+  font-family: 'Sans';
+}
+
+:host ::ng-deep .p-datepicker-input {
+  background-color: rgb(0 0 0 / 0.95);
+  font-size: 14px;
+  line-height: 16px;
+  background-color: rgb(0 0 0 / 0.95) !important; /* Ensure override */
+  color: #aaa !important;
+  border: none;
+  box-shadow: none !important;
+  cursor: pointer;
+  position: relative;
+}
+
+:host ::ng-deep .p-datepicker-panel {
+  background-color: rgb(0 0 0 / 0.95);
+  border-radius: 2rem;
+}

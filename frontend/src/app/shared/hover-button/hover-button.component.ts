@@ -14,6 +14,8 @@ export class HoverButtonComponent {
   @Input() type?: string; // Optional icon class
   @Input() h?: string; // Optional height
   @Input() w?: string; // Optional width
+  @Input() customClasses: string = ''; // Input for custom Tailwind classes
+  @Input() theme: 'dark' | 'light' = 'dark'; // Theme input
   @Output() onClick = new EventEmitter<MouseEvent>(); // Emit click events
 
   constructor(private el: ElementRef) {} // Inject ElementRef to query selector

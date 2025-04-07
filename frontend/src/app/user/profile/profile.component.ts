@@ -11,11 +11,12 @@ import { PaymentMethod } from '../../models/payment-method.model';
 import { UserService } from '../user.service';
 import { NotificationService } from '../../services/notification.service'; // Import NotificationService
 import { HttpErrorResponse } from '@angular/common/http';
+import { HoverButtonComponent } from '../../shared/hover-button/hover-button.component'; // Import HoverButtonComponent
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule], // Use ReactiveFormsModule
+  imports: [CommonModule, ReactiveFormsModule, HoverButtonComponent], // Add HoverButtonComponent
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
 })
@@ -62,18 +63,9 @@ export class ProfileComponent implements OnInit {
     // Initialize Add Payment Method Form
     this.addPaymentMethodForm = this.fb.group({
       type: ['Credit Card', Validators.required],
-      cardNumber: [
-        '',
-        [Validators.required, Validators.pattern(/^\d{15,16}$/)],
-      ],
-      expiryMonth: [
-        '',
-        [Validators.required, Validators.min(1), Validators.max(12)],
-      ],
-      expiryYear: [
-        '',
-        [Validators.required, Validators.min(new Date().getFullYear())],
-      ],
+      cardNumber: ['', [Validators.required, Validators.pattern(/^\d{15,16}$/)]],
+      expiryMonth: ['', [Validators.required, Validators.min(1), Validators.max(12)]],
+      expiryYear: ['', [Validators.required, Validators.min(new Date().getFullYear())]],
     });
   }
 
@@ -229,9 +221,7 @@ export class ProfileComponent implements OnInit {
 
   addNewPaymentMethod(): void {
     if (!this.addPaymentMethodForm.valid) {
-      this.paymentError.set(
-        'Please fill in all required payment fields correctly.'
-      );
+      this.paymentError.set('Please fill in all required payment fields correctly.');
       this.addPaymentMethodForm.markAllAsTouched();
       return;
     }
@@ -248,10 +238,7 @@ export class ProfileComponent implements OnInit {
 
     this.userService.addPaymentMethod(newMethodData).subscribe({
       next: (addedMethod) => {
-        this.paymentMethods.update((currentMethods) => [
-          ...currentMethods,
-          addedMethod,
-        ]);
+        this.paymentMethods.update((currentMethods) => [...currentMethods, addedMethod]);
         this.isLoadingPaymentMethods.set(false);
         this.addPaymentMethodForm.reset({ type: 'Credit Card' });
         console.log('Payment method added:', addedMethod);
@@ -278,9 +265,7 @@ export class ProfileComponent implements OnInit {
         console.log('Payment method removed:', methodId);
       },
       error: (err) => {
-        this.paymentError.set(
-          err.message || 'Failed to remove payment method.'
-        );
+        this.paymentError.set(err.message || 'Failed to remove payment method.');
         this.isLoadingPaymentMethods.set(false);
         console.error('Error removing payment method:', err);
       },
@@ -301,9 +286,7 @@ export class ProfileComponent implements OnInit {
         console.log('Default payment method set:', methodId);
       },
       error: (err) => {
-        this.paymentError.set(
-          err.message || 'Failed to set default payment method.'
-        );
+        this.paymentError.set(err.message || 'Failed to set default payment method.');
         this.isLoadingPaymentMethods.set(false);
         console.error('Error setting default payment method:', err);
       },

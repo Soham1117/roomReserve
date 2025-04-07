@@ -21,7 +21,7 @@ interface ContinentData {
 @Component({
   selector: 'app-continent-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule], // Add the pipe
   templateUrl: './continent-list.component.html',
   styleUrls: ['./continent-list.component.css'],
 })

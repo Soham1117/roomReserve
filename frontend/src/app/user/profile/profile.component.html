@@ -1,409 +1,458 @@
-<!-- User Profile Container -->
-<div class="max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-  <h1 class="text-3xl font-bold text-gray-900 mb-6">Your Profile</h1>
+<!-- Fullscreen container -->
+<div class="mt-20 flex min-h-screen items-center justify-center bg-white px-4 py-12">
+  <div class="w-full px-12">
+    <!-- Title -->
+    <div class="border-b border-gray-300 pb-20 text-center font-serif text-9xl text-black">
+      My Account
+    </div>
 
-  <!-- Profile Form -->
-  <div class="bg-white p-6 rounded-lg shadow">
-    <!-- Bind to the FormGroup -->
+    <!-- Profile Form -->
     <form
       [formGroup]="profileFormGroup"
       (ngSubmit)="updateProfile()"
-      class="space-y-6"
+      class="mt-10 flex flex-col items-end justify-center gap-6 border-b border-gray-300 pb-10 font-sans"
     >
-      <h2 class="text-xl font-semibold text-gray-800 border-b pb-3 mb-4">
-        Personal Information
-      </h2>
-
-      <!-- First Name -->
-      <div>
-        <label
-          for="profileFirstName"
-          class="block text-sm font-medium text-gray-700"
-          >First Name</label
-        >
-        <input
-          type="text"
-          id="profileFirstName"
-          formControlName="first_name"
-          autocomplete="given-name"
-          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-        />
-        <!-- Add validation messages if needed -->
-        <div
-          *ngIf="
-            profileFormGroup.get('first_name')?.invalid &&
-            (profileFormGroup.get('first_name')?.dirty ||
-              profileFormGroup.get('first_name')?.touched)
-          "
-          class="text-red-600 text-xs mt-1"
-        >
-          First name is required.
-          <!-- Example validation -->
+      <!-- Personal Information Row -->
+      <div class="flex w-full flex-row items-start justify-center gap-20">
+        <h2 class="w-1/4 flex-shrink-0 pt-5 text-2xl font-semibold text-gray-800">
+          Personal Information
+        </h2>
+        <div class="flex w-3/4 flex-grow flex-col gap-8">
+          <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+            <!-- Column 1 -->
+            <div class="flex flex-col gap-8">
+              <!-- First Name -->
+              <div class="relative">
+                <input
+                  id="profileFirstName"
+                  type="text"
+                  placeholder=" "
+                  formControlName="first_name"
+                  autocomplete="given-name"
+                  required
+                  class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-lg text-black focus:outline-none [&:-webkit-autofill]:[-webkit-text-fill-color:black] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_white_inset]"
+                />
+                <label
+                  for="profileFirstName"
+                  class="absolute bottom-0 left-0 w-full max-w-[84%] truncate text-lg text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)]"
+                  >First Name*</label
+                >
+                <div
+                  *ngIf="
+                    profileFormGroup.get('first_name')?.invalid &&
+                    (profileFormGroup.get('first_name')?.dirty ||
+                      profileFormGroup.get('first_name')?.touched)
+                  "
+                  class="absolute mt-1 text-xs text-red-600"
+                >
+                  <div *ngIf="profileFormGroup.get('first_name')?.errors?.['required']">
+                    First name is required.
+                  </div>
+                </div>
+              </div>
+              <!-- Email (Readonly) -->
+              <div class="relative">
+                <input
+                  id="profileEmail"
+                  type="email"
+                  placeholder=" "
+                  formControlName="email"
+                  autocomplete="email"
+                  readonly
+                  class="peer block w-full cursor-not-allowed border-b border-gray-400 bg-gray-100 px-0 pb-1 pt-5 text-lg text-gray-500 focus:outline-none"
+                />
+                <label
+                  for="profileEmail"
+                  class="absolute bottom-0 left-0 w-full max-w-[91%] truncate text-lg text-gray-500 transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)]"
+                  >Email*</label
+                >
+              </div>
+              <!-- Address Line 1 -->
+              <div class="relative">
+                <input
+                  id="profileAddress1"
+                  type="text"
+                  placeholder=" "
+                  formControlName="address_line1"
+                  autocomplete="address-line1"
+                  class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-lg text-black focus:outline-none [&:-webkit-autofill]:[-webkit-text-fill-color:black] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_white_inset]"
+                />
+                <label
+                  for="profileAddress1"
+                  class="absolute bottom-0 left-0 w-full max-w-[79%] truncate text-lg text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)]"
+                  >Address Line 1</label
+                >
+              </div>
+              <!-- City -->
+              <div class="relative">
+                <input
+                  id="profileCity"
+                  type="text"
+                  placeholder=" "
+                  formControlName="city"
+                  autocomplete="address-level2"
+                  class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-lg text-black focus:outline-none [&:-webkit-autofill]:[-webkit-text-fill-color:black] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_white_inset]"
+                />
+                <label
+                  for="profileCity"
+                  class="absolute bottom-0 left-0 w-full max-w-[94%] truncate text-lg text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)]"
+                  >City</label
+                >
+              </div>
+              <!-- Postal Code -->
+              <div class="relative">
+                <input
+                  id="profilepostal_code"
+                  type="text"
+                  placeholder=" "
+                  formControlName="postal_code"
+                  autocomplete="postal-code"
+                  class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-lg text-black focus:outline-none [&:-webkit-autofill]:[-webkit-text-fill-color:black] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_white_inset]"
+                />
+                <label
+                  for="profilepostal_code"
+                  class="absolute bottom-0 left-0 w-full max-w-[83%] truncate text-lg text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)]"
+                  >Postal Code</label
+                >
+              </div>
+            </div>
+            <!-- Column 2 -->
+            <div class="flex flex-col gap-8">
+              <!-- Last Name -->
+              <div class="relative">
+                <input
+                  id="profileLastName"
+                  type="text"
+                  placeholder=" "
+                  formControlName="last_name"
+                  autocomplete="family-name"
+                  required
+                  class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-lg text-black focus:outline-none [&:-webkit-autofill]:[-webkit-text-fill-color:black] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_white_inset]"
+                />
+                <label
+                  for="profileLastName"
+                  class="absolute bottom-0 left-0 w-full max-w-[84%] truncate text-lg text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)]"
+                  >Last Name*</label
+                >
+                <div
+                  *ngIf="
+                    profileFormGroup.get('last_name')?.invalid &&
+                    (profileFormGroup.get('last_name')?.dirty ||
+                      profileFormGroup.get('last_name')?.touched)
+                  "
+                  class="absolute mt-1 text-xs text-red-600"
+                >
+                  <div *ngIf="profileFormGroup.get('last_name')?.errors?.['required']">
+                    Last name is required.
+                  </div>
+                </div>
+              </div>
+              <!-- Phone Number -->
+              <div class="relative">
+                <input
+                  id="profilePhone"
+                  type="tel"
+                  placeholder=" "
+                  formControlName="phone_number"
+                  autocomplete="tel"
+                  class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-lg text-black focus:outline-none [&:-webkit-autofill]:[-webkit-text-fill-color:black] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_white_inset]"
+                />
+                <label
+                  for="profilePhone"
+                  class="absolute bottom-0 left-0 w-full max-w-[79%] truncate text-lg text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)]"
+                  >Phone Number</label
+                >
+              </div>
+              <!-- Address Line 2 -->
+              <div class="relative">
+                <input
+                  id="profileAddress2"
+                  type="text"
+                  placeholder=" "
+                  formControlName="address_line2"
+                  autocomplete="address-line2"
+                  class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-lg text-black focus:outline-none [&:-webkit-autofill]:[-webkit-text-fill-color:black] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_white_inset]"
+                />
+                <label
+                  for="profileAddress2"
+                  class="absolute bottom-0 left-0 w-full max-w-[79%] truncate text-lg text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)]"
+                  >Address Line 2</label
+                >
+              </div>
+              <!-- State -->
+              <div class="relative">
+                <input
+                  id="profileState"
+                  type="text"
+                  placeholder=" "
+                  formControlName="state"
+                  autocomplete="address-level1"
+                  class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-lg text-black focus:outline-none [&:-webkit-autofill]:[-webkit-text-fill-color:black] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_white_inset]"
+                />
+                <label
+                  for="profileState"
+                  class="absolute bottom-0 left-0 w-full max-w-[78%] truncate text-lg text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)]"
+                  >State / Province</label
+                >
+              </div>
+              <!-- Country -->
+              <div class="relative">
+                <input
+                  id="profileCountry"
+                  type="text"
+                  placeholder=" "
+                  formControlName="country"
+                  autocomplete="country-name"
+                  class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-lg text-black focus:outline-none [&:-webkit-autofill]:[-webkit-text-fill-color:black] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_white_inset]"
+                />
+                <label
+                  for="profileCountry"
+                  class="absolute bottom-0 left-0 w-full max-w-[88%] truncate text-lg text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)]"
+                  >Country</label
+                >
+              </div>
+            </div>
+          </div>
+          <!-- Loading, Success, Error Messages -->
+          <div *ngIf="isLoadingProfile()" class="pt-4 text-center text-sm text-gray-500">
+            Updating...
+          </div>
+          <div
+            *ngIf="profileSuccess()"
+            class="rounded-md border border-green-600 bg-green-100/70 p-4 pt-4 text-center text-sm text-green-700"
+          >
+            {{ profileSuccess() }}
+          </div>
+          <div
+            *ngIf="profileError()"
+            class="rounded-md border border-red-600 bg-red-100/70 p-4 pt-4 text-center text-sm text-red-700"
+          >
+            {{ profileError() }}
+          </div>
+          <!-- Update Profile Button -->
         </div>
       </div>
-
-      <!-- Last Name -->
-      <div>
-        <label
-          for="profileLastName"
-          class="block text-sm font-medium text-gray-700"
-          >Last Name</label
-        >
-        <input
-          type="text"
-          id="profileLastName"
-          formControlName="last_name"
-          autocomplete="family-name"
-          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-        />
-        <div
-          *ngIf="
-            profileFormGroup.get('last_name')?.invalid &&
-            (profileFormGroup.get('last_name')?.dirty ||
-              profileFormGroup.get('last_name')?.touched)
-          "
-          class="text-red-600 text-xs mt-1"
-        >
-          Last name is required.
-          <!-- Example validation -->
-        </div>
-      </div>
-
-      <!-- Email Address (Readonly) -->
-      <div>
-        <label
-          for="profileEmail"
-          class="block text-sm font-medium text-gray-700"
-          >Email Address</label
-        >
-        <input
-          type="email"
-          id="profileEmail"
-          formControlName="email"
-          autocomplete="email"
-          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-100 focus:outline-none sm:text-sm text-gray-500 cursor-not-allowed"
-        />
-      </div>
-
-      <!-- Phone Number (Optional) -->
-      <div>
-        <label
-          for="profilePhone"
-          class="block text-sm font-medium text-gray-700"
-          >Phone Number (Optional)</label
-        >
-        <input
-          type="tel"
-          id="profilePhone"
-          formControlName="phone_number"
-          autocomplete="tel"
-          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-        />
-      </div>
-
-      <!-- Address Line 1 -->
-      <div>
-        <label
-          for="profileAddress1"
-          class="block text-sm font-medium text-gray-700"
-          >Address Line 1</label
-        >
-        <input
-          type="text"
-          id="profileAddress1"
-          formControlName="address_line1"
-          autocomplete="address-line1"
-          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-        />
-      </div>
-
-      <!-- Address Line 2 -->
-      <div>
-        <label
-          for="profileAddress2"
-          class="block text-sm font-medium text-gray-700"
-          >Address Line 2 (Optional)</label
-        >
-        <input
-          type="text"
-          id="profileAddress2"
-          formControlName="address_line2"
-          autocomplete="address-line2"
-          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-        />
-      </div>
-
-      <!-- City -->
-      <div>
-        <label for="profileCity" class="block text-sm font-medium text-gray-700"
-          >City</label
-        >
-        <input
-          type="text"
-          id="profileCity"
-          formControlName="city"
-          autocomplete="address-level2"
-          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-        />
-      </div>
-
-      <!-- State/Province -->
-      <div>
-        <label
-          for="profileState"
-          class="block text-sm font-medium text-gray-700"
-          >State / Province</label
-        >
-        <input
-          type="text"
-          id="profileState"
-          formControlName="state"
-          autocomplete="address-level1"
-          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-        />
-      </div>
-
-      <!-- Postal Code -->
-      <div>
-        <label
-          for="profilepostal_code"
-          class="block text-sm font-medium text-gray-700"
-          >Postal Code</label
-        >
-        <input
-          type="text"
-          id="profilepostal_code"
-          formControlName="postal_code"
-          autocomplete="postal-code"
-          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-        />
-      </div>
-
-      <!-- Country -->
-      <div>
-        <label
-          for="profileCountry"
-          class="block text-sm font-medium text-gray-700"
-          >Country</label
-        >
-        <input
-          type="text"
-          id="profileCountry"
-          formControlName="country"
-          autocomplete="country-name"
-          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-        />
-      </div>
-
-      <!-- Loading, Success, Error Messages -->
-      <div *ngIf="isLoadingProfile()" class="text-sm text-gray-500">
-        Updating...
-      </div>
-      <div *ngIf="profileSuccess()" class="text-sm text-green-600">
-        {{ profileSuccess() }}
-      </div>
-      <div *ngIf="profileError()" class="text-sm text-red-600">
-        {{ profileError() }}
-      </div>
-
-      <!-- Update Profile Button -->
-      <div class="pt-4 flex justify-end space-x-3">
-        <button
-          type="button"
-          (click)="resetForm()"
-          class="py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-        >
-          Reset
-        </button>
+      <div class="pt-4">
         <button
           type="submit"
-          [disabled]="profileFormGroup.invalid || !profileFormGroup.dirty"
-          class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition duration-150 ease-in-out"
+          [disabled]="profileFormGroup.invalid || !profileFormGroup.dirty || isLoadingProfile()"
+          class="relative w-full rounded-full border border-black text-sm font-semibold tracking-wide text-black"
+          [class.bg-gray-300]="isLoadingProfile()"
+          [class.hover:bg-gray-300]="isLoadingProfile()"
+          [class.text-gray-500]="isLoadingProfile()"
+          [class.border-gray-300]="isLoadingProfile()"
         >
-          Update Profile
+          <div class="relativee">
+            <span *ngIf="isLoadingProfile()" class="flex items-center justify-center">
+              Saving...
+            </span>
+            <app-hover-button
+              *ngIf="!isLoadingProfile()"
+              theme="light"
+              buttonText="Save Changes"
+              [customClasses]="'w-full h-full p-2 px-5 hover:text-white'"
+            ></app-hover-button>
+          </div>
         </button>
       </div>
     </form>
-  </div>
 
-  <!-- Payment Methods Section -->
-  <div class="mt-8 bg-white p-6 rounded-lg shadow">
-    <h2 class="text-xl font-semibold text-gray-800 border-b pb-3 mb-4">
-      Payment Methods (Simulation)
-    </h2>
+    <!-- Payment Methods Section -->
+    <div class="mt-10 flex w-full flex-row items-start justify-center gap-20 pb-10 font-sans">
+      <h2 class="w-1/4 flex-shrink-0 pt-5 text-2xl font-semibold text-gray-800">Payment Methods</h2>
+      <div class="flex w-3/4 flex-grow flex-col gap-8">
+        <!-- Loading/Error State -->
+        <div *ngIf="isLoadingPaymentMethods()" class="text-sm text-gray-500">
+          Loading payment methods...
+        </div>
+        <div *ngIf="paymentError()" class="text-sm text-red-600">{{ paymentError() }}</div>
 
-    <!-- Loading/Error State for Payment Methods -->
-    <div *ngIf="isLoadingPaymentMethods()" class="text-sm text-gray-500">
-      Loading payment methods...
-    </div>
-    <div *ngIf="paymentError()" class="text-sm text-red-600">
-      {{ paymentError() }}
-    </div>
+        <!-- Display Existing Payment Methods -->
+        <div *ngIf="!isLoadingPaymentMethods() && !paymentError()">
+          <div *ngIf="paymentMethods().length === 0" class="text-sm text-gray-500">
+            You have no saved payment methods.
+          </div>
+          <ul *ngIf="paymentMethods().length > 0" class="divide-y divide-gray-300">
+            <li
+              *ngFor="let method of paymentMethods()"
+              class="flex items-center justify-between py-3 text-lg"
+            >
+              <div>
+                <span class="font-medium text-black">{{ method.type }}</span>
+                <span class="ml-2 text-gray-600">ending in {{ method.last4 }}</span>
+                <span
+                  *ngIf="method.expiryMonth && method.expiryYear"
+                  class="ml-2 text-sm text-gray-500"
+                >
+                  (Expires {{ method.expiryMonth }}/{{ method.expiryYear }})
+                </span>
+                <span
+                  *ngIf="method.isDefault"
+                  class="ml-2 inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800"
+                  >Default</span
+                >
+              </div>
+              <div class="space-x-4">
+                <button
+                  *ngIf="!method.isDefault"
+                  (click)="makeDefaultPaymentMethod(method.id)"
+                  type="button"
+                  class="text-sm font-medium text-indigo-600 hover:text-indigo-800"
+                >
+                  Make Default
+                </button>
+                <button
+                  (click)="removePaymentMethod(method.id)"
+                  type="button"
+                  class="text-sm font-medium text-red-600 hover:text-red-800"
+                >
+                  Remove
+                </button>
+              </div>
+            </li>
+          </ul>
+        </div>
 
-    <!-- Display Existing Payment Methods -->
-    <div *ngIf="!isLoadingPaymentMethods() && !paymentError()">
-      <div *ngIf="paymentMethods().length === 0" class="text-gray-500 text-sm">
-        You have no saved payment methods.
+        <!-- Add New Payment Method Form -->
+        <div class="mt-6 border-t border-gray-300 pt-6 font-sans">
+          <h3 class="mb-6 text-xl font-semibold text-gray-800">Add New Payment Method</h3>
+          <form
+            [formGroup]="addPaymentMethodForm"
+            (ngSubmit)="addNewPaymentMethod()"
+            class="space-y-8"
+          >
+            <!-- Fields in two columns -->
+            <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+              <!-- Column 1 -->
+              <div class="mt-2 flex flex-col gap-8">
+                <!-- Type -->
+                <div class="relative">
+                  <select
+                    id="pmType"
+                    formControlName="type"
+                    class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-lg text-black focus:outline-none"
+                  >
+                    <option value="Credit Card">Credit Card</option>
+                    <option value="Debit Card">Debit Card</option>
+                    <option value="PayPal">PayPal</option>
+                  </select>
+                  <label
+                    for="pmType"
+                    class="absolute bottom-0 left-0 w-full max-w-[88%] truncate text-lg text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)]"
+                    >Type*</label
+                  >
+                </div>
+                <!-- Expiry Month -->
+                <div class="relative">
+                  <input
+                    id="pmExpiryMonth"
+                    type="number"
+                    placeholder=" "
+                    formControlName="expiryMonth"
+                    class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-lg text-black focus:outline-none"
+                  />
+                  <label
+                    for="pmExpiryMonth"
+                    class="absolute bottom-0 left-0 w-full max-w-[71%] truncate text-lg text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)]"
+                    >Expiry Month (MM)*</label
+                  >
+                  <div
+                    *ngIf="
+                      addPaymentMethodForm.get('expiryMonth')?.invalid &&
+                      (addPaymentMethodForm.get('expiryMonth')?.dirty ||
+                        addPaymentMethodForm.get('expiryMonth')?.touched)
+                    "
+                    class="absolute mt-1 text-xs text-red-600"
+                  >
+                    Enter a valid month (1-12).
+                  </div>
+                </div>
+              </div>
+              <!-- Column 2 -->
+              <div class="flex flex-col gap-8">
+                <!-- Card Number -->
+                <div class="relative">
+                  <input
+                    id="pmCardNumber"
+                    type="text"
+                    placeholder=" "
+                    formControlName="cardNumber"
+                    class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-lg text-black focus:outline-none"
+                  />
+                  <label
+                    for="pmCardNumber"
+                    class="absolute bottom-0 left-0 w-full max-w-[81%] truncate text-lg text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)]"
+                    >Card Number*</label
+                  >
+                  <div
+                    *ngIf="
+                      addPaymentMethodForm.get('cardNumber')?.invalid &&
+                      (addPaymentMethodForm.get('cardNumber')?.dirty ||
+                        addPaymentMethodForm.get('cardNumber')?.touched)
+                    "
+                    class="absolute mt-1 text-xs text-red-600"
+                  >
+                    Enter a valid 15/16 digit card number.
+                  </div>
+                </div>
+                <!-- Expiry Year -->
+                <div class="relative">
+                  <input
+                    id="pmExpiryYear"
+                    type="number"
+                    placeholder=" "
+                    formControlName="expiryYear"
+                    class="peer block w-full border-b border-black bg-transparent px-0 pb-1 pt-5 text-lg text-black focus:outline-none"
+                  />
+                  <label
+                    for="pmExpiryYear"
+                    class="absolute bottom-0 left-0 w-full max-w-[71%] truncate text-lg text-black transition-all duration-300 peer-placeholder-shown:opacity-100 peer-focus:translate-x-[calc(100%)] peer-[&:not(:placeholder-shown)]:translate-x-[calc(100%)]"
+                    >Expiry Year (YYYY)*</label
+                  >
+                  <div
+                    *ngIf="
+                      addPaymentMethodForm.get('expiryYear')?.invalid &&
+                      (addPaymentMethodForm.get('expiryYear')?.dirty ||
+                        addPaymentMethodForm.get('expiryYear')?.touched)
+                    "
+                    class="absolute mt-1 text-xs text-red-600"
+                  >
+                    Enter a valid year.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Add Button -->
+            <div class="flex justify-end pt-4">
+              <button
+                type="submit"
+                [disabled]="addPaymentMethodForm.invalid || isLoadingPaymentMethods()"
+                class="relative w-auto rounded-full border border-black text-sm font-semibold tracking-wide text-black"
+                [class.bg-gray-300]="isLoadingPaymentMethods()"
+                [class.hover:bg-gray-300]="isLoadingPaymentMethods()"
+                [class.text-gray-500]="isLoadingPaymentMethods()"
+                [class.border-gray-300]="isLoadingPaymentMethods()"
+              >
+                <div class="relative">
+                  <span
+                    *ngIf="isLoadingPaymentMethods()"
+                    class="flex items-center justify-center p-2"
+                    >Adding...</span
+                  >
+                  <app-hover-button
+                    *ngIf="!isLoadingPaymentMethods()"
+                    theme="light"
+                    buttonText="Add Method"
+                    [customClasses]="'w-full h-full p-2 px-5 hover:text-white'"
+                  ></app-hover-button>
+                </div>
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
-      <ul *ngIf="paymentMethods().length > 0" class="divide-y divide-gray-200">
-        <li
-          *ngFor="let method of paymentMethods()"
-          class="py-3 flex justify-between items-center"
-        >
-          <div>
-            <span class="font-medium text-gray-900">{{ method.type }}</span>
-            <span class="text-gray-600 ml-2">ending in {{ method.last4 }}</span>
-            <span
-              *ngIf="method.expiryMonth && method.expiryYear"
-              class="text-gray-500 text-sm ml-2"
-            >
-              (Expires {{ method.expiryMonth }}/{{ method.expiryYear }})
-            </span>
-            <span
-              *ngIf="method.isDefault"
-              class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800"
-            >
-              Default
-            </span>
-          </div>
-          <div class="space-x-2">
-            <button
-              *ngIf="!method.isDefault"
-              (click)="makeDefaultPaymentMethod(method.id)"
-              type="button"
-              class="text-indigo-600 hover:text-indigo-800 text-sm font-medium"
-            >
-              Make Default
-            </button>
-            <button
-              (click)="removePaymentMethod(method.id)"
-              type="button"
-              class="text-red-600 hover:text-red-800 text-sm font-medium"
-            >
-              Remove
-            </button>
-          </div>
-        </li>
-      </ul>
     </div>
 
-    <!-- Add New Payment Method Form -->
-    <div class="mt-6 pt-4 border-t">
-      <h3 class="text-lg font-medium text-gray-900 mb-3">
-        Add New Payment Method
-      </h3>
-      <!-- Bind to the addPaymentMethodForm FormGroup -->
-      <form
-        [formGroup]="addPaymentMethodForm"
-        (ngSubmit)="addNewPaymentMethod()"
-        class="space-y-4"
-      >
-        <div>
-          <label for="pmType" class="block text-sm font-medium text-gray-700"
-            >Type</label
-          >
-          <select
-            id="pmType"
-            formControlName="type"
-            class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
-          >
-            <option>Credit Card</option>
-            <option>Debit Card</option>
-            <option>PayPal</option>
-          </select>
-        </div>
-        <div>
-          <label
-            for="pmCardNumber"
-            class="block text-sm font-medium text-gray-700"
-            >Card Number</label
-          >
-          <input
-            type="text"
-            id="pmCardNumber"
-            formControlName="cardNumber"
-            placeholder="Enter 15 or 16 digit card number"
-            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-          />
-          <div
-            *ngIf="
-              addPaymentMethodForm.get('cardNumber')?.invalid &&
-              (addPaymentMethodForm.get('cardNumber')?.dirty ||
-                addPaymentMethodForm.get('cardNumber')?.touched)
-            "
-            class="text-red-600 text-xs mt-1"
-          >
-            Please enter a valid 15 or 16 digit card number.
-          </div>
-        </div>
-        <div class="grid grid-cols-2 gap-4">
-          <div>
-            <label
-              for="pmExpiryMonth"
-              class="block text-sm font-medium text-gray-700"
-              >Expiry Month (MM)</label
-            >
-            <input
-              type="number"
-              id="pmExpiryMonth"
-              formControlName="expiryMonth"
-              placeholder="MM"
-              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            />
-            <div
-              *ngIf="
-                addPaymentMethodForm.get('expiryMonth')?.invalid &&
-                (addPaymentMethodForm.get('expiryMonth')?.dirty ||
-                  addPaymentMethodForm.get('expiryMonth')?.touched)
-              "
-              class="text-red-600 text-xs mt-1"
-            >
-              Enter a valid month (1-12).
-            </div>
-          </div>
-          <div>
-            <label
-              for="pmExpiryYear"
-              class="block text-sm font-medium text-gray-700"
-              >Expiry Year (YYYY)</label
-            >
-            <input
-              type="number"
-              id="pmExpiryYear"
-              formControlName="expiryYear"
-              placeholder="YYYY"
-              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            />
-            <div
-              *ngIf="
-                addPaymentMethodForm.get('expiryYear')?.invalid &&
-                (addPaymentMethodForm.get('expiryYear')?.dirty ||
-                  addPaymentMethodForm.get('expiryYear')?.touched)
-              "
-              class="text-red-600 text-xs mt-1"
-            >
-              Enter a valid year (current or future).
-            </div>
-          </div>
-        </div>
-        <div class="flex justify-end">
-          <button
-            type="submit"
-            [disabled]="addPaymentMethodForm.invalid"
-            class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            Add Payment Method
-          </button>
-        </div>
-      </form>
-    </div>
+    <!-- TODO: Add My Bookings section styled similarly -->
   </div>
-
-  <!-- Example: My Bookings Section -->
-  <!--
-  <div class="mt-8 bg-white p-6 rounded-lg shadow">
-    <h2 class="text-xl font-semibold text-gray-800 border-b pb-3 mb-4">My Bookings</h2>
-    <app-bookings-list></app-bookings-list>
-  </div>
-  -->
 </div>

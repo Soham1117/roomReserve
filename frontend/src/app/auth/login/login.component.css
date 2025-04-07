@@ -1,0 +1,6 @@
+.bg-card {
+  background-image:
+    var(--noise-url), radial-gradient(62.9% 100% at 0 0, #e894021a 0, #fff0 100%),
+    radial-gradient(62.9% 100% at 100% 100%, #e894021a 0, #fff0 100%),
+    linear-gradient(0deg, #1e1b15, #1e1b150d);
+}

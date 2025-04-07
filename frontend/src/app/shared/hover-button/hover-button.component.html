@@ -1,12 +1,13 @@
 <!-- Using a button element, can be adapted for routerLink if needed via Input -->
 <button
-  class="hover-effect-button relative z-10 inline-block overflow-hidden rounded-full border border-white bg-white px-8 py-3 text-sm font-semibold uppercase tracking-wider text-black transition-colors duration-300 ease-in-out"
+  class="hover-effect-button relative z-10 inline-block overflow-hidden rounded-full transition-colors duration-300 ease-in-out"
+  [ngClass]="customClasses"
   (mousemove)="onButtonMouseMove($event)"
   (mouseleave)="onButtonMouseLeave($event)"
   (click)="onClick.emit($event)"
 >
-  <!-- Keep relative z-10 on inner span -->
-  <span class="relative z-10 flex items-center justify-center gap-2">
+  <!-- Keep relative z-10 on inner span, add inherit for text color -->
+  <span class="relative z-10 mt-1 flex items-center justify-center gap-2 text-inherit">
     <!-- Optional Icon -->
     <svg
       *ngIf="type === 'svg' && iconSvgPath"
@@ -34,6 +35,11 @@
   </span>
   <!-- Add absolute bg-black rounded-full transform -translate-x-1/2 -translate-y-1/2 -z-10 to hover-circle -->
   <span
+    *ngIf="theme === 'dark'"
+    class="hover-circle absolute -z-10 block -translate-x-1/2 -translate-y-1/2 transform rounded-full bg-white"
+  ></span>
+  <span
+    *ngIf="theme === 'light'"
     class="hover-circle absolute -z-10 block -translate-x-1/2 -translate-y-1/2 transform rounded-full bg-black"
   ></span>
 </button>

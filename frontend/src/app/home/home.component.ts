@@ -12,12 +12,15 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SearchService } from '../search/search.service';
 import { Hotel } from '../models/hotel.model';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http'; // Keep HttpErrorResponse
+import { HotelService } from '../services/hotel.service'; // Import HotelService
 import { ContinentListComponent } from '../continent-list/continent-list.component';
 import { Router } from '@angular/router';
 import { HoverButtonComponent } from '../shared/hover-button/hover-button.component';
-import { CalendarModule } from 'primeng/calendar'; // Keep PrimeNG CalendarModule
-import { format } from 'date-fns'; // Keep format for searchHotels
+import { CalendarModule } from 'primeng/calendar';
+// import { format } from 'date-fns'; // No longer needed here
+import { FindPrimaryImagePipe } from '../shared/pipes/find-primary-image.pipe';
+import { SearchBarComponent, SearchCriteria } from '../shared/search-bar/search-bar.component'; // Import shared component and interface
 
 @Component({
   selector: 'app-home',
@@ -25,9 +28,11 @@ import { format } from 'date-fns'; // Keep format for searchHotels
   imports: [
     CommonModule,
     ContinentListComponent,
-    FormsModule,
+    // FormsModule, // No longer needed directly if search bar handles its own model
     HoverButtonComponent,
-    CalendarModule, // Keep CalendarModule
+    // CalendarModule, // No longer needed directly
+    FindPrimaryImagePipe,
+    SearchBarComponent, // Import the SearchBarComponent
   ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
@@ -47,19 +52,12 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('img5') img5!: ElementRef<HTMLImageElement>;
   @ViewChild('img6') img6!: ElementRef<HTMLImageElement>;
   @ViewChild('heroSection') heroSection!: ElementRef<HTMLElement>;
-  @ViewChild('dateRangeCalendar') dateRangeCalendar: any; // Add ViewChild for p-calendar instance
+  // Removed @ViewChild('dateRangeCalendar')
 
   private observer: IntersectionObserver | null = null;
-  isSearchFocused = false;
-  // Search parameters
-  destination: string = '';
-  // Removed checkInDate, checkOutDate, selectedStartDate, selectedEndDate
-  rangeDates: Date[] | null = null; // Use this for PrimeNG [(ngModel)]
-  adults: number = 2;
-  children: number = 0;
-  showGuestSelector: boolean = false;
-  // Removed showDatePicker
+  // Removed search bar state properties: isSearchFocused, destination, rangeDates, adults, children, showGuestSelector
 
+  // Keep mouse move listener if parallax is still desired
   @HostListener('mousemove', ['$event'])
   onMouseMove(event: MouseEvent) {
     this.mouseX = event.clientX;
@@ -68,19 +66,15 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   constructor(
-    private searchService: SearchService,
+    // private searchService: SearchService, // Remove if not used elsewhere
+    private hotelService: HotelService,
     private renderer: Renderer2,
-    private el: ElementRef,
+    private el: ElementRef, // Keep for parallax/intersection observer
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.loadFeaturedHotels();
-    this.heroImageUrl = this.getRandomImageUrl();
-    const heroIndex = this.availableImages.indexOf(this.heroImageUrl.replace('/', ''));
-    if (heroIndex !== -1) {
-      this.usedImageIndices.add(heroIndex);
-    }
+    this.loadFeaturedHotels(); // Call the updated method
   }
 
   ngAfterViewInit() {
@@ -114,72 +108,9 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  // --- Search Bar Logic ---
-  toggleSearchFocus(state: boolean): void {
-    this.isSearchFocused = state;
-    const searchBarElement = this.el.nativeElement.querySelector('.search-bar');
-    if (searchBarElement) {
-      if (state) {
-        this.renderer.addClass(searchBarElement, 'is-focused');
-      } else {
-        this.renderer.removeClass(searchBarElement, 'is-focused');
-      }
-    }
-  }
+  // --- Search Bar Logic (Removed - Moved to SearchBarComponent) ---
 
-  handleBlur(event: FocusEvent): void {
-    // Rely on document click listener to close
-  }
-
-  // --- Calendar Open Logic ---
-  onCalendarOpen(): void {
-    // Close guest selector if calendar is opened
-    if (this.showGuestSelector) {
-      this.showGuestSelector = false;
-    }
-  }
-
-  // --- Guest Selector Logic ---
-  toggleGuestSelector(event: MouseEvent): void {
-    event.stopPropagation();
-    const opening = !this.showGuestSelector;
-    this.showGuestSelector = opening;
-
-    // If opening guest selector, close calendar if it's open
-    if (opening && this.dateRangeCalendar && this.dateRangeCalendar.overlayVisible) {
-      this.dateRangeCalendar.hideOverlay();
-    }
-  }
-
-  changeGuests(type: 'adults' | 'children', delta: number): void {
-    if (type === 'adults') {
-      this.adults = Math.max(1, this.adults + delta);
-    }
-    if (type === 'children') {
-      this.children = Math.max(0, this.children + delta);
-    }
-  }
-
-  get totalGuests(): number {
-    return this.adults + this.children;
-  }
-
-  // Close popups if clicking outside the main search container
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: MouseEvent): void {
-    const searchContainerElement = this.el.nativeElement.querySelector('.search-bar-container');
-    if (searchContainerElement && !searchContainerElement.contains(event.target as Node)) {
-      if (this.isSearchFocused) {
-        this.toggleSearchFocus(false);
-      }
-      if (this.showGuestSelector) {
-        this.showGuestSelector = false;
-      }
-      // Removed check for showDatePicker
-    }
-    // Close PrimeNG calendar if clicking outside? - PrimeNG might handle this internally
-  }
-
+  // --- Intersection Observer Logic ---
   private setupIntersectionObserver(): void {
     const options = { root: null, rootMargin: '0px', threshold: 0.1 };
     this.observer = new IntersectionObserver((entries) => {
@@ -197,49 +128,53 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.observer.observe(this.el.nativeElement);
   }
 
-  // --- Search Action ---
-  searchHotels(): void {
-    // Format dates from PrimeNG model (rangeDates array)
-    const checkInParam = this.rangeDates?.[0] ? format(this.rangeDates[0], 'yyyy-MM-dd') : null;
-    // Important: PrimeNG range selection might put null in the second position if only one date is selected
-    const checkOutParam = this.rangeDates?.[1] ? format(this.rangeDates[1], 'yyyy-MM-dd') : null;
+  // --- Search Action (Handles event from SearchBarComponent) ---
+  handleSearch(criteria: SearchCriteria): void {
+    console.log('HomeComponent: Received search criteria:', criteria);
 
-    console.log('Searching with:', {
-      destination: this.destination,
-      checkIn: checkInParam,
-      checkOut: checkOutParam,
-      adults: this.adults,
-      children: this.children,
-    });
-
-    this.router.navigate(['/search'], {
+    // Navigate to the hotel-results page with query parameters
+    this.router.navigate(['/hotel-results'], {
       queryParams: {
-        destination: this.destination || null,
-        checkIn: checkInParam,
-        checkOut: checkOutParam,
-        adults: this.adults,
-        children: this.children,
+        destination: criteria.destination,
+        checkIn: criteria.checkIn,
+        checkOut: criteria.checkOut,
+        adults: criteria.adults,
+        children: criteria.children,
       },
     });
   }
 
   // --- Image Loading ---
-  availableImages: string[] = ['image_1.jpg', /* ... other images ... */ 'image_30.jpg'];
-  heroImageUrl: string = '';
-  private usedImageIndices = new Set<number>();
-
+  // Remove old image logic: availableImages, heroImageUrl, usedImageIndices, getRandomImageUrl, getHotelImageUrl
+  // Keep loadFeaturedHotels if it fetches actual data, otherwise remove or update it
   loadFeaturedHotels(): void {
-    /* ... implementation ... */
+    this.isLoading = true;
+    this.errorMessage = null;
+    // Fetch hotels (e.g., all or based on some criteria)
+    // Using empty search for now to get some hotels
+    this.hotelService.searchHotels('').subscribe({
+      next: (hotels: Hotel[]) => {
+        // Add type annotation
+        // Take the first 6 hotels for the parallax images
+        this.featuredHotels = hotels.slice(0, 6);
+        this.isLoading = false;
+        console.log('Fetched Featured Hotels for Home:', this.featuredHotels);
+        // Note: Parallax update might need explicit trigger if positions depend on image load/size
+      },
+      error: (err: HttpErrorResponse) => {
+        // Add type annotation
+        this.errorMessage = 'Failed to load featured hotels.';
+        this.isLoading = false;
+        console.error('Error loading featured hotels:', err);
+        this.featuredHotels = []; // Ensure array is empty on error
+      },
+    });
   }
   createMockHotels(): Hotel[] {
-    /* ... implementation ... */ return [];
+    // This can likely be removed if loadFeaturedHotels fetches real data
+    return [];
   }
-  getRandomImageUrl(): string {
-    /* ... implementation ... */ return '';
-  }
-  getHotelImageUrl(hotelId: number): string {
-    /* ... implementation ... */ return '';
-  }
+
   openExploreMap() {
     this.router.navigate(['/explore-map']);
   }

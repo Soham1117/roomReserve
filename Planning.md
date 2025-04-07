@@ -36,9 +36,10 @@
   - [x] Add "Children" counter to the guest pop-up.
   - [x] Update `totalGuests` getter to include children.
 - [x] **Search Action:**
-  - [x] Implement `searchHotels()` method in `HomeComponent`.
-  - [x] Gather search parameters (destination, dates from `rangeDates`, guests).
-  - [x] Implement navigation to `/search` with query parameters.
+  - [ ] **Modify `searchHotels()` method in `HomeComponent`:**
+    - [ ] Add a check: Only proceed if the destination input field is not empty.
+    - [ ] Gather search parameters (destination, dates from `rangeDates`, guests).
+    - [ ] **Change navigation:** Navigate to `/hotel-results` (new route) with query parameters instead of `/search`.
   - [x] Add `(click)` binding to the search arrow button.
 
 ## Phase 4: Entrance Animations
@@ -49,8 +50,138 @@
 
 ## Phase 5: Backend Integration & Other Features
 
-- [ ] Connect search bar to backend API.
-- [ ] Implement actual hotel search results page.
+- [ ] Connect search bar to backend API (in `HotelResultsComponent`).
 - [ ] Integrate other components (Map, Series, Housewives, About, Contact).
 - [ ] Implement authentication.
 - [ ] Implement booking flow.
+
+## Phase 6: Hotel Search Results Page
+
+- [x] Generate `HotelResultsComponent`.
+- [x] Define a new route `/hotel-results` in `app-routing.module.ts` pointing to `HotelResultsComponent`.
+- [x] Implement the basic layout for `HotelResultsComponent`.
+- [x] In `HotelResultsComponent`, retrieve search parameters (destination, dates, guests) from the activated route's query parameters.
+- [ ] **Create/Update Angular Service:**
+  - [ ] Create or locate an existing Angular service (e.g., `HotelService` in `frontend/src/app/services/`) to handle API requests.
+  - [ ] Implement a method in the service (e.g., `searchHotels(destination: string)`) that makes a GET request to the backend endpoint `/api/hotels/` with the `?search=` query parameter.
+- [ ] **Fetch and Display Data in `HotelResultsComponent`:**
+  - [ ] Inject the `HotelService` into `HotelResultsComponent`.
+  - [ ] Call the service method using the retrieved `destination` parameter in `ngOnInit`.
+  - [ ] Store the returned hotel data in a component property.
+  - [ ] Update the template (`hotel-results.component.html`) to display the fetched hotel data (initially simple list, creative display later).
+- [ ] Design and implement a creative display for hotel results (e.g., grid, cards, map view).
+
+## Phase 7: Hotel Images Integration
+
+- [x] **Backend Implementation:**
+  - [x] **Serializer:** Create `HotelImageSerializer` in `hotel_service/serializers.py`.
+    - [x] Inherit from `serializers.ModelSerializer`.
+    - [x] Set `model = HotelImage`.
+    - [x] Include fields: `id`, `image_high_res`, `image_compressed`, `caption`, `is_primary`.
+    - [x] Set `read_only=True`.
+  - [x] **Serializer Update:** Modify `HotelSerializer` in `hotel_service/serializers.py`.
+    - [x] Add `images = HotelImageSerializer(many=True, read_only=True)`.
+    - [x] Add `'images'` to `Meta.fields`.
+  - [x] **View Update:** Check `HotelViewSet` in `hotel_service/views.py` to ensure nested image data is included. (Confirmed OK due to DRF defaults/serializer update).
+  - [x] **URL Configuration:**
+    - [x] Verify `hotel_service/urls.py` (no changes needed).
+    - [x] Ensure `roomReserveBackend/urls.py` includes `hotel_service` URLs and serves media files in development (`settings.MEDIA_URL`, `settings.MEDIA_ROOT`).
+  - [x] **Settings:** Configure `MEDIA_URL` and `MEDIA_ROOT` in `roomReserveBackend/settings.py`.
+  - [x] **Seeding:** Update `seed_data.py` command to create `HotelImage` instances and link image files. (Used separate dirs)
+- [x] **Frontend Implementation:**
+  - [x] **Model:** Update `hotel.model.ts` to include `images: HotelImage[]`. Define `HotelImage` interface (`image_high_res_url`, `image_compressed_url`, `caption`, `is_primary`).
+  - [x] **Service:** Update `hotel.service.ts` to type responses including images and handle image base URLs.
+  - [x] **Component Updates:** Modify components to display images:
+    - [x] `home.component`: Display featured hotel images.
+    - [x] `explore-map.component`: Show primary image in map popups & sidebar.
+    - [ ] `continent-list.component`: Display hotel images. (Still uses hardcoded)
+    - [x] `hotel-results.component`: Display compressed images in list/cards.
+  - [x] **Environment:** Check `environment.ts` files (no changes needed).
+
+## Phase 8: Shared Search Bar
+
+- [x] **Refactor Search Bar into Shared Component:**
+  - [x] Generate `shared/search-bar/search-bar.component`.
+  - [x] Move search bar HTML from `home.component.html` to `search-bar.component.html`.
+  - [x] Move search bar logic (properties, methods) from `home.component.ts` to `search-bar.component.ts`.
+  - [x] Define `SearchCriteria` interface.
+  - [x] Add `@Input()`s for initial values (destination, dates, guests).
+  - [x] Add `@Output() onSearch = new EventEmitter<SearchCriteria>();`.
+  - [x] Ensure necessary module imports (`CommonModule`, `FormsModule`, `CalendarModule`, `HoverButtonComponent`).
+  - [x] Move relevant CSS from `home.component.css` to `search-bar.component.css`.
+- [x] **Integrate Shared Search Bar:**
+  - [x] **Home Component:**
+    - [x] Replace old search bar HTML with `<app-search-bar (onSearch)="handleSearch($event)"></app-search-bar>`.
+    - [x] Remove moved logic/properties from `home.component.ts`.
+    - [x] Implement `handleSearch($event)` to navigate to `/hotel-results` with query params.
+  - [x] **Hotel Results Component:**
+    - [x] Add `<app-search-bar ... [initial...]="..." (onSearch)="handleSearch($event)"></app-search-bar>` to `hotel-results.component.html`.
+    - [x] Import `SearchBarComponent` in `hotel-results.component.ts`.
+    - [x] Pass current search params to the shared component via `@Input()`s.
+    - [x] Implement `handleSearch($event)` to call `fetchHotels()` and update component state/URL params.
+
+## Phase 9: Hotel Detail Page (Initial Implementation)
+
+- [x] **Backend Check:** Ensure `/api/v1/hotels/{id}/` endpoint returns nested `images`, `room_types`, and `amenities`. Update `HotelSerializer` / `HotelViewSet` if necessary. (Serializer updated)
+- [x] **Hero Section:**
+  - [x] Implement full-width section with primary high-res image background.
+  - [x] Display large hotel name and location.
+  - [x] Add "Book Now" / "Read More" buttons.
+- [x] **Description Section(s):**
+  - [x] Implement layout similar to reference image (large quote/intro text).
+  - [x] Add alternating text/image blocks using hotel description and non-primary images.
+- [x] **Room Types Section:**
+  - [x] Design creative layout (e.g., cards) to showcase 2-4 featured room types.
+  - [x] Display room image (placeholder/generic for now), name, capacity, description snippet, price.
+  - [x] Add "View Details" / "Check Availability" button per room.
+  - [x] Include "View All Room Types" link/button.
+- [x] **Amenities Section:**
+  - [x] Design creative layout (e.g., icon grid, themed groups).
+  - [x] Display key amenities with icons and names.
+- [x] **Suggested Hotels Section:**
+  - [x] Add section title "Other Hotels in [City Name]".
+  - [x] Fetch hotels in the same city (using `HotelService.searchHotels`).
+  - [x] Display suggestions using the same layout as the hotel results page.
+
+## Phase 10: Room Images & Seeding Enhancements
+
+- [x] **Room Images:**
+  - [x] **Backend Model:** Create `RoomImage` model in `hotel_service/models.py` (ForeignKey to `RoomType`, `image_high_res`, `image_compressed`, `caption`, `is_primary`).
+  - [x] **Migrations:** Run `makemigrations` and `migrate` for `hotel_service`.
+  - [x] **Backend Serializer:** Create `RoomImageSerializer`, update `RoomTypeSerializer` to nest `images`, update `HotelSerializer`'s `get_room_types` method.
+  - [x] **Frontend Model:** Update `Room` interface in `room.model.ts` to include `images?: RoomImage[]`, define `RoomImage` interface.
+  - [x] **Frontend Detail Page:** Update Room Types section in `hotel-detail.component.html` to display primary room image.
+- [x] **Seeding Enhancements (`seed_data.py`):**
+  - [x] **Room Images:** Add logic to seed `RoomImage` instances using `seed_hotel_images/room_high_res/` and `seed_hotel_images/room_compressed/` directories.
+  - [x] **Amenities:** Expand `amenity_names` list (~25 total), define ~5 essential amenities, update logic to assign 10-15 amenities per hotel (essentials + random).
+  - [x] **Cities:** Add more cities (USA, India) to `cities_data` dictionary.
+
+## Phase 11: Detail Page Enhancements & Auth
+
+- [ ] **Hotel Detail Page UI:**
+  - [ ] **Creative Amenities:** Redesign the amenities section layout (e.g., grouped lists, icons).
+  - [ ] **Checkout Form:**
+    - [ ] Design and implement a checkout section (half-width alongside amenities?).
+    - [ ] Include date range picker, guest selection, price display.
+    - [ ] Implement frontend price calculation logic (fetch availability/overrides via `HotelService` if needed).
+  - [ ] **Room Image Gallery:**
+    - [ ] Generate `shared/image-gallery-overlay/image-gallery-overlay.component`.
+    - [ ] Implement overlay display (large image, prev/next, close).
+    - [ ] Add logic to `hotel-detail.component.ts` to manage overlay visibility and pass selected room images.
+    - [ ] Add click handler to room type image/card in `hotel-detail.component.html` to open the overlay.
+- [x] **Authentication:**
+  - [x] **Backend Check:** Verify `auth_service` endpoints and data requirements (JWT confirmed).
+  - [x] **Frontend Components:** Generate/Update `LoginComponent` and `RegisterComponent` with forms and styling.
+  - [x] **Frontend Service:** Ensure `AuthService` has `login`, `register`, `logout`, `isAuthenticated`, etc., methods calling backend APIs (Refresh logic added).
+  - [x] **Routing:** Add `/login`, `/register` routes.
+  - [x] **Header Integration:** Update `HeaderComponent` to show Login/Register or Account/Logout links conditionally (Includes conditional styling).
+  - [x] **Interceptor:** Update `AuthInterceptor` to handle 401s and token refresh.
+  - [x] **Persistent Login:** Modify `AuthService.loadInitialAuthState` to attempt token refresh if access token is expired on load.
+- [ ] **Booking Flow (Initial):**
+  - [ ] **Backend Check:** Verify `Booking` model and `/api/v1/bookings/` endpoint.
+  - [ ] **Frontend Service:** Create/Update `BookingService` with a `createBooking(bookingData)` method.
+  - [ ] **Checkout Form Logic:** On "Reserve" click in `HotelDetailComponent`:
+    - [ ] Validate form inputs.
+    - [ ] Check if user is authenticated (using `AuthService`). Redirect to login if not.
+    - [ ] If authenticated, call `BookingService.createBooking()` with required data (user ID, room type ID, dates, guests, price).
+    - [ ] Handle success (e.g., navigate to confirmation page) or error messages.

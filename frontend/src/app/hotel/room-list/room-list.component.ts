@@ -28,7 +28,7 @@ export class RoomListComponent implements OnInit {
           name: 'Standard Queen', // Renamed from type
           description: 'Comfortable room with one queen bed.',
           capacity: 2, // Added capacity
-          basePrice: 120, // Renamed from pricePerNight
+          base_price: 120, // Renamed from pricePerNight
           // features removed
         },
         {
@@ -37,7 +37,7 @@ export class RoomListComponent implements OnInit {
           name: 'Deluxe King', // Renamed from type
           description: 'Spacious room with one king bed and city view.',
           capacity: 2, // Added capacity
-          basePrice: 180, // Renamed from pricePerNight
+          base_price: 180, // Renamed from pricePerNight
           // features removed
         },
         {
@@ -46,7 +46,7 @@ export class RoomListComponent implements OnInit {
           name: 'Suite', // Renamed from type
           description: 'Large suite with separate living area.',
           capacity: 4, // Added capacity (e.g., with sofa bed)
-          basePrice: 250, // Renamed from pricePerNight
+          base_price: 250, // Renamed from pricePerNight
           // features removed
         },
       ];

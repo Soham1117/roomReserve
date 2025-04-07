@@ -56,9 +56,7 @@ export class BookingFormComponent implements OnInit {
         tap((params) => {
           // Basic validation and type conversion
           const hotelId = params['hotelId'] ? +params['hotelId'] : null;
-          const roomTypeId = params['roomTypeId']
-            ? +params['roomTypeId']
-            : null;
+          const roomTypeId = params['roomTypeId'] ? +params['roomTypeId'] : null;
           const checkIn = params['checkIn'];
           const checkOut = params['checkOut'];
           const guests = params['guests'] ? +params['guests'] : null;
@@ -76,17 +74,12 @@ export class BookingFormComponent implements OnInit {
             hotelName: 'Loading...', // Placeholder while fetching
             roomTypeName: 'Loading...', // Placeholder while fetching
           };
-          console.log(
-            'Initial booking details from params:',
-            this.bookingDetails
-          );
+          console.log('Initial booking details from params:', this.bookingDetails);
         }),
         // Fetch RoomType details using the roomTypeId
         switchMap(() => {
           if (!this.bookingDetails) return of(null); // Should not happen due to check above
-          return this.searchService.getRoomTypeDetails(
-            this.bookingDetails.roomTypeId
-          );
+          return this.searchService.getRoomTypeDetails(this.bookingDetails.roomTypeId);
         }),
         catchError((err) => {
           // Correctly imported catchError
@@ -101,37 +94,28 @@ export class BookingFormComponent implements OnInit {
           }
           this.isLoading = false;
           // Correctly imported throwError
-          return throwError(
-            () => new Error(this.errorMessage || 'Failed to load room details')
-          );
+          return throwError(() => new Error(this.errorMessage || 'Failed to load room details'));
         })
       )
       .subscribe((roomType: Room | null) => {
         if (roomType && this.bookingDetails) {
           this.bookingDetails.roomTypeName = roomType.name;
-          this.bookingDetails.pricePerNight = roomType.basePrice; // Use basePrice
-          // Recalculate total price based on fetched basePrice
+          this.bookingDetails.pricePerNight = roomType.base_price; // Use base_price
+          // Recalculate total price based on fetched base_price
           this.bookingDetails.totalPrice = this.calculateTotalPrice(
             this.bookingDetails.checkIn,
             this.bookingDetails.checkOut,
-            roomType.basePrice
+            roomType.base_price
           );
-          console.log(
-            'Updated booking details with room info:',
-            this.bookingDetails
-          );
+          console.log('Updated booking details with room info:', this.bookingDetails);
         }
         // If roomType is null (error handled in catchError), placeholders/error message remain
         this.isLoading = false; // Finish loading sequence
       });
   }
 
-  // Price calculation using basePrice
-  calculateTotalPrice(
-    checkIn: string,
-    checkOut: string,
-    pricePerNight: number
-  ): number {
+  // Price calculation using base_price
+  calculateTotalPrice(checkIn: string, checkOut: string, pricePerNight: number): number {
     try {
       const startDate = new Date(checkIn);
       const endDate = new Date(checkOut);
@@ -188,8 +172,7 @@ export class BookingFormComponent implements OnInit {
       },
       error: (err: HttpErrorResponse) => {
         this.isLoading = false;
-        this.errorMessage =
-          err.message || 'An unknown error occurred during booking.';
+        this.errorMessage = err.message || 'An unknown error occurred during booking.';
         console.error('Booking failed:', err);
       },
     });
