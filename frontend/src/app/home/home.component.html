@@ -8,7 +8,7 @@
         'https://via.placeholder.com/176x117/333333/808080?text=No+Image'
       "
       [alt]="featuredHotels[0].name"
-      class="absolute left-[5%] top-[10%] h-auto w-24 object-cover sm:left-[10%] sm:top-[15%] sm:w-36 md:w-44"
+      class="absolute left-[5%] top-[10%] h-auto w-24 object-cover sm:left-[10%] sm:top-[15%] sm:w-36 md:left-[8%] md:top-[12%] md:w-40 lg:left-[10%] lg:top-[15%] lg:w-44"
     />
     <img
       *ngIf="featuredHotels.length > 1"
@@ -18,7 +18,7 @@
         'https://via.placeholder.com/144x96/333333/808080?text=No+Image'
       "
       [alt]="featuredHotels[1].name"
-      class="absolute bottom-[10%] left-[10%] h-auto w-28 object-cover sm:left-[5%] sm:top-[35%] sm:w-32 md:w-36"
+      class="absolute bottom-[10%] left-[10%] h-auto w-28 object-cover sm:left-[5%] sm:top-[35%] sm:w-32 md:left-[6%] md:top-[40%] md:w-32 lg:left-[5%] lg:top-[35%] lg:w-36"
     />
     <img
       *ngIf="featuredHotels.length > 2"
@@ -28,7 +28,7 @@
         'https://via.placeholder.com/112x75/333333/808080?text=No+Image'
       "
       [alt]="featuredHotels[2].name"
-      class="absolute right-[5%] top-[8%] z-10 h-auto w-20 object-cover sm:right-[10%] sm:top-[5%] sm:w-24 md:w-28"
+      class="absolute right-[5%] top-[8%] z-10 h-auto w-20 object-cover sm:right-[10%] sm:top-[5%] sm:w-24 md:right-[8%] md:top-[8%] md:w-24 lg:right-[10%] lg:top-[5%] lg:w-28"
     />
     <img
       *ngIf="featuredHotels.length > 3"
@@ -38,7 +38,7 @@
         'https://via.placeholder.com/208x139/333333/808080?text=No+Image'
       "
       [alt]="featuredHotels[3].name"
-      class="absolute bottom-[5%] right-[8%] h-auto w-32 object-cover sm:right-[5%] sm:top-[40%] sm:w-40 md:w-52"
+      class="absolute bottom-[5%] right-[8%] h-auto w-32 object-cover sm:right-[5%] sm:top-[40%] sm:w-40 md:right-[6%] md:top-[45%] md:w-44 lg:right-[5%] lg:top-[40%] lg:w-52"
     />
     <img
       *ngIf="featuredHotels.length > 4"
@@ -48,7 +48,7 @@
         'https://via.placeholder.com/144x96/333333/808080?text=No+Image'
       "
       [alt]="featuredHotels[4].name"
-      class="absolute bottom-[25%] left-[35%] hidden h-auto w-32 object-cover sm:block md:bottom-[20%] md:left-auto md:right-[25%] md:w-36"
+      class="absolute bottom-[25%] left-[35%] hidden h-auto w-32 object-cover sm:block md:hidden lg:bottom-[20%] lg:left-auto lg:right-[25%] lg:block lg:w-36"
     />
     <img
       *ngIf="featuredHotels.length > 5"
@@ -58,7 +58,7 @@
         'https://via.placeholder.com/192x128/333333/808080?text=No+Image'
       "
       [alt]="featuredHotels[5].name"
-      class="absolute bottom-[2%] right-[30%] hidden h-auto w-40 object-cover md:bottom-[0%] md:left-[30%] md:right-auto md:w-48"
+      class="absolute bottom-[2%] right-[30%] hidden h-auto w-40 object-cover sm:block md:bottom-[5%] md:left-[35%] md:right-auto md:w-44 lg:bottom-[0%] lg:left-[30%] lg:w-48"
     />
 
     <div
@@ -72,7 +72,7 @@
         Money can't buy you class,<br class="hidden sm:inline" />
         but it can buy you a vacation.
       </h2>
-      <p class="mb-6 max-w-md font-sans text-sm text-white/60 md:mb-8">
+      <p class="mb-6 max-w-md font-sans text-sm text-white/60 md:mb-8 md:max-w-lg lg:max-w-xl">
         Check in to the iconic hotels and resorts featured on The Real Housewives.
       </p>
       <app-hover-button
@@ -92,11 +92,10 @@
 
   <div class="absolute bottom-0 left-1/2 w-full -translate-x-1/2 transform p-4 text-white md:p-8">
     <h1
-      class="width-full text-center font-serif text-5xl font-bold leading-none sm:text-6xl md:text-8xl lg:text-9xl xl:text-[15rem]"
+      class="width-full text-center font-serif text-5xl font-bold leading-none sm:text-6xl md:text-8xl lg:text-9xl xl:text-[10rem]"
     >
       The Suite Life
     </h1>
   </div>
 </div>
-<!-- Add the Continent List Component -->
 <app-continent-list></app-continent-list>

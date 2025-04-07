@@ -196,7 +196,7 @@
   - [x] Adjust mobile menu nav width (`sm:w-3/4 md:w-1/2`).
   - [x] Adjust mobile menu bottom-right section size/text (`w-20 sm:w-24 md:w-32`, `text-[10px] sm:text-xs`).
 - [x] **Home Page:**
-  - [x] Hero section text/image layout adjustments.
+  - [x] Hero section text/image layout adjustments (including md/lg refinement).
   - [x] Search bar reflow (adjusted size, hid options on mobile).
   - [x] Continent list adjustments (adjusted text/SVG size, hid background images).
 - [x] **Login/Register/Profile Pages:**
