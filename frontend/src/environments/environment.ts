@@ -4,6 +4,6 @@
 
 export const environment = {
   production: false, // Default should be non-production
-  apiUrl: 'https://d3fw17aivp1vr9.cloudfront.net/api/v1/', // Default API URL (can be local)
+  apiUrl: 'https://api.aetherdash.xyz/api/v1/', // Default API URL (can be local)
   googleMapsApiKey: '', // Default/Placeholder API Key (SHOULD NOT BE COMMITTED if sensitive)
 };
