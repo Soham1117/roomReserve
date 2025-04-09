@@ -23,7 +23,7 @@
           class="absolute inset-0 mb-16 flex flex-col items-center justify-end px-4 text-center text-white sm:mb-20"
         >
           <h1
-            class="mb-4 w-full text-wrap font-serif text-4xl font-medium sm:text-5xl md:w-2/3 md:text-6xl lg:w-1/2 lg:text-8xl xl:text-9xl"
+            class="mb-4 w-full text-wrap font-serif text-4xl font-medium sm:text-5xl md:w-2/3 md:text-6xl lg:w-1/2 lg:text-7xl xl:text-8xl 2xl:text-9xl"
           >
             {{ currentHotel.name }}
           </h1>
@@ -222,152 +222,6 @@
 
       <div class="mx-auto my-16 max-w-5xl px-4 text-black sm:my-24 sm:px-6">
         <h2 class="mb-8 text-left text-xl font-semibold md:mb-10 md:text-2xl lg:text-3xl">
-          Reserve Your Stay
-        </h2>
-        <div class="rounded-lg border border-gray-200 bg-white p-4 shadow-md sm:p-6">
-          <form
-            [formGroup]="checkoutForm"
-            (ngSubmit)="reserveRoom()"
-            class="space-y-4 sm:space-y-6"
-          >
-            <div
-              *ngIf="selectedRoomType() as room"
-              class="mb-4 rounded border border-blue-200 bg-blue-50 p-3"
-            >
-              <p class="font-semibold text-blue-800">Selected Room: {{ room.name }}</p>
-              <p class="text-sm text-blue-700">
-                Capacity: {{ room.capacity }}, Price:
-                {{ room.base_price | currency: 'USD' : 'symbol' : '1.0-0' }}/night
-              </p>
-            </div>
-            <div
-              *ngIf="!selectedRoomType()"
-              class="mb-4 rounded border border-yellow-300 bg-yellow-50 p-3 text-sm text-yellow-700"
-            >
-              Please select a room type above by clicking its card.
-            </div>
-            <div>
-              <label for="dates" class="block text-xs font-medium text-gray-700 sm:text-sm"
-                >Check-in / Check-out</label
-              >
-              <p-calendar
-                id="dates"
-                formControlName="dates"
-                selectionMode="range"
-                [readonlyInput]="true"
-                dateFormat="yy-mm-dd"
-                [showIcon]="true"
-                [minDate]="minDate"
-                placeholder="Select your dates"
-                styleClass="w-full mt-1"
-                inputStyleClass="w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-              ></p-calendar>
-              <div
-                *ngIf="checkoutForm.get('dates')?.invalid && checkoutForm.get('dates')?.touched"
-                class="mt-1 text-xs text-red-600"
-              >
-                Please select check-in and check-out dates.
-              </div>
-            </div>
-            <div class="grid grid-cols-2 gap-2 sm:gap-4">
-              <div>
-                <label for="adults" class="block text-xs font-medium text-gray-700 sm:text-sm"
-                  >Adults</label
-                >
-                <p-inputNumber
-                  inputId="adults"
-                  formControlName="adults"
-                  [showButtons]="true"
-                  buttonLayout="horizontal"
-                  spinnerMode="horizontal"
-                  decrementButtonClass="p-button-secondary p-button-sm"
-                  incrementButtonClass="p-button-secondary p-button-sm"
-                  incrementButtonIcon="pi pi-plus"
-                  decrementButtonIcon="pi pi-minus"
-                  [min]="1"
-                  [max]="selectedRoomType()?.capacity ?? 1"
-                  styleClass="mt-1"
-                  inputStyleClass="w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                ></p-inputNumber>
-              </div>
-              <div>
-                <label for="children" class="block text-xs font-medium text-gray-700 sm:text-sm"
-                  >Children</label
-                >
-                <p-inputNumber
-                  inputId="children"
-                  formControlName="children"
-                  [showButtons]="true"
-                  buttonLayout="horizontal"
-                  spinnerMode="horizontal"
-                  decrementButtonClass="p-button-secondary p-button-sm"
-                  incrementButtonClass="p-button-secondary p-button-sm"
-                  incrementButtonIcon="pi pi-plus"
-                  decrementButtonIcon="pi pi-minus"
-                  [min]="0"
-                  [max]="
-                    (selectedRoomType()?.capacity ?? 1) - (checkoutForm.get('adults')?.value ?? 1)
-                  "
-                  styleClass="mt-1"
-                  inputStyleClass="w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                ></p-inputNumber>
-              </div>
-            </div>
-            <div *ngIf="calculatedPrice() !== null" class="pt-2 text-right sm:pt-4">
-              <p class="text-base font-semibold text-gray-800 sm:text-lg">
-                Total Price: {{ calculatedPrice() | currency: 'USD' : 'symbol' : '1.2-2' }}
-              </p>
-              <p class="text-xs text-gray-500 sm:text-sm">Based on selected dates and room type.</p>
-            </div>
-            <div class="pt-2 sm:pt-4">
-              <button
-                type="submit"
-                [disabled]="checkoutForm.invalid || !selectedRoomType() || isBookingLoading()"
-                class="relative w-full rounded-full border border-black text-sm font-semibold tracking-wide text-black transition hover:bg-black hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
-                [class.bg-gray-300]="isBookingLoading()"
-                [class.hover:bg-gray-300]="isBookingLoading()"
-                [class.text-gray-500]="isBookingLoading()"
-                [class.border-gray-300]="isBookingLoading()"
-              >
-                <div class="relative px-6 py-2">
-                  <span *ngIf="isBookingLoading()" class="flex items-center justify-center">
-                    <svg
-                      class="-ml-1 mr-2 h-5 w-5 animate-spin"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                    >
-                      <circle
-                        class="opacity-25"
-                        cx="12"
-                        cy="12"
-                        r="10"
-                        stroke="currentColor"
-                        stroke-width="4"
-                      ></circle>
-                      <path
-                        class="opacity-75"
-                        fill="currentColor"
-                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                      ></path>
-                    </svg>
-                    Reserving...
-                  </span>
-                  <app-hover-button
-                    *ngIf="!isBookingLoading()"
-                    theme="light"
-                    buttonText="Reserve Now"
-                    [customClasses]="'w-full h-full p-2 hover:text-white'"
-                  ></app-hover-button>
-                </div>
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-
-      <div class="mx-auto my-16 max-w-5xl px-4 text-black sm:my-24 sm:px-6">
-        <h2 class="mb-8 text-left text-xl font-semibold md:mb-10 md:text-2xl lg:text-3xl">
           What this place offers
         </h2>
         <div
@@ -426,7 +280,7 @@
                   'https://via.placeholder.com/200x133/333333/808080?text=No+Image'
                 "
                 alt="{{ hotel.name }}"
-                class="h-48 w-full object-cover sm:h-60 lg:h-60 lg:w-96"
+                class="h-48 w-full object-cover sm:h-60 lg:h-52 lg:w-80 2xl:h-60 2xl:w-96"
               />
             </div>
             <div
@@ -466,14 +320,14 @@
                 buttonText="Book Now"
                 theme="dark"
                 [customClasses]="
-                  'flex-1 border border-white px-6 py-2 text-xs font-semibold uppercase tracking-wider text-white hover:text-black sm:px-8 sm:text-sm lg:flex-none'
+                  'flex-1 border border-black px-6 py-2 text-xs font-semibold uppercase tracking-wider text-black hover:text-black sm:px-8 sm:text-sm lg:flex-none'
                 "
                 (onClick)="router.navigate(['/hotel', hotel.id])"
               >
               </app-hover-button>
               <app-hover-button
                 buttonText="Read More"
-                theme="light"
+                theme="dark"
                 [customClasses]="
                   'flex-1 border border-gray-600 bg-black px-6 py-2 text-xs font-semibold uppercase tracking-wider text-white hover:text-black sm:px-8 sm:text-sm lg:flex-none'
                 "

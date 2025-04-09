@@ -11,6 +11,7 @@ import { BookingsListComponent } from './user/bookings-list/bookings-list.compon
 import { HomeComponent } from './home/home.component';
 import { HotelResultsComponent } from './hotel-results/hotel-results.component';
 import { adminGuard } from './auth/admin.guard';
+import { BookingPageComponent } from './booking/booking-page/booking-page.component'; // Import new component
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -19,9 +20,10 @@ export const routes: Routes = [
   { path: 'search', component: SearchFormComponent },
   { path: 'hotel-results', component: HotelResultsComponent },
   { path: 'hotels/hotels/:id', component: HotelDetailComponent }, // Consider renaming route to 'hotel/:id'
-  { path: 'booking', component: BookingFormComponent }, // Might be deprecated if booking happens on detail page
-  { path: 'booking/payment', component: PaymentComponent }, // Might be part of future flow
-  { path: 'booking/confirmation/:id', component: ConfirmationComponent }, // Added :id parameter
+  { path: 'booking', component: BookingFormComponent }, // Might be deprecated
+  { path: 'booking/create/:hotelId', component: BookingPageComponent }, // New booking page route
+  { path: 'booking/payment/:id', component: PaymentComponent }, // Keep for payment simulation step
+  { path: 'booking/confirmation/:id', component: ConfirmationComponent },
   { path: 'account/profile', component: ProfileComponent },
   { path: 'account/bookings', component: BookingsListComponent },
   {

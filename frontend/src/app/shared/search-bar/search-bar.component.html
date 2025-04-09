@@ -131,17 +131,13 @@
       </div>
     </div>
     <div class="ml-auto flex-shrink-0">
-      <app-hover-button
-        buttonText=""
-        [customClasses]="
-          'flex h-12 w-12 items-center justify-center rounded-full bg-white text-sm text-black/70 hover:text-white sm:h-14 sm:w-14 md:h-16 md:w-16'
-        "
-        type="img"
-        iconSvgPath="/arrow.png"
-        h="'1rem sm:1.25rem md:1.5rem'"
-        w="'1.5rem sm:1.75rem md:2rem'"
-        (onClick)="triggerSearch()"
-      ></app-hover-button>
+      <button
+        class="flex h-12 w-12 items-center justify-center rounded-full bg-white text-sm text-black/70 hover:text-white sm:h-14 sm:w-14 md:h-20 md:w-20"
+        type="button"
+        (click)="triggerSearch()"
+      >
+        <img src="/arrow.png" alt="" class="h-5 w-10" />
+      </button>
     </div>
   </div>
 </div>

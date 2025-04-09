@@ -8,7 +8,7 @@
         'https://via.placeholder.com/176x117/333333/808080?text=No+Image'
       "
       [alt]="featuredHotels[0].name"
-      class="absolute left-[5%] top-[10%] h-auto w-24 object-cover sm:left-[10%] sm:top-[15%] sm:w-36 md:left-[8%] md:top-[12%] md:w-40 lg:left-[10%] lg:top-[15%] lg:w-44"
+      class="absolute left-[5%] top-[10%] h-auto w-24 object-cover sm:left-[10%] sm:top-[15%] sm:w-36 md:left-[8%] md:top-[12%] md:w-40 lg:left-[5%] lg:top-[15%] lg:w-44"
     />
     <img
       *ngIf="featuredHotels.length > 1"
@@ -18,7 +18,7 @@
         'https://via.placeholder.com/144x96/333333/808080?text=No+Image'
       "
       [alt]="featuredHotels[1].name"
-      class="absolute bottom-[10%] left-[10%] h-auto w-28 object-cover sm:left-[5%] sm:top-[35%] sm:w-32 md:left-[6%] md:top-[40%] md:w-32 lg:left-[5%] lg:top-[35%] lg:w-36"
+      class="absolute bottom-[10%] left-[10%] h-auto w-28 object-cover sm:left-[5%] sm:top-[35%] sm:w-24 md:left-[6%] md:top-[40%] md:w-28 lg:left-[2%] lg:top-[45%] lg:w-32"
     />
     <img
       *ngIf="featuredHotels.length > 2"
@@ -48,7 +48,7 @@
         'https://via.placeholder.com/144x96/333333/808080?text=No+Image'
       "
       [alt]="featuredHotels[4].name"
-      class="absolute bottom-[25%] left-[35%] hidden h-auto w-32 object-cover sm:block md:hidden lg:bottom-[20%] lg:left-auto lg:right-[25%] lg:block lg:w-36"
+      class="absolute bottom-[25%] left-[35%] hidden h-auto w-32 object-cover sm:block md:hidden lg:bottom-[20%] lg:left-auto lg:right-[25%] lg:block lg:w-0 xl:w-0 2xl:w-36"
     />
     <img
       *ngIf="featuredHotels.length > 5"
@@ -58,7 +58,7 @@
         'https://via.placeholder.com/192x128/333333/808080?text=No+Image'
       "
       [alt]="featuredHotels[5].name"
-      class="absolute bottom-[2%] right-[30%] hidden h-auto w-40 object-cover sm:block md:bottom-[5%] md:left-[35%] md:right-auto md:w-44 lg:bottom-[0%] lg:left-[30%] lg:w-48"
+      class="absolute bottom-[2%] right-[30%] hidden h-auto w-40 object-cover sm:block md:bottom-[5%] md:left-[35%] md:right-auto md:w-44 lg:bottom-[15%] lg:left-[18%] lg:w-0 xl:w-0 2xl:w-48"
     />
 
     <div
@@ -67,7 +67,7 @@
       <app-search-bar (onSearch)="handleSearch($event)"></app-search-bar>
 
       <h2
-        class="mb-4 mt-12 font-serif text-3xl leading-tight sm:mt-16 md:mt-24 md:text-4xl lg:text-5xl"
+        class="mb-4 mt-12 font-serif text-2xl leading-tight sm:mt-16 md:mt-10 md:text-3xl lg:text-4xl 2xl:mt-28 2xl:text-5xl"
       >
         Money can't buy you class,<br class="hidden sm:inline" />
         but it can buy you a vacation.
@@ -92,7 +92,7 @@
 
   <div class="absolute bottom-0 left-1/2 w-full -translate-x-1/2 transform p-4 text-white md:p-8">
     <h1
-      class="width-full text-center font-serif text-5xl font-bold leading-none sm:text-6xl md:text-8xl lg:text-9xl xl:text-[10rem]"
+      class="width-full text-center font-serif text-5xl font-bold leading-none sm:text-6xl md:text-8xl lg:text-9xl xl:text-[10rem] 2xl:text-[16rem]"
     >
       The Suite Life
     </h1>

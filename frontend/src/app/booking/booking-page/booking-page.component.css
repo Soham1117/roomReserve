@@ -1,0 +1,173 @@
+/* Hide scrollbar for Chrome, Safari and Opera */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+html,
+body {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Ensure content is still scrollable */
+html,
+body {
+  overflow: auto;
+}
+
+:host ::ng-deep .p-datepicker-header {
+  background-color: rgba(255, 255, 255);
+  color: #000000;
+  font-family: 'Sans';
+}
+
+:host ::ng-deep .p-inputtext {
+  background-color: rgba(255, 255, 255);
+  color: #000000;
+  font-family: 'Sans';
+}
+
+:host ::ng-deep .p-inputnumber-stacked .p-inputnumber-button {
+  background-color: rgb(228, 228, 228);
+  color: #000000;
+  font-family: 'Sans';
+}
+
+:host ::ng-deep .p-datepicker-input {
+  background-color: rgba(255, 255, 255);
+  font-size: 14px;
+  line-height: 20px;
+  background-color: rgba(255, 255, 255) !important; /* Ensure override */
+  color: #000000 !important;
+  border: black;
+  border-radius: 2rem;
+  box-shadow: none !important;
+  cursor: pointer;
+  position: relative;
+}
+
+:host ::ng-deep .p-datepicker-panel {
+  background-color: rgba(255, 255, 255);
+  border-radius: 2rem;
+  z-index: 1000;
+  color: #000000;
+}
+
+/* --- Additional Dark Theme Styles --- */
+
+/* Calendar table cells (days) */
+:host ::ng-deep .p-datepicker table td {
+  padding: 0.3rem; /* Adjust padding */
+}
+
+:host ::ng-deep .p-datepicker table td span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem; /* Adjust size */
+  height: 2rem; /* Adjust size */
+  border-radius: 50%;
+  border: 1px solid transparent;
+  color: black;
+  transition:
+    background-color 0.2s,
+    color 0.2s,
+    border-color 0.2s;
+}
+
+/* Hover state for selectable days */
+:host ::ng-deep .p-datepicker table td:not(.p-datepicker-other-month) span:not(.p-disabled):hover {
+  background-color: rgba(255, 255, 255, 0.65);
+  border-color: rgba(255, 255, 255, 0.65);
+  color: black;
+}
+
+/* Today's date */
+:host ::ng-deep .p-datepicker table td.p-datepicker-today span {
+  border-color: rgba(255, 255, 255, 0.8); /* Subtle border for today */
+  background-color: rgb(255, 247, 237);
+  display: flex;
+  color: black;
+}
+
+/* Today's date */
+:host ::ng-deep .p-datepicker-title button {
+  border-color: rgba(255, 255, 255, 0.8); /* Subtle border for today */
+
+  color: black;
+}
+
+/* Selected date/range start/end */
+:host ::ng-deep .p-datepicker table td span.p-highlight {
+  background-color: rgba(255, 255, 255, 0.9); /* White background */
+  color: black; /* Black text */
+  border-color: white;
+}
+:host ::ng-deep .p-datepicker table td span.p-highlight:hover {
+  background-color: white;
+}
+
+/* Dates within selected range */
+:host ::ng-deep .p-datepicker table td.p-datepicker-selected-range span {
+  background-color: rgba(255, 255, 255, 0.6);
+  color: white;
+  border-radius: 0; /* Make range background rectangular */
+}
+:host ::ng-deep .p-datepicker table td.p-datepicker-range-start span {
+  border-top-left-radius: 50%;
+  border-bottom-left-radius: 50%;
+}
+:host ::ng-deep .p-datepicker table td.p-datepicker-range-end span {
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+}
+
+/* Weekday headers */
+:host ::ng-deep .p-datepicker table th span {
+  color: rgba(0, 0, 0);
+  padding: 0.5rem 0;
+}
+
+/* Month/Year title */
+:host ::ng-deep .p-datepicker .p-datepicker-title a {
+  color: white;
+}
+:host ::ng-deep .p-datepicker .p-datepicker-title a:hover {
+  color: rgb(0, 0, 0);
+}
+
+/* Navigation icons */
+:host ::ng-deep .p-datepicker .p-datepicker-header .p-datepicker-prev,
+:host ::ng-deep .p-datepicker .p-datepicker-header .p-datepicker-next {
+  color: rgba(0, 0, 0, 0.7);
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+}
+:host ::ng-deep .p-datepicker .p-datepicker-header .p-datepicker-prev:hover,
+:host ::ng-deep .p-datepicker .p-datepicker-header .p-datepicker-next:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: white;
+}
+
+/* Remove focus ring if desired */
+:host ::ng-deep .p-datepicker table td span:focus {
+  box-shadow: none;
+}
+:host ::ng-deep .p-datepicker .p-datepicker-header .p-datepicker-prev:focus,
+:host ::ng-deep .p-datepicker .p-datepicker-header .p-datepicker-next:focus {
+  box-shadow: none;
+}
+
+:host ::ng-deep .p-datepicker-month-view span {
+  border-color: rgba(255, 255, 255, 0.8); /* Subtle border for today */
+  background-color: rgb(255, 255, 255, 0.7);
+  color: black;
+}
+
+:host ::ng-deep .p-datepicker-year-view span {
+  border-color: rgba(255, 255, 255, 0.8); /* Subtle border for today */
+  background-color: rgb(255, 255, 255, 0.7);
+  color: black;
+}

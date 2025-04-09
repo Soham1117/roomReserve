@@ -1,18 +1,30 @@
-// Represents a Booking, aligning with the bookings table
-export interface Booking {
-  id: number; // Changed from string, assuming backend provides it
-  userId: number; // Changed from string
-  roomTypeId: number; // Renamed from roomId, changed from string
-  bookingReference: string; // Renamed from confirmationNumber, made mandatory
-  checkInDate: Date | string; // Changed type
-  checkOutDate: Date | string; // Changed type
-  numGuests: number; // Renamed from guests
-  totalPrice: number;
-  // Status aligned with backend booking_statuses table
-  status: 'PENDING' | 'CONFIRMED' | 'CANCELLED' | 'COMPLETED' | 'NO_SHOW';
-  createdAt?: Date | string; // Renamed from bookedAt, changed type
-  updatedAt?: Date | string; // Added timestamp
+export interface BookedRoom {
+  id: number;
+  room_type: number;
+  room_type_name: string;
+  quantity: number;
+  price_at_booking: number;
+}
 
-  // Removed denormalized fields (hotelName, roomType, hotelId)
-  // These should be fetched/joined via related IDs (userId, roomTypeId -> hotelId)
+export interface BookingGuest {
+  id?: number;
+  first_name?: string;
+  last_name?: string;
+  is_primary: boolean;
+}
+
+export interface Booking {
+  id: number;
+  booking_reference: string;
+  user: string; // Username
+  check_in_date: string; // Format: YYYY-MM-DD
+  check_out_date: string; // Format: YYYY-MM-DD
+  num_guests: number;
+  total_price: string; // String representation of decimal
+  status_code: string; // Status code from backend
+  special_requests?: string;
+  booked_rooms_details: BookedRoom[];
+  guests: BookingGuest[];
+  created_at: string;
+  updated_at: string;
 }

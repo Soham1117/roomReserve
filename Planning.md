@@ -160,7 +160,7 @@
 
 - [ ] **Hotel Detail Page UI:**
   - [ ] **Creative Amenities:** Redesign the amenities section layout (e.g., grouped lists, icons).
-  - [ ] **Checkout Form:**
+  - [ ] **Checkout Form:** (Moved to Booking Page in Phase 13)
     - [ ] Design and implement a checkout section (half-width alongside amenities?).
     - [ ] Include date range picker, guest selection, price display.
     - [ ] Implement frontend price calculation logic (fetch availability/overrides via `HotelService` if needed).
@@ -177,14 +177,6 @@
   - [x] **Header Integration:** Update `HeaderComponent` to show Login/Register or Account/Logout links conditionally (Includes conditional styling).
   - [x] **Interceptor:** Update `AuthInterceptor` to handle 401s and token refresh.
   - [x] **Persistent Login:** Modify `AuthService.loadInitialAuthState` to attempt token refresh if access token is expired on load.
-- [x] **Booking Flow (Initial):**
-  - [x] **Backend Check:** Verify `Booking` model and `/api/v1/bookings/` endpoint.
-  - [x] **Frontend Service:** Create/Update `BookingService` with a `createBooking(bookingData)` method.
-  - [x] **Checkout Form Logic:** On "Reserve" click in `HotelDetailComponent`:
-    - [x] Validate form inputs.
-    - [x] Check if user is authenticated (using `AuthService`). Redirect to login if not.
-    - [x] If authenticated, call `BookingService.createBooking()` with required data (user ID, room type ID, dates, guests, price).
-    - [x] Handle success (e.g., navigate to confirmation page) or error messages.
 
 ## Phase 12: Responsiveness
 
@@ -212,3 +204,26 @@
   - [x] Amenities section layout changes (responsive grid, text size).
   - [x] Checkout form adjustments (responsive spacing).
   - [x] Suggested hotels layout changes (matched results page responsiveness).
+
+## Phase 13: Multi-Room Booking Refactor & Enhancements
+
+- [x] **Backend Refactor (Models & Migrations):**
+  - [x] Modify `Booking` model: Remove `room_type` FK, add `special_requests` TextField.
+  - [x] Create `BookedRoom` model: FKs to `Booking`, `RoomType`, add `quantity`, `price_at_booking`.
+  - [x] Modify `BookingGuest` model: Confirm FK to `Booking` is sufficient.
+  - [x] Generate & Apply Migrations.
+- [x] **Backend Refactor (Serializers & Views):**
+  - [x] Create `BookedRoomSerializer`.
+  - [x] Rewrite `BookingSerializer`: Remove `room_type`, add nested `BookedRoomSerializer` (writeable), keep nested `guests` (writeable), add `special_requests`.
+  - [x] Implement `BookingSerializer.create`: Handle nested `booked_rooms` & `guests`, perform availability checks (raise `ValidationError`), calculate final `total_price`, create `Booking`, `BookedRoom`, and `BookingGuest` instances.
+  - [x] Update `BookingViewSet`: Use new serializer, simplify `perform_create`, implement `confirm_payment` action (POST `/bookings/{id}/confirm_payment/`).
+  - [ ] (Optional) Add API endpoint for availability/price checking before booking submission.
+- [x] **Frontend Refactor (Booking Page & Service):**
+  - [x] Generate `BookingPageComponent` and add route (`/booking/create/:hotelId`).
+  - [x] Update `HotelDetailComponent`: Remove checkout form, change room buttons to navigate to booking page.
+  - [x] Implement `BookingPageComponent`: Fetch hotel data, build complex form (dates, guests, `FormArray` for rooms, `FormArray` for guest names, special requests), display summary, handle submission.
+  - [x] Update `BookingService`: Update payload interface, update `createBooking`, add `getBookingById`, add `confirmPayment`.
+- [x] **Frontend Refactor (Payment & Confirmation):**
+  - [x] Generate/Update `PaymentComponent`: Add route (`/booking/payment/:id`), fetch booking details, display summary, add dummy form, implement "Confirm Payment" button calling `bookingService.confirmPayment`, navigate to confirmation on success.
+  - [ ] Update `ConfirmationComponent`: Fetch confirmed booking details, display multi-room summary.
+- [x] **Simulated Payment Flow:** Ensure the flow from booking -> payment page -> confirmation page works, updating booking status via the `confirm_payment` API call.

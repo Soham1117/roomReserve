@@ -46,28 +46,26 @@ export class BookingsListComponent implements OnInit {
     today.setHours(0, 0, 0, 0);
 
     this.upcomingBookings = bookings.filter((booking) => {
-      // Ensure checkOutDate is treated as a Date object
-      const checkOutDate = new Date(booking.checkOutDate);
-      checkOutDate.setHours(0, 0, 0, 0); // Compare date part only
+      // Ensure check_out_date is treated as a Date object
+      const check_out_date = new Date(booking.check_out_date);
+      check_out_date.setHours(0, 0, 0, 0); // Compare date part only
       // Include bookings ending today or later
-      return checkOutDate >= today;
+      return check_out_date >= today;
     });
 
     this.pastBookings = bookings.filter((booking) => {
-      const checkOutDate = new Date(booking.checkOutDate);
-      checkOutDate.setHours(0, 0, 0, 0);
+      const check_out_date = new Date(booking.check_out_date);
+      check_out_date.setHours(0, 0, 0, 0);
       // Include bookings ending before today
-      return checkOutDate < today;
+      return check_out_date < today;
     });
 
     // Optional: Sort bookings within each list
     this.upcomingBookings.sort(
-      (a, b) =>
-        new Date(a.checkInDate).getTime() - new Date(b.checkInDate).getTime()
+      (a, b) => new Date(a.check_in_date).getTime() - new Date(b.check_in_date).getTime()
     );
     this.pastBookings.sort(
-      (a, b) =>
-        new Date(b.checkOutDate).getTime() - new Date(a.checkOutDate).getTime()
+      (a, b) => new Date(b.check_out_date).getTime() - new Date(a.check_out_date).getTime()
     );
   }
 

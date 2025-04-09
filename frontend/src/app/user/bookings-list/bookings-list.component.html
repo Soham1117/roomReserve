@@ -1,32 +1,30 @@
 <!-- Bookings List Container -->
-<div class="max-w-5xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-  <h1 class="text-3xl font-bold text-gray-900 mb-6">My Bookings</h1>
+<div class="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
+  <h1 class="mb-6 text-3xl font-bold text-gray-900">My Bookings</h1>
 
   <!-- Upcoming Bookings -->
   <section class="mb-8">
-    <h2 class="text-xl font-semibold text-gray-800 mb-4">Upcoming Stays</h2>
-    <div
-      *ngIf="upcomingBookings && upcomingBookings.length > 0; else noUpcoming"
-      class="space-y-4"
-    >
+    <h2 class="mb-4 text-xl font-semibold text-gray-800">Upcoming Stays</h2>
+    <div *ngIf="upcomingBookings && upcomingBookings.length > 0; else noUpcoming" class="space-y-4">
       <!-- Booking Item Loop -->
       <div
         *ngFor="let booking of upcomingBookings"
-        class="bg-white p-4 rounded-lg shadow flex justify-between items-center"
+        class="flex items-center justify-between rounded-lg bg-white p-4 shadow"
       >
         <div>
           <!-- Hotel Name removed - needs separate fetch based on roomTypeId -->
           <!-- <h3 class="font-medium text-gray-900">{{ booking.hotelName }}</h3> -->
           <p class="text-sm text-gray-600">
-            {{ booking.checkInDate | date : "mediumDate" }} -
-            {{ booking.checkOutDate | date : "mediumDate" }}
+            {{ booking.check_in_date | date: 'mediumDate' }} -
+            {{ booking.check_out_date | date: 'mediumDate' }}
             <!-- Added date pipe -->
           </p>
           <p class="text-xs text-gray-500">
-            Booking Ref: {{ booking.bookingReference }}
+            Booking Ref: {{ booking.booking_reference }}
             <!-- Renamed -->
           </p>
-          <p class="text-xs text-gray-500">Guests: {{ booking.numGuests }}</p>
+          <p class="text-xs text-gray-500">Guests: {{ booking.num_guests }}</p>
+
           <!-- Added numGuests -->
         </div>
         <div class="text-right">
@@ -37,9 +35,7 @@
             >View Hotel</a
           > -->
           <!-- Add actions like 'View Details' or 'Cancel' later -->
-          <span class="text-sm font-semibold text-green-700">{{
-            booking.status
-          }}</span>
+          <span class="text-sm font-semibold text-green-700">{{ booking.status_code }}</span>
           <!-- Display status -->
         </div>
       </div>
@@ -49,33 +45,30 @@
     </ng-template>
   </section>
 
-  <hr class="border-gray-200 my-8" />
+  <hr class="my-8 border-gray-200" />
 
   <!-- Past Bookings -->
   <section>
-    <h2 class="text-xl font-semibold text-gray-800 mb-4">Past Stays</h2>
-    <div
-      *ngIf="pastBookings && pastBookings.length > 0; else noPast"
-      class="space-y-4"
-    >
+    <h2 class="mb-4 text-xl font-semibold text-gray-800">Past Stays</h2>
+    <div *ngIf="pastBookings && pastBookings.length > 0; else noPast" class="space-y-4">
       <!-- Booking Item Loop -->
       <div
         *ngFor="let booking of pastBookings"
-        class="bg-white p-4 rounded-lg shadow opacity-75 flex justify-between items-center"
+        class="flex items-center justify-between rounded-lg bg-white p-4 opacity-75 shadow"
       >
         <div>
           <!-- Hotel Name removed - needs separate fetch -->
           <!-- <h3 class="font-medium text-gray-900">{{ booking.hotelName }}</h3> -->
           <p class="text-sm text-gray-600">
-            {{ booking.checkInDate | date : "mediumDate" }} -
-            {{ booking.checkOutDate | date : "mediumDate" }}
+            {{ booking.check_in_date | date: 'mediumDate' }} -
+            {{ booking.check_out_date | date: 'mediumDate' }}
             <!-- Added date pipe -->
           </p>
           <p class="text-xs text-gray-500">
-            Booking Ref: {{ booking.bookingReference }}
+            Booking Ref: {{ booking.booking_reference }}
             <!-- Added reference -->
           </p>
-          <p class="text-xs text-gray-500">Guests: {{ booking.numGuests }}</p>
+          <p class="text-xs text-gray-500">Guests: {{ booking.num_guests }}</p>
           <!-- Added numGuests -->
         </div>
         <div class="text-right">
@@ -86,9 +79,7 @@
             >View Hotel</a
           > -->
           <!-- Add actions like 'Leave Review' later -->
-          <span class="text-sm font-semibold text-gray-500">{{
-            booking.status
-          }}</span>
+          <span class="text-sm font-semibold text-gray-500">{{ booking.status_code }}</span>
           <!-- Display status -->
         </div>
       </div>

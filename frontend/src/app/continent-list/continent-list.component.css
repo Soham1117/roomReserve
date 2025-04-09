@@ -96,12 +96,6 @@
   animation: wipe-ltr-exit 0.8s ease-out forwards;
 }
 
-/* List content styling */
-.list-content {
-  @apply relative z-10 mx-auto w-full max-w-6xl px-4;
-  /* Remove entrance animation styles from the container */
-}
-
 /* Remove .list-content.is-visible rule */
 
 /* Styling for individual character spans */
@@ -122,7 +116,7 @@
 }
 
 .continent-header {
-  @apply mb-48 text-center text-base uppercase tracking-widest text-gray-200;
+  @apply text-center text-base uppercase tracking-widest text-gray-200;
 }
 
 .continent-item {
@@ -130,7 +124,7 @@
 }
 
 .continent-name {
-  @apply relative font-serif text-6xl transition-colors duration-500 md:text-[10rem]; /* Slower color transition */
+  @apply relative font-serif transition-colors duration-500; /* Slower color transition */
 }
 
 .continent-name.active {

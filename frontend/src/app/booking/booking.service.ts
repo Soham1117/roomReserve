@@ -19,8 +19,8 @@ export class BookingService {
   // User ID is set automatically by the backend based on authentication
   createBooking(bookingData: {
     roomTypeId: number;
-    checkInDate: string; // YYYY-MM-DD
-    checkOutDate: string; // YYYY-MM-DD
+    check_in_date: string; // YYYY-MM-DD
+    check_out_date: string; // YYYY-MM-DD
     numGuests: number;
     totalPrice: number; // Assuming price is calculated frontend or passed through
     // Optional: Add guest details if backend handles nested creation
@@ -32,8 +32,8 @@ export class BookingService {
     // Construct payload matching the BookingSerializer fields expected by backend
     const payload = {
       room_type: bookingData.roomTypeId, // Send RoomType ID
-      check_in_date: bookingData.checkInDate,
-      check_out_date: bookingData.checkOutDate,
+      check_in_date: bookingData.check_in_date,
+      check_out_date: bookingData.check_out_date,
       num_guests: bookingData.numGuests,
       total_price: bookingData.totalPrice, // Send price calculated/confirmed by frontend
       status: 'PENDING', // Default status for new booking
@@ -57,9 +57,7 @@ export class BookingService {
   getUserBookings(): Observable<Booking[]> {
     console.log('BookingService: Fetching bookings for current user');
     // Assumes the backend /api/bookings/bookings/ endpoint filters by authenticated user
-    return this.http
-      .get<Booking[]>(this.bookingsApiUrl)
-      .pipe(catchError(this.handleError));
+    return this.http.get<Booking[]>(this.bookingsApiUrl).pipe(catchError(this.handleError));
   }
 
   // Method to cancel a booking
@@ -78,8 +76,7 @@ export class BookingService {
   private handleError(error: any): Observable<never> {
     console.error('API Error in BookingService:', error);
     return throwError(
-      () =>
-        new Error('Failed to process booking request; please try again later.')
+      () => new Error('Failed to process booking request; please try again later.')
     );
   }
 }

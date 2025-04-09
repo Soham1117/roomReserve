@@ -12,7 +12,6 @@ import {
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CalendarModule } from 'primeng/calendar';
-import { HoverButtonComponent } from '../hover-button/hover-button.component';
 import { format } from 'date-fns';
 
 // Define interface for emitted search data
@@ -27,7 +26,7 @@ export interface SearchCriteria {
 @Component({
   selector: 'app-search-bar',
   standalone: true,
-  imports: [CommonModule, FormsModule, CalendarModule, HoverButtonComponent],
+  imports: [CommonModule, FormsModule, CalendarModule],
   templateUrl: './search-bar.component.html',
   styleUrls: ['./search-bar.component.css'],
 })
@@ -57,7 +56,6 @@ export class SearchBarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Initialize with input values if provided
     this.destination = this.initialDestination || '';
     this.rangeDates = this.initialRangeDates || null;
     this.adults = this.initialAdults !== null ? this.initialAdults : 2;

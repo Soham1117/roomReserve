@@ -60,6 +60,10 @@ export class HeaderComponent implements AfterViewInit, OnDestroy, OnInit {
         if (event instanceof NavigationEnd) {
           this.isAuthPage =
             event.url === '/login' || event.url === '/register' || event.url === '/account/profile';
+          let parts = event.url.split('/');
+          if (parts.includes('booking')) {
+            this.isAuthPage = true;
+          }
           // Ensure change detection runs if needed, especially with OnPush strategy (though not used here currently)
           this.cdRef.markForCheck();
           // Close menu on navigation

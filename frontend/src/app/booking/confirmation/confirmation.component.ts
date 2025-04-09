@@ -29,11 +29,8 @@ export class ConfirmationComponent implements OnInit {
     this.bookingRef = this.route.snapshot.queryParamMap.get('bookingRef');
 
     if (this.bookingRef) {
-      console.log(
-        'Fetching confirmation details for bookingRef:',
-        this.bookingRef
-      );
-      // Assuming getBookingDetails can handle bookingReference lookup
+      console.log('Fetching confirmation details for bookingRef:', this.bookingRef);
+      // Assuming getBookingDetails can handle booking_reference lookup
       // Note: Backend might need adjustment if it only supports lookup by ID
       this.bookingService.getBookingDetails(this.bookingRef).subscribe({
         next: (booking) => {
@@ -42,8 +39,7 @@ export class ConfirmationComponent implements OnInit {
           console.log('Booking details loaded:', this.bookingDetails);
         },
         error: (err: HttpErrorResponse) => {
-          this.errorMessage =
-            err.message || 'Failed to load booking confirmation details.';
+          this.errorMessage = err.message || 'Failed to load booking confirmation details.';
           this.isLoading = false;
           console.error('Error loading booking confirmation:', err);
         },

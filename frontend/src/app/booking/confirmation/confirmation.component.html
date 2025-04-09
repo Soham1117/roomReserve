@@ -1,41 +1,29 @@
 <!-- Booking Confirmation Container -->
-<div class="max-w-3xl mx-auto py-12 px-4 sm:px-6 lg:px-8 text-center">
+<div class="mx-auto max-w-3xl px-4 py-12 text-center sm:px-6 lg:px-8">
   <!-- Success Icon (Placeholder) -->
   <div class="mb-4">
     <!-- Replace with a proper checkmark icon later -->
-    <span class="inline-block p-3 bg-green-100 rounded-full">
-      <svg
-        class="h-8 w-8 text-green-600"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M5 13l4 4L19 7"
-        />
+    <span class="inline-block rounded-full bg-green-100 p-3">
+      <svg class="h-8 w-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
       </svg>
     </span>
   </div>
 
   <!-- Confirmation Message -->
-  <h1 class="text-3xl font-bold text-gray-900 mb-2">Booking Confirmed!</h1>
-  <p class="text-lg text-gray-600 mb-6">
+  <h1 class="mb-2 text-3xl font-bold text-gray-900">Booking Confirmed!</h1>
+  <p class="mb-6 text-lg text-gray-600">
     Thank you for your booking. A confirmation email has been sent.
   </p>
 
   <!-- Booking Details Summary (Placeholder) -->
-  <div class="bg-white p-6 rounded-lg shadow text-left mb-8">
-    <h2 class="text-xl font-semibold text-gray-800 border-b pb-3 mb-4">
-      Booking Summary
-    </h2>
+  <div class="mb-8 rounded-lg bg-white p-6 text-left shadow">
+    <h2 class="mb-4 border-b pb-3 text-xl font-semibold text-gray-800">Booking Summary</h2>
     <div class="space-y-3 text-sm text-gray-700">
       <p>
         <strong>Booking Reference:</strong>
         <!-- Renamed -->
-        {{ bookingDetails?.bookingReference || "ABC123XYZ" }}
+        {{ bookingDetails?.booking_reference || 'ABC123XYZ' }}
       </p>
       <!-- Hotel Name removed - needs separate fetch -->
       <!-- <p>
@@ -46,16 +34,12 @@
         <strong>Room:</strong> {{ bookingDetails?.roomType || "Room Type" }}
       </p> -->
       <p>
-        <strong>Dates:</strong> {{ bookingDetails?.checkInDate || "Date" }} -
-        {{ bookingDetails?.checkOutDate || "Date" }}
+        <strong>Dates:</strong> {{ bookingDetails?.check_in_date || 'Date' }} -
+        {{ bookingDetails?.check_out_date || 'Date' }}
       </p>
-      <p>
-        <strong>Guests:</strong> {{ bookingDetails?.numGuests || "Number" }}
-      </p>
+      <p><strong>Guests:</strong> {{ bookingDetails?.num_guests || 'Number' }}</p>
       <!-- Renamed -->
-      <p>
-        <strong>Total Paid:</strong> ${{ bookingDetails?.totalPrice || "0.00" }}
-      </p>
+      <p><strong>Total Paid:</strong> ${{ bookingDetails?.total_price || '0.00' }}</p>
     </div>
   </div>
 
@@ -64,14 +48,14 @@
     <!-- TODO: Update route when created -->
     <a
       routerLink="/account/bookings"
-      class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out"
+      class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition duration-150 ease-in-out hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
     >
       View My Bookings
     </a>
     <!-- Link to homepage -->
     <a
       routerLink="/"
-      class="inline-flex justify-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out"
+      class="inline-flex justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
     >
       Back to Homepage
     </a>

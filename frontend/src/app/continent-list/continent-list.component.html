@@ -31,9 +31,13 @@
     </div>
   </div>
 
-  <div #listContent class="list-content relative z-10" (mouseleave)="onMouseLeaveList()">
+  <div
+    #listContent
+    class="relative z-10 mx-auto mb-20 w-full max-w-6xl px-4"
+    (mouseleave)="onMouseLeaveList()"
+  >
     <h2
-      class="continent-header my-24 text-center text-2xl sm:my-32 md:my-48 md:text-3xl lg:text-4xl"
+      class="continent-header my-24 text-center text-2xl sm:mt-10 md:my-48 md:text-3xl lg:text-4xl"
     >
       Browse Hotels by Continents
     </h2>
@@ -45,7 +49,7 @@
         (mouseenter)="onContinentHover(continent)"
       >
         <span
-          class="continent-name group text-4xl sm:text-6xl lg:text-8xl"
+          class="continent-name group text-2xl sm:text-4xl lg:text-8xl 2xl:text-[10rem]"
           [class.active]="hoveredContinent === continent"
           [class.inactive]="hoveredContinent !== continent && hoveredContinent !== null"
         >

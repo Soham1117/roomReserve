@@ -1,4 +1,4 @@
-<div class="results-container relative min-h-screen bg-black p-4 font-sans text-white md:p-8">
+<div class="relative min-h-screen bg-black p-4 font-sans text-white md:mt-52 md:p-8 2xl:mt-72">
   <div
     class="mb-6 flex flex-col items-center justify-end border-b border-gray-800 pb-2 md:mb-10 md:pb-4"
   >
@@ -9,12 +9,13 @@
       [initialChildren]="children"
       (onSearch)="handleSearch($event)"
     ></app-search-bar>
-    <span class="mt-8 text-center font-serif text-6xl sm:text-8xl lg:text-9xl xl:text-[14rem]">{{
-      destination
-    }}</span>
+    <span
+      class="mt-8 text-center font-serif text-6xl sm:text-8xl lg:text-9xl xl:text-[10rem] 2xl:text-[14rem]"
+      >{{ destination }}</span
+    >
   </div>
 
-  <div class="results-list">
+  <div>
     <!-- Loading Indicator -->
     <div *ngIf="isLoading" class="py-12 text-center">
       <p class="text-xl text-gray-400">Loading hotels...</p>
@@ -29,10 +30,10 @@
     </div>
 
     <!-- Hotel Results -->
-    <div *ngIf="!isLoading && !errorMessage && hotels.length > 0" class="flex flex-col">
+    <div *ngIf="!isLoading && !errorMessage && hotels.length > 0" class="flex w-full flex-col">
       <div
         *ngFor="let hotel of hotels; let isLast = last"
-        class="hotel-item mt-6 flex flex-col gap-4 border-b border-gray-800 pb-6 lg:mt-10 lg:flex-row lg:items-start lg:gap-8 lg:pb-10"
+        class="mt-6 flex w-full flex-col gap-4 border-b border-gray-800 pb-6 lg:mt-10 lg:flex-row lg:items-start lg:gap-8 lg:pb-10"
         [class.border-none]="isLast"
       >
         <div class="w-full flex-shrink-0 lg:w-auto">
@@ -42,7 +43,7 @@
               'https://via.placeholder.com/200x133/333333/808080?text=No+Image'
             "
             alt="{{ hotel.name }}"
-            class="h-48 w-full object-cover sm:h-60 lg:h-60 lg:w-96"
+            class="h-48 w-full object-cover sm:h-60 lg:h-52 lg:w-80 2xl:h-60 2xl:w-96"
           />
         </div>
 

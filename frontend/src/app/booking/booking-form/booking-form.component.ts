@@ -149,8 +149,8 @@ export class BookingFormComponent implements OnInit {
     // Prepare data for the booking service
     const bookingPayload = {
       roomTypeId: this.bookingDetails.roomTypeId,
-      checkInDate: this.bookingDetails.checkIn,
-      checkOutDate: this.bookingDetails.checkOut,
+      check_in_date: this.bookingDetails.checkIn,
+      check_out_date: this.bookingDetails.checkOut,
       numGuests: this.bookingDetails.guests,
       totalPrice: this.bookingDetails.totalPrice || 0,
       // Add guest details from the form if backend handles nested create
@@ -167,7 +167,7 @@ export class BookingFormComponent implements OnInit {
         this.isLoading = false;
         console.log('Booking successful:', createdBooking);
         this.router.navigate(['/booking/confirmation'], {
-          queryParams: { bookingRef: createdBooking.bookingReference },
+          queryParams: { bookingRef: createdBooking.booking_reference },
         });
       },
       error: (err: HttpErrorResponse) => {
