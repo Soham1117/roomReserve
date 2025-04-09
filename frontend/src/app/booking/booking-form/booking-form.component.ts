@@ -3,7 +3,6 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router'; // Import ActivatedRoute, Router
 import { BookingService } from '../booking.service'; // Import BookingService
-import { Booking } from '../../models/booking.model'; // Import Booking model
 import { SearchService } from '../../search/search.service'; // Import SearchService
 import { Room } from '../../models/room.model'; // Import Room model
 import { HttpErrorResponse } from '@angular/common/http';
